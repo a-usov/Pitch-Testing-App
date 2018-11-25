@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Sound Record</string>
     <string name="title_activity_home">Home</string>
-    <string name="title_activity_my_tests">MyTests</string>
+    <string name="title_activity_my_tests">My Tests</string>
+    <string name="title_activity_my_account">My Account</string>
 </resources>
