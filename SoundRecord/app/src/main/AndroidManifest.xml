@@ -26,7 +26,11 @@
         <activity
             android:name=".MyTests"
             android:label="@string/title_activity_my_tests"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Results"
+            android:label="@string/title_activity_results"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

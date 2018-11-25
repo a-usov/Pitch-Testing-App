@@ -67,6 +67,12 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //temporary way to get to the result page
+    public void openResultsPage(){
+        Intent intent = new Intent(this, Results.class);
+        startActivity(intent);
+    }
+
     //dropdown menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,6 +88,8 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId() == R.id.my_tests){
             openMyTestsPage();
+        }else if(item.getItemId() == R.id.results) {
+            openResultsPage();
         }else{
             Toast.makeText(this, "This will be My Acoount page", Toast.LENGTH_SHORT).show();
         }
