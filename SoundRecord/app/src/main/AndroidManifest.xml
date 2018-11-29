@@ -30,6 +30,10 @@
         <activity
             android:name=".Results"
             android:label="@string/title_activity_results"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Trials"
+            android:label="@string/title_activity_trials"
             android:theme="@style/AppTheme"></activity>
     </application>
 
