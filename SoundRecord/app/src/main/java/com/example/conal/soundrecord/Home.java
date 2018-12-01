@@ -21,6 +21,8 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Conall was here
+
 
         footballBtn = (Button) findViewById(R.id.footballBtn);
         hockeyBtn = (Button) findViewById(R.id.hockeyBtn);
