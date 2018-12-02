@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 btnPlay.setEnabled(true);
                 btnStartRecord.setEnabled(true);
                 btnStopRecord.setEnabled(false);
+
+                openProcessingActivity();
             }
         });
 
@@ -156,6 +158,10 @@ public class MainActivity extends AppCompatActivity {
                 record_audio_result == PackageManager.PERMISSION_GRANTED;
     }
 
+    public void openProcessingActivity(){
+        Intent intent = new Intent(this, Processing.class);
+        startActivity(intent);
+    }
 
     public void openHomePage(){
         Intent intent = new Intent(this, Home.class);

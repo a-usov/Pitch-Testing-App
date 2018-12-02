@@ -7,4 +7,5 @@
     <string name="radio_button_good">Positive result</string>
     <string name="radio_button_bad">Negative result</string>
     <string name="title_activity_trials">Trials</string>
+    <string name="title_activity_processing">Processing</string>
 </resources>

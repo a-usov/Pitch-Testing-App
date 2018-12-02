@@ -34,7 +34,11 @@
         <activity
             android:name=".Trials"
             android:label="@string/title_activity_trials"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Processing"
+            android:label="@string/title_activity_processing"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
