@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         else if(item.getItemId() == R.id.my_tests){
             openMyTestsPage();
         }else{
-            Toast.makeText(this, "This will be My Acoount page", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

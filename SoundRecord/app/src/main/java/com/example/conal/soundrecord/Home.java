@@ -93,7 +93,7 @@ public class Home extends AppCompatActivity {
         }else if(item.getItemId() == R.id.results) {
             openResultsPage();
         }else{
-            Toast.makeText(this, "This will be My Acoount page", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
