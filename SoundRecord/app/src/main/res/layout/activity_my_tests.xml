@@ -14,4 +14,11 @@
 
     <include layout="@layout/content_my_tests" />
 
+    <Button
+        android:id="@+id/btnCSV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="400px"
+        android:text="Create CSV" />
+
 </android.support.design.widget.CoordinatorLayout>
