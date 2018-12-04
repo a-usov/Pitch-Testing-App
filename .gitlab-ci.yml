@@ -42,9 +42,6 @@ assembleDebug:
 latex:
     image: blang/latex
 
-    before_script:
-        - cd $PWD/../
-
     stage: build
 
     script:
