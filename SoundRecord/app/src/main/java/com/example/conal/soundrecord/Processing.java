@@ -32,7 +32,7 @@ public class Processing extends AppCompatActivity {
         new CountDownTimer(3000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+                mTextField.setText("seconds remaining: " + (millisUntilFinished + 1000) / 1000);
             }
 
             public void onFinish() {
