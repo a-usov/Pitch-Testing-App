@@ -32,7 +32,7 @@ public class Home extends AppCompatActivity {
         footballBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMainActivity();
+                openMapsPage();
             }
         });
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +75,12 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //temporary way to get to the maps page, for football atm
+    public void openMapsPage(){
+        Intent intent = new Intent(this,MapsActivity.class);
+        startActivity(intent);
+    }
+
     //dropdown menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,7 +96,10 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId() == R.id.my_tests){
             openMyTestsPage();
-        }else if(item.getItemId() == R.id.results) {
+        }else if(item.getItemId() ==  R.id.footballBtn){ // In development of getting gps positions
+            openMapsPage();
+        }
+        else if(item.getItemId() == R.id.results) {
             openResultsPage();
         }else{
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
