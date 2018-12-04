@@ -43,6 +43,9 @@ latex:
     image: blang/latex
 
     stage: build
+    
+    before_script:
+        - echo y
 
     script:
         - latexmk -pdf -cd docs/dissertation/dissertation.tex
