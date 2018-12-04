@@ -37,6 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Button btnStartRecord, btnStopRecord;
     String pathSave = "";
     MediaRecorder mediaRecorder;
+    int testCount = 0;
     private GoogleMap mMap;
 
     @Override
@@ -100,7 +101,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 btnStartRecord.setEnabled(true);
                 btnStopRecord.setEnabled(false);
 
-                openProcessingActivity();
+                if (testCount == 1) {
+                    openProcessingActivity();
+                    testCount = 0;
+                }
+                testCount++;
             }
         });
         }
