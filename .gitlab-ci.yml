@@ -31,7 +31,7 @@ lintDebug:
         - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
     artifacts:
         paths:
-            - app/lint/reports/*.html
+            - SoundRecord/app/lint/reports/*.html
 
 assembleDebug:
     stage: build
@@ -39,7 +39,7 @@ assembleDebug:
         - ./gradlew assembleDebug
     artifacts:
         paths:
-            - app/build/outputs/*
+            - SoundRecord/app/build/outputs/apk/debug/*.apk
 
 
 latex:
