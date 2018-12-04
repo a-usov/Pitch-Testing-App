@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Results extends AppCompatActivity {
@@ -18,10 +18,10 @@ public class Results extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton result;
     private RadioButton good;
-    private SeekBar result_bar;
-    private ImageView cross;
-    private ImageView tick;
     private Button ok;
+    private ImageView bar_good;
+    private ImageView bar_bad;
+    private TextView percent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,32 +34,32 @@ public class Results extends AppCompatActivity {
 
     public void onClickListenerButton(){
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        result_bar = (SeekBar) findViewById(R.id.seekBar);
-        cross = (ImageView) findViewById(R.id.cross);
-        tick = (ImageView) findViewById(R.id.tick);
         ok = (Button) findViewById(R.id.buttonOK);
         good = (RadioButton) findViewById(R.id.radioButton);
+        bar_good = (ImageView) findViewById(R.id.good);
+        bar_bad = (ImageView) findViewById(R.id.bad);
+        percent = (TextView) findViewById(R.id.percent);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int selectedID = radioGroup.getCheckedRadioButtonId();
                 result = findViewById(selectedID);
-                tick.setVisibility(View.INVISIBLE);
-                cross.setVisibility(View.INVISIBLE);
+                bar_good.setVisibility(View.INVISIBLE);
+                bar_bad.setVisibility(View.INVISIBLE);
 
-                if(result == good){
-                    result_bar.setProgress(50);
-                    tick.setVisibility(View.VISIBLE);
-                } else{
-                    result_bar.setProgress(15);
-                    cross.setVisibility(View.VISIBLE);
+                if (result == good) {
+                    bar_good.setVisibility(View.VISIBLE);
+                    percent.setText("55%");
+                } else {
+                    bar_bad.setVisibility(View.VISIBLE);
+                    percent.setText("30%");
                 }
             }
-        });
+            });
 
+        }
 
-    }
 
     public void openHomePage(){
         Intent intent = new Intent(this, Home.class);
@@ -94,7 +94,7 @@ public class Results extends AppCompatActivity {
             openMyTestsPage();
         }else if(item.getItemId() == R.id.results) {
             openResultsPage();
-        }else{
+        }else if(item.getItemId() == R.id.my_account){
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 
