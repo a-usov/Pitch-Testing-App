@@ -29,7 +29,7 @@ lintDebug:
     stage: build
     script:
         - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
-    artifacs:
+    artifacts:
         paths:
             - app/lint/reports/*.html
 
