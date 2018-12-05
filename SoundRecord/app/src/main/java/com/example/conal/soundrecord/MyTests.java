@@ -1,7 +1,13 @@
 package com.example.conal.soundrecord;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,9 +16,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MyTests extends AppCompatActivity {
 
-    private Button createPDF;
+    //Declare variables
     private TextView date1;
     private TextView date2;
     private TextView date3;
@@ -45,66 +55,10 @@ public class MyTests extends AppCompatActivity {
                 openTrials();
             }
         });
-
-
     }
-       /*
-        createPDF = (Button) findViewById(R.id.btnPDF);
-
-        createPDF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                generateReportPDF();
-            }
-        });
-
-
-
-    public Document generateReportPDF(){
-        //create document
-        Document report = new Document();
-        String dest = "";
-
-        //location to save
-        PdfWriter.getInstance(report, new FileOutputStream("C:\Users\Olga\Documents.test_pdf.pdf"));
-
-        //open to write
-        report.open();
-    }*/
 
     public void openTrials(){
         Intent intent = new Intent(this, Trials.class);
         startActivity(intent);
     }
-
-    public void openHomePage(){
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-    }
-
-    public void openMyTestsPage(){
-        Intent intent = new Intent(this, MyTests.class);
-        startActivity(intent);
-    }
-
-    //dropdown menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == R.id.home){
-            openHomePage();
-        }else if(item.getItemId() == R.id.my_tests){
-            openMyTestsPage();
-        }else{
-            Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

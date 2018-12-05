@@ -11,7 +11,7 @@
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="368dp"
-        android:layout_height="337dp"
+        android:layout_height="445dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -23,7 +23,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <TableRow
             android:layout_width="match_parent"
@@ -207,5 +208,30 @@
 
         </TableRow>
 
+
     </TableLayout>
+
+    <Button
+        android:id="@+id/btnCSV"
+        android:layout_width="124dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="248dp"
+        android:text="Create CSV"
+        app:layout_constraintEnd_toStartOf="@+id/btnPDF"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tableLayout" />
+
+    <Button
+        android:id="@+id/btnPDF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="248dp"
+        android:text="Create PDF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnCSV"
+        app:layout_constraintTop_toTopOf="@+id/tableLayout" />
+
+
 </android.support.constraint.ConstraintLayout>

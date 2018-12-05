@@ -221,12 +221,4 @@
 
     </TableLayout>
 
-    <Button
-        android:id="@+id/btnPDF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="create PDF"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="446dp" />
-
 </android.support.constraint.ConstraintLayout>
