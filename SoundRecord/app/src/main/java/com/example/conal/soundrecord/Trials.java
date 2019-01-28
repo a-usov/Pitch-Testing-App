@@ -66,7 +66,7 @@ public class Trials extends AppCompatActivity {
         });
     }
 
-    private void insertCell(PdfPTable table, String text, int align, int colspan) {
+    private void insertCell(PdfPTable table, String text, int align, int colspan, int rowspan) {
 
         //create a new cell with the specified Text and Font
         PdfPCell cell = new PdfPCell(new Phrase(text.trim()));
@@ -74,6 +74,7 @@ public class Trials extends AppCompatActivity {
         cell.setHorizontalAlignment(align);
         //set the cell column span
         cell.setColspan(colspan);
+        cell.setRowspan(rowspan);
         //in case there is no text and you wan to create an empty row
         if (text.trim().equalsIgnoreCase("")) {
             cell.setMinimumHeight(10f);
@@ -97,103 +98,146 @@ public class Trials extends AppCompatActivity {
 
             report.open();
 
-            float [] pointColumnWidths = {150F, 150F, 150F, 150F};
+            float [] pointColumnWidths = {150F, 150F, 150F, 150F, 150F, 150F, 150F};
             PdfPTable table = new PdfPTable(pointColumnWidths);
 
             // Adding cells to the table
             insertCell(table, "Determination of Ball Rebound (FIELD)\n" +
-                    "FIFA Quality concept October 2015\n", Element.ALIGN_CENTER, 4);
-            insertCell(table, "Job No", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Contract", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Test Date", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Test Condition", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Surface Name", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Time of day", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Air temp: (ºC)", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Surface temp: (ºC)", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Humidity: (%)", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Wind Speed: (m/s)", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Day Book", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Client", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Date of Construction", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Carpet Type", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Infill Type", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Shockpad", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Weather Conditions", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Lead Technician", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Additional Technician", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
-            insertCell(table, "Uncertainty Measurement:", Element.ALIGN_LEFT, 1);
-            insertCell(table, "", Element.ALIGN_LEFT, 1);
+                    "FIFA Quality concept October 2015\n", Element.ALIGN_CENTER, 7, 1);
+            insertCell(table, "Job No", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Contract", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
 
+            insertCell(table, "Test Date", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Test Condition", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
 
-            /*
-            table.addCell(new PdfPCell(new Phrase("Job No")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Contract")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Test Date")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Test Condition")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Substrate Type")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Surface Name")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Time of day")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Air temp: (ºC)")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Surface temp: (ºC)")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Humidity: (%)")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Wind Speed: (m/s)")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Substrate Type")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Day Book")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Client")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Date of Construction")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Carpet Type")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Infill Type")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Shockpad")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Weather Conditions")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Lead Technician")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Additional Technician")));
-            table.addCell(new PdfPCell());
-            table.addCell(new PdfPCell(new Phrase("Uncertainty Measurement:")));
-            table.addCell(new PdfPCell());*/
+            insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Surface Name", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Time of day", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Air temp: (ºC)", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Surface temp: (ºC)", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Humidity: (%)", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Wind Speed: (m/s)", Element.ALIGN_LEFT, 2, 1);
+           // insertCell(table, "", Element.ALIGN_LEFT, 2);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Day Book", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Client", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Date of Construction", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Carpet Type", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Infill Type", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Shockpad", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Weather Conditions", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Lead Technician", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "Additional Technician", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 2, 1);
+
+            insertCell(table, "Uncertainty Measurement:", Element.ALIGN_LEFT, 2, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1, 1);
+            insertCell(table, "", Element.ALIGN_CENTER, 4, 1);
+
+            insertCell(table, "###############", Element.ALIGN_LEFT, 7, 1);
+            insertCell(table, "Calibrate ball on concrete", Element.ALIGN_CENTER, 7, 1);
+            insertCell(table, "Limit: 1.35m ± 0.02m", Element.ALIGN_CENTER, 7, 1);
+
+            insertCell(table, "Drop", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "1", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "2", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "3", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "4", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "5", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "AVG", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "Height (m)", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "AVG", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "Test Results (m)", Element.ALIGN_MIDDLE, 1, 6);
+            insertCell(table, "Test Location 1", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "Test Location 2", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "Test Location 3", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "Test Location 4", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "Test Location 5", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "Test Location 6", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            
+            insertCell(table, "Mean Result", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+
+            insertCell(table, "Consistency ±10%", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1);
+
 
 
             report.add(table);
