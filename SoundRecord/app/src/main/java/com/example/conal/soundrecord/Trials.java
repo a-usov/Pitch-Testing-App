@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -65,6 +66,20 @@ public class Trials extends AppCompatActivity {
         });
     }
 
+    private void insertCell(PdfPTable table, String text, int align, int colspan) {
+
+        //create a new cell with the specified Text and Font
+        PdfPCell cell = new PdfPCell(new Phrase(text.trim()));
+        //set the cell alignment
+        cell.setHorizontalAlignment(align);
+        //set the cell column span
+        cell.setColspan(colspan);
+        //in case there is no text and you wan to create an empty row
+        if (text.trim().equalsIgnoreCase("")) {
+            cell.setMinimumHeight(10f);
+        }
+        table.addCell(cell);
+    }
 
     public void generateReportPDF() throws IOException {
 
@@ -86,10 +101,55 @@ public class Trials extends AppCompatActivity {
             PdfPTable table = new PdfPTable(pointColumnWidths);
 
             // Adding cells to the table
+            insertCell(table, "Determination of Ball Rebound (FIELD)\n" +
+                    "FIFA Quality concept October 2015\n", Element.ALIGN_CENTER, 4);
+            insertCell(table, "Job No", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Contract", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Test Date", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Test Condition", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Surface Name", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Time of day", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Air temp: (ºC)", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Surface temp: (ºC)", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Humidity: (%)", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Wind Speed: (m/s)", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Day Book", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Client", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Date of Construction", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Carpet Type", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Infill Type", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Shockpad", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Weather Conditions", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Lead Technician", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Additional Technician", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
+            insertCell(table, "Uncertainty Measurement:", Element.ALIGN_LEFT, 1);
+            insertCell(table, "", Element.ALIGN_LEFT, 1);
 
-            table.addCell(new PdfPCell(new Phrase("Determination of Ball Rebound (FIELD)\n" +
-                    "FIFA Quality concept October 2015")));
 
+            /*
             table.addCell(new PdfPCell(new Phrase("Job No")));
             table.addCell(new PdfPCell());
             table.addCell(new PdfPCell(new Phrase("Contract")));
@@ -133,11 +193,12 @@ public class Trials extends AppCompatActivity {
             table.addCell(new PdfPCell(new Phrase("Additional Technician")));
             table.addCell(new PdfPCell());
             table.addCell(new PdfPCell(new Phrase("Uncertainty Measurement:")));
-            table.addCell(new PdfPCell());
+            table.addCell(new PdfPCell());*/
 
 
             report.add(table);
             report.close();
+
         }catch(Exception e){}
 
     }
