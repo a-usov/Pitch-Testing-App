@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#abcdef"
+    android:gravity="center_vertical|center"
+    tools:context=".MapsActivity">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="475dp"
+        tools:context=".MapsActivity">
+
+    </fragment>
+
+    <Button
+        android:id="@+id/btnStopRecord"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/holo_red_light"
+        android:baselineAligned="false"
+        android:text="STOP "
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnStartRecord"
+        app:layout_constraintTop_toBottomOf="@+id/map" />
+
+    <Button
+        android:id="@+id/btnStartRecord"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="RECORD"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnStopRecord"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map" />
+
+
+</android.support.constraint.ConstraintLayout>

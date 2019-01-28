@@ -1,48 +1,86 @@
 package com.example.conal.soundrecord;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationAvailability;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+
 import java.io.IOException;
+import java.util.Locale;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     final int REQUEST_PERMISSION_CODE = 1000;
     //Declare variables
-    Button btnPlay, btnStop, btnStartRecord, btnStopRecord;
+    Button btnStartRecord, btnStopRecord;
     String pathSave = "";
     MediaRecorder mediaRecorder;
-    MediaPlayer mediaPlayer;
+    int testCount = 0;
+    private GoogleMap mMap;
+    private double longit;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_maps);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
 
         if (!checkPermissionFromDevice()) requestPermission();
 
-        btnPlay = this.<Button>findViewById(R.id.btnPlay);
-        btnStop = this.<Button>findViewById(R.id.btnStop);
+		mapFragment.getMapAsync(this);
+
         btnStopRecord = this.<Button>findViewById(R.id.btnStopRecord);
         btnStartRecord = this.<Button>findViewById(R.id.btnStartRecord);
 
-        btnPlay.setEnabled(true);
-        btnStop.setEnabled(false);
         btnStartRecord.setEnabled(true);
         btnStopRecord.setEnabled(false);
 
@@ -61,12 +99,9 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    btnPlay.setEnabled(false);
-                    btnStop.setEnabled(false);
                     btnStartRecord.setEnabled(false);
                     btnStopRecord.setEnabled(true);
 
-                    Toast.makeText(MainActivity.this, "Recording...", Toast.LENGTH_SHORT).show();
                 } else {
                     requestPermission();
                 }
@@ -76,48 +111,28 @@ public class MainActivity extends AppCompatActivity {
         btnStopRecord.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 mediaRecorder.stop();
-                btnPlay.setEnabled(true);
                 btnStartRecord.setEnabled(true);
                 btnStopRecord.setEnabled(false);
 
-                openProcessingActivity();
-            }
-        });
-
-        btnPlay.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                btnStop.setEnabled(true);
-                btnStartRecord.setEnabled(false);
-                btnStopRecord.setEnabled(false);
-                btnPlay.setEnabled(false);
-
-                mediaPlayer = new MediaPlayer();
-                try {
-                    mediaPlayer.setDataSource(pathSave);
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (testCount == 1) {
+                    openProcessingActivity();
+                    testCount = 0;
                 }
-
-                mediaPlayer.start();
-                Toast.makeText(MainActivity.this, "Playing...", Toast.LENGTH_SHORT).show();
+                testCount++;
             }
         });
+        }
 
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                btnStopRecord.setEnabled(false);
-                btnPlay.setEnabled(true);
-                btnStartRecord.setEnabled(true);
-                btnStop.setEnabled(false);
 
-                if (mediaPlayer != null) {
-                    mediaPlayer.stop();
-                    mediaPlayer.release();
-                    setupMediaRecorder();
-                }
-            }
-        });
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        Log.i("INFO", "Map is ready");
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     private void setupMediaRecorder() {
@@ -131,7 +146,8 @@ public class MainActivity extends AppCompatActivity {
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.RECORD_AUDIO
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
         }, REQUEST_PERMISSION_CODE);
 
     }
@@ -154,8 +170,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkPermissionFromDevice() {
         int write_external_storage_result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
+        int access_coarse_location_result = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         return write_external_storage_result == PackageManager.PERMISSION_GRANTED &&
-                record_audio_result == PackageManager.PERMISSION_GRANTED;
+                record_audio_result == PackageManager.PERMISSION_GRANTED &&
+                access_coarse_location_result == PackageManager.PERMISSION_GRANTED;
     }
 
     public void openProcessingActivity(){
@@ -172,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyTests.class);
         startActivity(intent);
     }
+
 
     //dropdown menu
     @Override
