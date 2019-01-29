@@ -64,10 +64,19 @@ public class Location implements Parcelable {
 
     public void addHeight(Float height){ heights.add(height); }
 
-    public Float getRunningAvg(){return runningAvg;}
+    public Float getRunningAvg(){
+        /*float total = 0f;
+
+        for (float height : heights) {
+            total += height;
+        }
+
+        return total/(heights.size());*/
+        return runningAvg;
+    }
 
     // Remove this method
-    public void setRunningAvg(Float avg) { runningAvg = avg;}
+    //public void setRunningAvg(Float avg) { runningAvg = avg;}
 
     public String toString() {
         return location + " " + heights;
