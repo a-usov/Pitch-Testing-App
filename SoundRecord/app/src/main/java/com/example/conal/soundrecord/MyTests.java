@@ -26,6 +26,7 @@ public class MyTests extends AppCompatActivity {
     private TextView date1;
     private TextView date2;
     private TextView date3;
+    private Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,10 @@ public class MyTests extends AppCompatActivity {
         date1 = (TextView) findViewById(R.id.date1);
         date2 = (TextView) findViewById(R.id.date2);
         date3 = (TextView) findViewById(R.id.date3);
+
+        Intent intent = getIntent();
+        loc = intent.getParcelableExtra(Processing.LOCATION);
+        Toast.makeText(MyTests.this, loc.toString(), Toast.LENGTH_LONG).show();
 
 
         date1.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +60,9 @@ public class MyTests extends AppCompatActivity {
                 openTrials();
             }
         });
+
+
+
     }
 
     public void openTrials(){

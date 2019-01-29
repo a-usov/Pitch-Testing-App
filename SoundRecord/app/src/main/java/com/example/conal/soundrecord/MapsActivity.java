@@ -44,7 +44,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
 
 import java.text.DateFormat;
@@ -54,29 +56,22 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     final int REQUEST_PERMISSION_CODE = 1000;
+    public static final String POSITION = "com.example.soundrecord.POSITION";
     //Declare variables
     Button btnStartRecord, btnStopRecord, btnGetLocation;
     TextView txtLocation;
     String pathSave = "";
     MediaRecorder mediaRecorder;
-    int testCount = 0;
     private GoogleMap mMap;
     private FusedLocationProviderClient client;
     private double lat;
     private double longi;
-    private int totalRecordings = 3;
-    private int numRecordings = 0;
-
-
-
+    private static int numRecordings = 0;
+    private Intent intent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        totalRecordings = 0;
         client = LocationServices.getFusedLocationProviderClient(this);
-
-
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -137,6 +132,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.i("location", "Longitude" + longi);
                     // Ready /update map
                     //onMapReady(mMap);
+
+                    //intent = getIntent();
+                    intent.putExtra(POSITION, cPos);
+
+
+
                 }
                 else{
                     Log.i("location", "Location is null.");
@@ -228,16 +229,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 btnStartRecord.setEnabled(true);
                 btnStopRecord.setEnabled(false);
                 numRecordings++;
-                openProcessingActivity();
 
+                //Intent intent = new Intent(view.getContext(), Processing.class);
+                intent.setClass(this, Processing.class);
 
-
-
-
+                //Code below ensures enough bounces (change 2 to 6 in final version)
+                if (numRecordings > 2) openProcessingActivity(intent);
+                else {
+                    intent.setClass(view.getContext(), MapsActivity.class);
+                    startActivity(intent);
+                }
     }
 
-    public void openProcessingActivity(){
-        Intent intent = new Intent(this, Processing.class);
+    public void openProcessingActivity(Intent intent){
+        //Intent intent = new Intent(this, Processing.class);
         startActivity(intent);
     }
 
