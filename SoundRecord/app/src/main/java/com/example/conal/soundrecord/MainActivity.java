@@ -1,15 +1,18 @@
 package com.example.conal.soundrecord;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 btnPlay.setEnabled(true);
                 btnStartRecord.setEnabled(true);
                 btnStopRecord.setEnabled(false);
+
+                openProcessingActivity();
             }
         });
 
@@ -151,5 +156,42 @@ public class MainActivity extends AppCompatActivity {
         int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
         return write_external_storage_result == PackageManager.PERMISSION_GRANTED &&
                 record_audio_result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public void openProcessingActivity(){
+        Intent intent = new Intent(this, Processing.class);
+        startActivity(intent);
+    }
+
+    public void openHomePage(){
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    public void openMyTestsPage(){
+        Intent intent = new Intent(this, MyTests.class);
+        startActivity(intent);
+    }
+
+    //dropdown menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.home) {
+            openHomePage();
+        }
+        else if(item.getItemId() == R.id.my_tests){
+            openMyTestsPage();
+        }else{
+            Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
