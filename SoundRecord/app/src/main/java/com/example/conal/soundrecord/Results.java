@@ -6,59 +6,64 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Results extends AppCompatActivity {
 
-    private RadioGroup radioGroup;
-    private RadioButton result;
-    private RadioButton good;
-    private Button ok;
-    private ImageView bar_good;
-    private ImageView bar_bad;
-    private TextView percent;
+    private ImageView bad10;
+    private ImageView bad20;
+    private ImageView bad30;
+    private ImageView bad40;
+    private ImageView good45;
+    private ImageView good50;
+    private ImageView good55;
+    private ImageView good60;
+    private ImageView good65;
+    private ImageView good70;
+    private ImageView good75;
+    private ImageView bad80;
+    private ImageView bad90;
+    private ImageView bad95;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        onClickListenerButton();
 
 
+        bad10 = (ImageView) findViewById(R.id.bad10);
+        bad20 = (ImageView) findViewById(R.id.bad20);
+        bad30 = (ImageView) findViewById(R.id.bad30);
+        bad40 = (ImageView) findViewById(R.id.bad40);
+        good45 = (ImageView) findViewById(R.id.good45);
+        good50 = (ImageView) findViewById(R.id.good50);
+        good55 = (ImageView) findViewById(R.id.good55);
+        good60 = (ImageView) findViewById(R.id.good60);
+        good65 = (ImageView) findViewById(R.id.good65);
+        good70 = (ImageView) findViewById(R.id.good70);
+        good75 = (ImageView) findViewById(R.id.good75);
+        bad80 = (ImageView) findViewById(R.id.bad80);
+        bad90 = (ImageView) findViewById(R.id.bad90);
+        bad95 = (ImageView) findViewById(R.id.bad95);
+
+        bad10.setVisibility(View.INVISIBLE);
+        bad20.setVisibility(View.INVISIBLE);
+        bad30.setVisibility(View.INVISIBLE);
+        bad40.setVisibility(View.INVISIBLE);
+        good45.setVisibility(View.INVISIBLE);
+        good50.setVisibility(View.INVISIBLE);
+        good55.setVisibility(View.INVISIBLE);
+        good60.setVisibility(View.INVISIBLE);
+        good65.setVisibility(View.INVISIBLE);
+        good70.setVisibility(View.INVISIBLE);
+        good75.setVisibility(View.VISIBLE);
+        bad80.setVisibility(View.INVISIBLE);
+        bad90.setVisibility(View.INVISIBLE);
+        bad95.setVisibility(View.INVISIBLE);
     }
 
-    public void onClickListenerButton(){
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        ok = (Button) findViewById(R.id.buttonOK);
-        good = (RadioButton) findViewById(R.id.radioButton);
-        bar_good = (ImageView) findViewById(R.id.good);
-        bar_bad = (ImageView) findViewById(R.id.bad);
-        percent = (TextView) findViewById(R.id.percent);
 
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int selectedID = radioGroup.getCheckedRadioButtonId();
-                result = findViewById(selectedID);
-                bar_good.setVisibility(View.INVISIBLE);
-                bar_bad.setVisibility(View.INVISIBLE);
-
-                if (result == good) {
-                    bar_good.setVisibility(View.VISIBLE);
-                    percent.setText("55%");
-                } else {
-                    bar_bad.setVisibility(View.VISIBLE);
-                    percent.setText("30%");
-                }
-            }
-            });
-
-        }
 
 
     public void openHomePage(){
