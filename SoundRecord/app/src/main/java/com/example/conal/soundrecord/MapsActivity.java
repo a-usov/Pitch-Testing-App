@@ -43,6 +43,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -57,6 +58,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     final int REQUEST_PERMISSION_CODE = 1000;
     public static final String POSITION = "com.example.soundrecord.POSITION";
+    public static final String FOLDER = "com.example.soundrecord.FOLDER";
+    private static File folderRecordings = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
     //Declare variables
     Button btnStartRecord, btnStopRecord, btnGetLocation;
     TextView txtLocation;
@@ -198,10 +201,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void startRecording(View view){
         Log.i("Recording", "Yay we're at recording.");
         if (checkPermissionFromDevice()) {
-            Log.i("Recording", "Permission is fine");
             Toast.makeText(this, "Recording...", Toast.LENGTH_SHORT).show();
-            pathSave = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
-                    UUID.randomUUID().toString() + "_audio_record.3_gpp";
+
+
+            /** Making a folder to hold the 5 recordings **/
+            Log.i("Recording", "Creating folder");
+//                File folderRecordings = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
+            if (!folderRecordings.exists()){
+                folderRecordings.mkdir();
+                Log.i("Recording", "Folder is created.");
+
+
+            }
+
+            String folderPath = folderRecordings.toString();
+
+            // Save recording in folder
+            pathSave = folderRecordings.getPath() + "/" +  UUID.randomUUID().toString() + "_audio_record.3_gpp";
+
             setupMediaRecorder();
             Log.i("Recording", "Set up media recorder");
 
@@ -216,7 +233,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             btnStartRecord.setEnabled(false);
             btnStopRecord.setEnabled(true);
-
         } else {
             requestPermission();
         }
@@ -230,7 +246,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 btnStopRecord.setEnabled(false);
                 numRecordings++;
 
-                //Intent intent = new Intent(view.getContext(), Processing.class);
+                intent.putExtra(FOLDER,folderRecordings);
                 intent.setClass(this, Processing.class);
 
                 //Code below ensures enough bounces (change 2 to 6 in final version)

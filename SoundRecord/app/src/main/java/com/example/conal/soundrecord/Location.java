@@ -12,19 +12,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Location implements Parcelable {
-    private boolean passFail = false;
+    private boolean passFail;
     private LatLng location;
-    private Timestamp time;
-    private Date date;
-    // Remove date and time
     private ArrayList<Float> heights;
-    private Float runningAvg;
 
     public Location(LatLng location) {
         this.passFail = false;
         this.heights = new ArrayList<Float>();
         this.location = location;
-        this.runningAvg = 0f;
     }
 
     public boolean getPassFail(){
@@ -33,7 +28,6 @@ public class Location implements Parcelable {
 
     public void setPassFail(boolean bool){
         passFail = bool;
-
     }
 
     public LatLng getLocation(){
@@ -44,39 +38,19 @@ public class Location implements Parcelable {
         location = place;
     }
 
-    public Timestamp getTime(){
-        return time;
-    }
-
-    public void setTime(Timestamp times){
-        time = times;
-    }
-
-    public Date getDate(){
-        return date;
-    }
-
-    public void setDate(Date aDate){
-        date = aDate;
-    }
-
     public ArrayList<Float> getHeights() { return heights; }
 
     public void addHeight(Float height){ heights.add(height); }
 
     public Float getRunningAvg(){
-        /*float total = 0f;
+        float total = 0f;
 
         for (float height : heights) {
             total += height;
         }
 
-        return total/(heights.size());*/
-        return runningAvg;
+        return total/(heights.size());
     }
-
-    // Remove this method
-    //public void setRunningAvg(Float avg) { runningAvg = avg;}
 
     public String toString() {
         return location + " " + heights;
@@ -86,16 +60,12 @@ public class Location implements Parcelable {
     protected Location(Parcel in) {
         passFail = in.readByte() != 0x00;
         location = (LatLng) in.readValue(LatLng.class.getClassLoader());
-        time = (Timestamp) in.readValue(Timestamp.class.getClassLoader());
-        long tmpDate = in.readLong();
-        date = tmpDate != -1 ? new Date(tmpDate) : null;
         if (in.readByte() == 0x01) {
             heights = new ArrayList<Float>();
             in.readList(heights, Float.class.getClassLoader());
         } else {
             heights = null;
         }
-        runningAvg = in.readByte() == 0x00 ? null : in.readFloat();
     }
 
     @Override
@@ -107,19 +77,11 @@ public class Location implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte((byte) (passFail ? 0x01 : 0x00));
         dest.writeValue(location);
-        dest.writeValue(time);
-        dest.writeLong(date != null ? date.getTime() : -1L);
         if (heights == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
             dest.writeList(heights);
-        }
-        if (runningAvg == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeFloat(runningAvg);
         }
     }
 

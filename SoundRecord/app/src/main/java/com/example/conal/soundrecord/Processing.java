@@ -7,13 +7,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.apache.commons.io.FileUtils;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -72,7 +76,16 @@ public class Processing extends AppCompatActivity {
                 }
         }.start();
 
-       //
+        File folderRecordings = (File)intent.getSerializableExtra(MapsActivity.FOLDER);
+
+        try {
+            FileUtils.deleteDirectory(folderRecordings);
+            Log.i("Recordings", "Folder is deleted.");
+        }
+        catch (IOException e){
+            e.printStackTrace();
+            Log.i("Recordings", "No folder to delete.");
+        }
     }
 
     public void openResultsActivity(Intent intent){
