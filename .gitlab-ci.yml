@@ -33,18 +33,3 @@ assembleDebug:
         paths:
             - SoundRecord/app/build/outputs/apk/debug/*.apk
 
-
-latex:
-    image: blang/latex
-
-    stage: build
-    
-    before_script:
-        - echo y
-
-    script:
-        - latexmk -pdf -cd docs/dissertation/dissertation.tex
-    artifacts:
-        paths:
-            - docs/dissertation/*.pdf
-
