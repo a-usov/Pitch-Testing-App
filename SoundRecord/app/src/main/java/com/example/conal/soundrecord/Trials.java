@@ -15,19 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -46,20 +36,21 @@ public class Trials extends AppCompatActivity {
         setContentView(R.layout.activity_trials);
 
         createCSV = this.<Button>findViewById(R.id.btnCSV);
-        createPDF = (Button) findViewById(R.id.btnPDF);
+        //createPDF = (Button) findViewById(R.id.btnPDF);
 
         createCSV.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
                     generateCSV();
-                }
-                catch(IOException e) {
+                } catch (IOException e) {
 
                 }
             }
         });
 
-        createPDF.setOnClickListener(new View.OnClickListener() {
+    }
+
+        /*createPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -69,7 +60,7 @@ public class Trials extends AppCompatActivity {
             }
         });
     }
-
+    //a method to create a cell with specific parameters and add it to a table
     private void insertCell(PdfPTable table, String text, int align, int colspan, int rowspan, Font font, BaseColor color ) {
 
         //create a new cell with the specified Text and Font
@@ -88,8 +79,6 @@ public class Trials extends AppCompatActivity {
     }
 
     public void generateReportPDF() throws IOException {
-
-
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
 
@@ -97,7 +86,7 @@ public class Trials extends AppCompatActivity {
 
         String filePDF = folderPDF.toString() + "/" + "Report.pdf";
 
-        //fonts
+        //create fonts
         Font title = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLACK);
         //Font subtitle = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD, BaseColor.BLACK));
         Font labelBlack = new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD, BaseColor.BLACK);
@@ -267,7 +256,7 @@ public class Trials extends AppCompatActivity {
                 table.addCell(imageCell);
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
 
             insertCell(table, "The picture of the pitch goes here", Element.ALIGN_CENTER, 7, 4, labelBlack, BaseColor.WHITE);
             insertCell(table, "FIFA Quality: 0.6 - 1.0m \t" + "FIFA Quality Pro: 0.6 - 0.85m", Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
@@ -285,22 +274,12 @@ public class Trials extends AppCompatActivity {
             insertCell(table, "Other please state -", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.MAGENTA);
             insertCell(table, "", Element.ALIGN_CENTER, 2, 1,labelBlack, BaseColor.WHITE);
 
-            //PdfPCell imageCell = new PdfPCell(pitch);
-            //imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            //imageCell.setColspan(7);
-            //imageCell.setRowspan(4);
-            //in case there is no text and you wan to create an empty row
-            //table.addCell(imageCell);
-
-
             report.add(table);
-
 
             report.close();
 
         }catch(Exception e){}
-
-    }
+    }*/
 
     public void generateCSV() throws IOException {
         if (checkPermissionFromDevice()) {
