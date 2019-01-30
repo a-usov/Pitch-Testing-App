@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.itextpdf.text.BaseColor;
@@ -64,6 +65,8 @@ public class MyTests extends AppCompatActivity {
     }
 
     public void generateReportPDF() throws IOException {
+
+        Toast.makeText(MyTests.this, "PDF created.", Toast.LENGTH_SHORT).show();
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
 
