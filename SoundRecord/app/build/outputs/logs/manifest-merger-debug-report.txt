@@ -1,0 +1,331 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+MERGED from [com.android.support:design:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\ce0a6595390d2a99e3ab01ef31d104bb\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\8368accb5eeca2c491e1d6734ed70cb7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\ce0b07ffc089077906a2d5b388e78edb\AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.gms:play-services-places:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-16.0.0.aar\290edb1bf0628f4ff624a690c74f9757\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:17:1-32:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\139b28a470931cce608666efafa76afa\AndroidManifest.xml:2:1-9:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\058f42e9019747c6638aebd143085526\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\00b1e9063e02c987c495cc9ade916a9a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\d91f477aeae53e0d12ecd82ef260045d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\478f7b1a64aa523705b171a9e0d12fc4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\1fadc14fe016ab43444473187e7cf4ad\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\5479fafc2241744e4d2b6b174c4c0a1f\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\63ab58a1905717e721593856c79e7f0b\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\4d52e7abc508c606b174f749920837e7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\530adc47facdca0f67a6437dbff6c75a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\2ece75038b249e45549d87ae5f008112\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\d6d86765f77a1c7b31308a766c6a203b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\f29be750c78f84ac6ff7f2d122029ef9\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\2879a9787297d895dbf304f1faa657df\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\664ddd2d7d02f4445dfddc3d113a1c80\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\edee2e6e688b1f34ef3ecb7754f01019\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\3613812ebf5c9dc7465e0cc921cc3000\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\a0738ae820f88b635c70660b3d1bbf20\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\1035e78c283539fbd55aeb0ab95d6232\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\417708b7b86ec954ff1dd1ba86dc3cd7\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f51dcb646c088adf2bd84bc6f60d1d64\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\6eb3c10ad2204d19805f1a4db4638b36\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\7f4e49a5d3f41ef20fbf7bdf20a06358\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d8eb82b6e6c6e0992bb6a27e6205e03e\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\7c04d0f8218fa88a65204d9388d088ba\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\58878453952ceff97e00da6b30c64e5a\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8e8da32336c5ccc5b9ab449b73b842ba\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\190bc4168a30d8f5ca6f210bc2fdfe60\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\0a6eb459964240fdc7e93810d1ec0bdf\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\8dddb4d90c1659e908d01be6c400e01d\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\f68cbc7aa8e409caf72a2dbf617626c1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\2286695dd936a9e210468ed722c6fc3e\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+	package
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:3:5-44
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:1-73:12
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:5:5-71
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:5:22-68
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:6:22-78
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:7:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:8:5-79
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:8:22-76
+uses-permission#android.permission. ACCESS_COARSE_LOCATION
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:9:5-82
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:9:22-79
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:10:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:10:22-64
+application
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:19:5-71:19
+MERGED from [com.android.support:design:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\ce0a6595390d2a99e3ab01ef31d104bb\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\ce0a6595390d2a99e3ab01ef31d104bb\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\ce0b07ffc089077906a2d5b388e78edb\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\ce0b07ffc089077906a2d5b388e78edb\AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-places:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-16.0.0.aar\290edb1bf0628f4ff624a690c74f9757\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-16.0.0.aar\290edb1bf0628f4ff624a690c74f9757\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\139b28a470931cce608666efafa76afa\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\139b28a470931cce608666efafa76afa\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\1fadc14fe016ab43444473187e7cf4ad\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\1fadc14fe016ab43444473187e7cf4ad\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\5479fafc2241744e4d2b6b174c4c0a1f\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\5479fafc2241744e4d2b6b174c4c0a1f\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\63ab58a1905717e721593856c79e7f0b\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\63ab58a1905717e721593856c79e7f0b\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\417708b7b86ec954ff1dd1ba86dc3cd7\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\417708b7b86ec954ff1dd1ba86dc3cd7\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f51dcb646c088adf2bd84bc6f60d1d64\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f51dcb646c088adf2bd84bc6f60d1d64\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\417708b7b86ec954ff1dd1ba86dc3cd7\AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:24:9-35
+	android:label
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:22:9-41
+	android:roundIcon
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:23:9-54
+	android:icon
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:21:9-43
+	android:allowBackup
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:20:9-35
+	android:theme
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:25:9-40
+activity#com.example.conal.soundrecord.MainActivity
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:26:9-50
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:26:19-47
+activity#com.example.conal.soundrecord.Home
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:27:9-36:20
+	android:label
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:29:13-56
+	android:theme
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:30:13-44
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:28:13-33
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:31:13-35:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:32:17-69
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:32:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:34:17-77
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:34:27-74
+activity#com.example.conal.soundrecord.MyTests
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:37:9-40:47
+	android:label
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:39:13-60
+	android:theme
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:40:13-44
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:38:13-36
+activity#com.example.conal.soundrecord.Results
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:41:9-44:47
+	android:label
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:43:13-59
+	android:theme
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:44:13-44
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:42:13-36
+activity#com.example.conal.soundrecord.Trials
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:45:9-48:47
+	android:label
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:47:13-58
+	android:theme
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:48:13-44
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:46:13-35
+activity#com.example.conal.soundrecord.Processing
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:49:9-52:59
+	android:label
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:51:13-62
+	android:theme
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:52:13-56
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:50:13-39
+uses-library#org.apache.http.legacy
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:53:9-55:40
+	android:required
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:55:13-37
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:54:13-50
+meta-data#com.google.android.geo.API_KEY
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:64:9-66:55
+	android:value
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:66:13-52
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:65:13-58
+activity#com.example.conal.soundrecord.MapsActivity
+ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:68:9-70:68
+	android:label
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:70:13-56
+	android:name
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml:69:13-41
+uses-sdk
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:design:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\ce0a6595390d2a99e3ab01ef31d104bb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\ce0a6595390d2a99e3ab01ef31d104bb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\8368accb5eeca2c491e1d6734ed70cb7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\8368accb5eeca2c491e1d6734ed70cb7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\ce0b07ffc089077906a2d5b388e78edb\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\ce0b07ffc089077906a2d5b388e78edb\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-places:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-16.0.0.aar\290edb1bf0628f4ff624a690c74f9757\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-16.0.0.aar\290edb1bf0628f4ff624a690c74f9757\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\139b28a470931cce608666efafa76afa\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\139b28a470931cce608666efafa76afa\AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\058f42e9019747c6638aebd143085526\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\058f42e9019747c6638aebd143085526\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\00b1e9063e02c987c495cc9ade916a9a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\00b1e9063e02c987c495cc9ade916a9a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\d91f477aeae53e0d12ecd82ef260045d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\d91f477aeae53e0d12ecd82ef260045d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\478f7b1a64aa523705b171a9e0d12fc4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\478f7b1a64aa523705b171a9e0d12fc4\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\1fadc14fe016ab43444473187e7cf4ad\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\1fadc14fe016ab43444473187e7cf4ad\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\5479fafc2241744e4d2b6b174c4c0a1f\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\5479fafc2241744e4d2b6b174c4c0a1f\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\63ab58a1905717e721593856c79e7f0b\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\63ab58a1905717e721593856c79e7f0b\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\4d52e7abc508c606b174f749920837e7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\4d52e7abc508c606b174f749920837e7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\530adc47facdca0f67a6437dbff6c75a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\530adc47facdca0f67a6437dbff6c75a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\2ece75038b249e45549d87ae5f008112\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\2ece75038b249e45549d87ae5f008112\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\d6d86765f77a1c7b31308a766c6a203b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\d6d86765f77a1c7b31308a766c6a203b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\f29be750c78f84ac6ff7f2d122029ef9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\f29be750c78f84ac6ff7f2d122029ef9\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\2879a9787297d895dbf304f1faa657df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\2879a9787297d895dbf304f1faa657df\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\664ddd2d7d02f4445dfddc3d113a1c80\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\664ddd2d7d02f4445dfddc3d113a1c80\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\edee2e6e688b1f34ef3ecb7754f01019\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\edee2e6e688b1f34ef3ecb7754f01019\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\3613812ebf5c9dc7465e0cc921cc3000\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\3613812ebf5c9dc7465e0cc921cc3000\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\a0738ae820f88b635c70660b3d1bbf20\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\a0738ae820f88b635c70660b3d1bbf20\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\1035e78c283539fbd55aeb0ab95d6232\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\1035e78c283539fbd55aeb0ab95d6232\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\417708b7b86ec954ff1dd1ba86dc3cd7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\417708b7b86ec954ff1dd1ba86dc3cd7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f51dcb646c088adf2bd84bc6f60d1d64\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f51dcb646c088adf2bd84bc6f60d1d64\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\6eb3c10ad2204d19805f1a4db4638b36\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\6eb3c10ad2204d19805f1a4db4638b36\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\7f4e49a5d3f41ef20fbf7bdf20a06358\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\cardview-v7-28.0.0.aar\7f4e49a5d3f41ef20fbf7bdf20a06358\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d8eb82b6e6c6e0992bb6a27e6205e03e\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d8eb82b6e6c6e0992bb6a27e6205e03e\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\7c04d0f8218fa88a65204d9388d088ba\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\7c04d0f8218fa88a65204d9388d088ba\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\58878453952ceff97e00da6b30c64e5a\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\58878453952ceff97e00da6b30c64e5a\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8e8da32336c5ccc5b9ab449b73b842ba\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8e8da32336c5ccc5b9ab449b73b842ba\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\190bc4168a30d8f5ca6f210bc2fdfe60\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\190bc4168a30d8f5ca6f210bc2fdfe60\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\0a6eb459964240fdc7e93810d1ec0bdf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\0a6eb459964240fdc7e93810d1ec0bdf\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\8dddb4d90c1659e908d01be6c400e01d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\8dddb4d90c1659e908d01be6c400e01d\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\f68cbc7aa8e409caf72a2dbf617626c1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\f68cbc7aa8e409caf72a2dbf617626c1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\2286695dd936a9e210468ed722c6fc3e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\2286695dd936a9e210468ed722c6fc3e\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:23:9-51
+	android:targetSdkVersion
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\conal\Documents\codebase\SoundRecord\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:23:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.0.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-maps-16.0.0.aar\9551078682c2a8a2af3db0fa58ac0c5b\AndroidManifest.xml:28:9-32
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\9199726afe79ddecfeede1df39b150bc\AndroidManifest.xml:24:13-79
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\8f3204ccc72bddd13edd6bd5a4353ccd\AndroidManifest.xml:24:13-58
+meta-data#android.support.VERSION
+ADDED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\63ab58a1905717e721593856c79e7f0b\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\63ab58a1905717e721593856c79e7f0b\AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\conal\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\c37385e7cc3e8f9ccf3f935c9f044278\AndroidManifest.xml:27:13-51
