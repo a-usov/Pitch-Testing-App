@@ -1,0 +1,58 @@
+image: openjdk:8-jdk
+
+variables:
+    ANDROID_COMPILE_SDK: "28"
+    ANDROID_BUILD_TOOLS: "28.0.2"
+    ANDROID_SDK_TOOLS:   "4333796"
+
+before_script:
+    - echo 123 | sudo -S apt-get --quiet update --yes
+    - echo 123 | sudo -S apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+    - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
+    - unzip -d android-sdk-linux android-sdk.zip
+    - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
+    - echo y | android-sdk-linux/tools/bin/sdkmanager "platform-tools" >/dev/null
+    - echo y | android-sdk-linux/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
+    - export ANDROID_HOME=$PWD/android-sdk-linux
+    - export PATH=$PATH:$PWD/android-sdk-linux/platform-tools/
+    - chmod +x SoundRecord/gradlew
+    - set +o pipefail
+    - yes | android-sdk-linux/tools/bin/sdkmanager --licenses
+    - set -o pipefail
+    - cd SoundRecord/
+
+stages:
+    - build
+    - test
+
+lintDebug:
+    stage: build
+    script:
+        - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+    artifacts:
+        paths:
+            - SoundRecord/app/lint/reports/*.html
+
+assembleDebug:
+    stage: build
+    script:
+        - ./gradlew assembleDebug
+    artifacts:
+        paths:
+            - SoundRecord/app/build/outputs/apk/debug/*.apk
+
+
+latex:
+    image: blang/latex
+
+    stage: build
+    
+    before_script:
+        - echo y
+
+    script:
+        - latexmk -pdf -cd docs/dissertation/dissertation.tex
+    artifacts:
+        paths:
+            - docs/dissertation/*.pdf
+
