@@ -1,11 +1,13 @@
 package com.example.conal.soundrecord;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -75,6 +77,9 @@ public class MyTests extends AppCompatActivity {
         Font labelBlack = new Font(Font.FontFamily.HELVETICA, 9, Font.BOLD, BaseColor.BLACK);
         Font labelRed = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);
         Font other = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
+        Intent intent = getIntent();
+        Location loc = intent.getParcelableExtra(Processing.LOCATION);
+        LatLng coord = loc.getLocation();
 
         try{
             Document report = new Document();
@@ -142,7 +147,7 @@ public class MyTests extends AppCompatActivity {
 
             insertCell(table, "Uncertainty Measurement:", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_CENTER, 4, 1, other, BaseColor.WHITE);
+            insertCell(table, coord.toString(), Element.ALIGN_CENTER, 4, 1, other, BaseColor.WHITE);
 
             insertCell(table, "", Element.ALIGN_LEFT, 7, 1, labelBlack,BaseColor.BLACK);
             insertCell(table, "Calibrate ball on concrete", Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);

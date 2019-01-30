@@ -56,7 +56,7 @@ public class Processing extends AppCompatActivity {
             loc.addHeight((float)n);
         }
 
-        Toast.makeText(this, l.toString() + " " + loc.getHeights(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, l.toString() + " " + loc.getHeights(), Toast.LENGTH_SHORT).show();
 
         intent.setClass(this, MyTests.class);
         intent.putExtra(LOCATION, loc);
