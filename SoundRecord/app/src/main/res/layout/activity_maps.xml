@@ -30,6 +30,7 @@
         android:text="STOP "
         android:textColor="@android:color/white"
         android:textSize="20dp"
+        android:onClick="stopRecording"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnStartRecord"
@@ -44,8 +45,9 @@
         android:text="RECORD"
         android:textColor="@android:color/white"
         android:textSize="20dp"
+        android:onClick="startRecording"
         app:layout_constraintEnd_toStartOf="@+id/btnStopRecord"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map" />
 
