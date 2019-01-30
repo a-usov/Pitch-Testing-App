@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,21 +40,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     MediaRecorder mediaRecorder;
     int testCount = 0;
     private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        private FusedLocationProviderClient mFusedLocationClient;
-//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-//        mFusedLocationClient.getLastLocation()
-//                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-//                    @Override
-//                    public void onSuccess(Location location) {
-//                        // Got last known location. In some rare situations this can be null.
-//                        if (location != null) {
-//                            // Logic to handle location object
-//                        }
-//                    }
-//                });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
@@ -61,8 +52,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-
         if (!checkPermissionFromDevice()) requestPermission();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+            }, REQUEST_PERMISSION_CODE);
+        }
+
+
+            mFusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            double longit = location.getLongitude();
+                            double lat = location.getLatitude();
+                            Toast.makeText(MapsActivity.this, "Longitude" + longit, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapsActivity.this, "Latitude" + lat, Toast.LENGTH_SHORT).show();
+
+
+
+                        }
+
+
+                    });
 
         btnStopRecord = this.<Button>findViewById(R.id.btnStopRecord);
         btnStartRecord = this.<Button>findViewById(R.id.btnStartRecord);
@@ -141,7 +158,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.RECORD_AUDIO
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
         }, REQUEST_PERMISSION_CODE);
 
     }
@@ -164,8 +182,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean checkPermissionFromDevice() {
         int write_external_storage_result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
+        int access_coarse_location_result = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         return write_external_storage_result == PackageManager.PERMISSION_GRANTED &&
-                record_audio_result == PackageManager.PERMISSION_GRANTED;
+                record_audio_result == PackageManager.PERMISSION_GRANTED &&
+                access_coarse_location_result == PackageManager.PERMISSION_GRANTED;
     }
 
     public void openProcessingActivity(){
