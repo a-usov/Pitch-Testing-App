@@ -1,8 +1,12 @@
 package com.example.conal.soundrecord;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -21,10 +25,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class MyTests extends AppCompatActivity {
 
+    final int REQUEST_PERMISSION_CODE = 1000;
     private Button createPDF;
 
 
@@ -32,6 +38,12 @@ public class MyTests extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tests);
+
+        Intent intent = getIntent();
+
+        Location loc = intent.getParcelableExtra(Processing.LOCATION);
+        try {generateCSV(loc);} //Change this to generateCSV(pitchTest)
+        catch (IOException e) {}
 
         createPDF = (Button) findViewById(R.id.btnPDF);
 
@@ -62,6 +74,60 @@ public class MyTests extends AppCompatActivity {
             cell.setMinimumHeight(15f);
         }
         table.addCell(cell);
+    }
+
+    public void generateCSV(Location location) throws IOException { // Change this method to take PitchTest
+        if (checkPermissionFromDevice()) {
+            File folder = new File(Environment.getExternalStorageDirectory()
+                    + "/CSV Files");
+
+            boolean var = false;
+            if (!folder.exists()) var = folder.mkdir();
+
+            System.out.println("" + var);
+
+            final String filename = folder.toString() + "/" + "Test.csv";
+
+            try {
+                FileWriter fw = new FileWriter(filename);
+
+                fw.append("data");
+                fw.append(',');
+
+                fw.append("goes");
+                fw.append(',');
+
+                fw.append("here:");
+                fw.append(',');
+
+                fw.append("time");
+                fw.append(',');
+
+                fw.append("0.6");
+                fw.append(',');
+
+                fw.append("height");
+                fw.append(',');
+
+                fw.append("1.4");
+                fw.append(',');
+
+                fw.append(location.toString());
+                fw.append(',');
+
+                fw.append('\n');
+
+                fw.close();
+
+                Toast.makeText(this, "Written to file \"" + folder.toString() + filename + "/\"", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) { }
+        }
+
+        else {
+            requestPermission();
+            this.finish();
+            Toast.makeText(this, "Cannot create CSV without permission.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void generateReportPDF() throws IOException {
@@ -271,5 +337,20 @@ public class MyTests extends AppCompatActivity {
 
         }catch(Exception e){}
     }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECORD_AUDIO
+        }, REQUEST_PERMISSION_CODE);
+
     }
+
+    public boolean checkPermissionFromDevice() {
+        int write_external_storage_result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
+        return write_external_storage_result == PackageManager.PERMISSION_GRANTED &&
+                record_audio_result == PackageManager.PERMISSION_GRANTED;
+    }
+}
 

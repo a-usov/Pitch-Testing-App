@@ -72,7 +72,7 @@ public class Processing extends AppCompatActivity {
                 //mTextField.setText("done!");
                 spinner.setVisibility(View.GONE);
                 mTextField.setVisibility(View.GONE);
-                openResultsActivity(intent);
+                startActivity(intent);
                 }
         }.start();
 
@@ -87,10 +87,4 @@ public class Processing extends AppCompatActivity {
             Log.i("Recordings", "No folder to delete.");
         }
     }
-
-    public void openResultsActivity(Intent intent){
-        //Intent intent = new Intent(this, Results.class);
-        startActivity(intent);
-    }
-
 }
