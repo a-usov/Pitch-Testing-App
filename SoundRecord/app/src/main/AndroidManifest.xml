@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,8 +14,6 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,10 +48,10 @@
             android:name=".Processing"
             android:label="@string/title_activity_processing"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -69,10 +67,16 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+
         <service
             android:name=".FetchAddressIntentService"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <activity
+            android:name=".FormPDF"
+            android:label="@string/title_activity_form_pdf"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
