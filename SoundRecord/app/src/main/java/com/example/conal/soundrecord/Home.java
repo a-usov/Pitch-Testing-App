@@ -81,6 +81,11 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openFormPDF(){
+        Intent intent = new Intent(this,FormPDF.class);
+        startActivity(intent);
+    }
+
     //dropdown menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -101,6 +106,8 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId() == R.id.results) {
             openResultsPage();
+        }else if(item.getItemId() == R.id.formPDF) {
+                openFormPDF();
         }else{
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
