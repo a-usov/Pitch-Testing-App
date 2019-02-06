@@ -40,20 +40,54 @@ public class ResultsActivity extends AppCompatActivity {
     private String currentDate;
     private String currentTime;
     private String jobNo;
+    private String contract;
+    private String surfaceName;
+    private String airTemp;
+    private String surfaceTemp;
+    private String humidity;
+    private String windSpeed;
+    private String dayBook;
+    private String client;
+    private String dateOfConstruction;
+    private String carpetType;
+    private String infillType;
+    private String shockpad;
+    private String weatherConditions;
+    private String leadTechnician;
+    private String additionalTechnician;
 
+    private String defaultValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        defaultValue = "defaultValueIfNothingIsFound";
+        /** Get the shared preferences **/
         setContentView(R.layout.activity_results);
-//        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+        /** Get date and time taken from home **/
         String dateKey = "currentDate";
         String dateTime = "currentTime";
         currentDate = sharedPref.getString("currentDate", "defaultStringIfNothingFound");
         currentTime = sharedPref.getString("currentTime", "defaultStringIfNothingFound");
-        jobNo = sharedPref.getString("jobNo", "defaultStringIfNothingIsFound");
+        contract = sharedPref.getString("contract", defaultValue);
+        surfaceName = sharedPref.getString("surfaceName", defaultValue);
+        humidity = sharedPref.getString("humidity", defaultValue);
+        airTemp = sharedPref.getString("airTemp", defaultValue);
+        surfaceTemp = sharedPref.getString("surfaceTemp", defaultValue);
+        windSpeed = sharedPref.getString("windSpeed", defaultValue);
+        dayBook = sharedPref.getString("dayBook", defaultValue);
+        client = sharedPref.getString("client", defaultValue);
+        dateOfConstruction = sharedPref.getString("dateOfConstruction", defaultValue);
+        carpetType = sharedPref.getString("carpetTye", defaultValue);
+        infillType = sharedPref.getString("infillType", defaultValue);
+        shockpad = sharedPref.getString("shockpad", defaultValue);
+        weatherConditions = sharedPref.getString("weatherConditions", defaultValue);
+        leadTechnician = sharedPref.getString("leadTechnician", defaultValue);
+        additionalTechnician = sharedPref.getString("additionalTechnician", defaultValue);
+        jobNo = sharedPref.getString("jobNo", defaultValue);
+
         Log.i("currentDate", "The current date is " + currentDate);
         Log.i("currentDate", "The time recorded is " + currentTime);
 
@@ -186,7 +220,7 @@ public class ResultsActivity extends AppCompatActivity {
             insertCell(table, "Job No", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, jobNo, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Contract", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, contract, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Test Date", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, currentDate, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
@@ -196,43 +230,43 @@ public class ResultsActivity extends AppCompatActivity {
             insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Surface Name", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, surfaceName, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Time of day", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, currentTime, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Air temp: (ºC)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, airTemp, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Surface temp: (ºC)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, surfaceTemp, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Humidity: (%)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, humidity, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Wind Speed: (m/s)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             // insertCell(table, "", Element.ALIGN_LEFT, 2);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, windSpeed, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Day Book", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, dayBook, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Client", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, client, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Date of Construction", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, dateOfConstruction, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Carpet Type", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, carpetType, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Infill Type", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, infillType, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Shockpad", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, shockpad, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Weather Conditions", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, weatherConditions, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Lead Technician", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, leadTechnician, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Additional Technician", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, additionalTechnician, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Uncertainty Measurement:", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
