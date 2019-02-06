@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class HomeActivity extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     private Button footballBtn;
     private Button hockeyBtn;
@@ -38,33 +38,42 @@ public class HomeActivity extends AppCompatActivity {
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMapsPage();
+                openMainActivity();
             }
         });
         rugbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMapsPage();
+                openMainActivity();
             }
         });
         tennisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMapsPage();
+                openMainActivity();
             }
         });
     }
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     public void openHomePage(){
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 
     public void openMyTestsPage(){
-        Intent intent = new Intent(this, MyTestsActivity.class);
+        Intent intent = new Intent(this, MyTests.class);
         startActivity(intent);
     }
 
+    //temporary way to get to the result page
+    public void openResultsPage(){
+        Intent intent = new Intent(this, Results.class);
+        startActivity(intent);
+    }
 
     //temporary way to get to the maps page, for football atm
     public void openMapsPage(){
@@ -90,7 +99,9 @@ public class HomeActivity extends AppCompatActivity {
         }else if(item.getItemId() ==  R.id.footballBtn){ // In development of getting gps positions
             openMapsPage();
         }
-        else{
+        else if(item.getItemId() == R.id.results) {
+            openResultsPage();
+        }else{
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 
