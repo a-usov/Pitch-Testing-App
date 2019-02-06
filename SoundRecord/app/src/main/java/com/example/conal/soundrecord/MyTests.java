@@ -1,13 +1,16 @@
 package com.example.conal.soundrecord;
 
+import android.content.Context;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,16 +31,31 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static com.example.conal.soundrecord.Home.MyPREFERENCES;
+
 public class MyTests extends AppCompatActivity {
 
     final int REQUEST_PERMISSION_CODE = 1000;
     private Button createPDF;
+    private String currentDate;
+    private String currentTime;
+    private String jobNo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tests);
+//        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        String dateKey = "currentDate";
+        String dateTime = "currentTime";
+        currentDate = sharedPref.getString("currentDate", "defaultStringIfNothingFound");
+        currentTime = sharedPref.getString("currentTime", "defaultStringIfNothingFound");
+        jobNo = sharedPref.getString("jobNo", "defaultStringIfNothingIsFound");
+        Log.i("currentDate", "The current date is " + currentDate);
+        Log.i("currentDate", "The time recorded is " + currentTime);
 
         Intent intent = getIntent();
 
@@ -46,6 +64,8 @@ public class MyTests extends AppCompatActivity {
         catch (IOException e) {}
 
         createPDF = (Button) findViewById(R.id.btnPDF);
+
+
 
         createPDF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,12 +184,12 @@ public class MyTests extends AppCompatActivity {
             insertCell(table, "Determination of Ball Rebound (FIELD)\n" +
                     "FIFA Quality concept October 2015\n", Element.ALIGN_CENTER, 7, 1, title, BaseColor.WHITE);
             insertCell(table, "Job No", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, jobNo, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Contract", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Test Date", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, currentDate, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Test Condition", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
@@ -179,7 +199,7 @@ public class MyTests extends AppCompatActivity {
             insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Time of day", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, currentTime, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Air temp: (ºC)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 

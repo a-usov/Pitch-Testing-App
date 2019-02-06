@@ -9,4 +9,25 @@
     <string name="title_activity_trials">Trials</string>
     <string name="title_activity_processing">Processing</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_form_pdf">FormPDF</string>
+    <string name="action_settings">Settings</string>
+    <string name="job_no">Job Number</string>
+    <string name="contract">Contract</string>
+    <string name="test_condition">Test Condition</string>
+    <string name="ubstrate_type">Substrate Type</string>
+    <string name="surface_name">Surface Name</string>
+    <string name="air_temp">Air Temp</string>
+    <string name="surface_temp">Surface Temp</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="day_book">Day Book</string>
+    <string name="client">Client</string>
+    <string name="construction_date">Date of Construction</string>
+    <string name="carpet_type">Carpet Type</string>
+    <string name="infill_type">Infill Type</string>
+    <string name="shockpad">Shockpad</string>
+    <string name="weather_conditions">Weather Conditions</string>
+    <string name="lead_technician">Lead Technician</string>
+    <string name="additional_technician">Additional Technician</string>
+    <string name="uncertainty_measurement">Uncertainty Measurement</string>
 </resources>
