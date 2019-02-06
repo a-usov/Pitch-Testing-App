@@ -77,26 +77,22 @@ public class HomeActivity extends AppCompatActivity {
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMainActivity();
+                openMapsPage();
             }
         });
         rugbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMainActivity();
+                openMapsPage();
             }
         });
         tennisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMainActivity();
+                openMapsPage();
             }
         });
 
-    }
-    public void openMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
     public void openHomePage(){
@@ -104,14 +100,8 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openMyTestsPage(){
-        Intent intent = new Intent(this, ResultsActivity.class);
-        startActivity(intent);
-    }
-
-    //temporary way to get to the result page
     public void openResultsPage(){
-        Intent intent = new Intent(this, Results.class);
+        Intent intent = new Intent(this, ResultsActivity.class);
         startActivity(intent);
     }
 
@@ -140,7 +130,7 @@ public class HomeActivity extends AppCompatActivity {
             openHomePage();
         }
         else if(item.getItemId() == R.id.my_tests){
-            openMyTestsPage();
+            openResultsPage();
         }else if(item.getItemId() ==  R.id.footballBtn){ // In development of getting gps positions
             openMapsPage();
         }
