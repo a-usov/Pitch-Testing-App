@@ -3,26 +3,21 @@ package com.example.conal.soundrecord;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import org.apache.commons.io.FileUtils;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 
-public class Processing extends AppCompatActivity {
+public class ProcessingActivity extends AppCompatActivity {
     //Declare variables
     TextView mTextField;
     public static final String LOCATION = "com.example.conal.soundrecord.LOCATION";
@@ -58,7 +53,7 @@ public class Processing extends AppCompatActivity {
 
         //Toast.makeText(this, l.toString() + " " + loc.getHeights(), Toast.LENGTH_SHORT).show();
 
-        intent.setClass(this, MyTests.class);
+        intent.setClass(this, MyTestsActivity.class);
         intent.putExtra(LOCATION, loc);
 
 

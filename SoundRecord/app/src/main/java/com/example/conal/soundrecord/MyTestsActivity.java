@@ -23,7 +23,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class MyTests extends AppCompatActivity {
+public class MyTestsActivity extends AppCompatActivity {
 
     private Button createPDF;
 
@@ -66,7 +66,7 @@ public class MyTests extends AppCompatActivity {
 
     public void generateReportPDF() throws IOException {
 
-        Toast.makeText(MyTests.this, "PDF created.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MyTestsActivity.this, "PDF created.", Toast.LENGTH_SHORT).show();
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
 
@@ -81,7 +81,7 @@ public class MyTests extends AppCompatActivity {
         Font labelRed = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);
         Font other = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
         Intent intent = getIntent();
-        Location loc = intent.getParcelableExtra(Processing.LOCATION);
+        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
         LatLng coord = loc.getLocation();
 
         try{

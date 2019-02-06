@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#abcdef"
-    tools:context=".MyTests"
+    tools:context=".MyTestsActivity"
     tools:showIn="@layout/activity_my_tests">
 
 
