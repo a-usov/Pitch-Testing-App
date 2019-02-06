@@ -28,7 +28,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ResultsActivity extends AppCompatActivity {
+public class MyTests extends AppCompatActivity {
 
     final int REQUEST_PERMISSION_CODE = 1000;
     private Button createPDF;
@@ -37,11 +37,11 @@ public class ResultsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_results);
+        setContentView(R.layout.activity_my_tests);
 
         Intent intent = getIntent();
 
-        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
+        Location loc = intent.getParcelableExtra(Processing.LOCATION);
         try {generateCSV(loc);} //Change this to generateCSV(pitchTest)
         catch (IOException e) {}
 
@@ -132,7 +132,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     public void generateReportPDF() throws IOException {
 
-        Toast.makeText(ResultsActivity.this, "PDF created.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MyTests.this, "PDF created.", Toast.LENGTH_SHORT).show();
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
 
@@ -147,7 +147,7 @@ public class ResultsActivity extends AppCompatActivity {
         Font labelRed = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);
         Font other = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
         Intent intent = getIntent();
-        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
+        Location loc = intent.getParcelableExtra(Processing.LOCATION);
         LatLng coord = loc.getLocation();
 
         try{
