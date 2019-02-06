@@ -35,7 +35,7 @@ public class Trials extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trials);
 
-        createCSV = this.<Button>findViewById(R.id.btnCSV);
+        /*createCSV = this.<Button>findViewById(R.id.btnCSV);
         //createPDF = (Button) findViewById(R.id.btnPDF);
 
         createCSV.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +46,7 @@ public class Trials extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
 
     }
 
@@ -281,7 +281,7 @@ public class Trials extends AppCompatActivity {
         }catch(Exception e){}
     }*/
 
-    public void generateCSV() throws IOException {
+   /* public void generateCSV() throws IOException {
         if (checkPermissionFromDevice()) {
             File folder = new File(Environment.getExternalStorageDirectory()
                     + "/CSV Files");
@@ -330,7 +330,7 @@ public class Trials extends AppCompatActivity {
             this.finish();
             Toast.makeText(this, "Cannot create CSV without permission.", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
     public void openHomePage(){
         Intent intent = new Intent(this, Home.class);
@@ -366,13 +366,13 @@ public class Trials extends AppCompatActivity {
     // Next 3 methods copied from Main Activity. Need to check permissions before creating CSV/PDF.
     //
 
-    private void requestPermission() {
+    /*private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.RECORD_AUDIO
         }, REQUEST_PERMISSION_CODE);
 
-    }
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -389,10 +389,10 @@ public class Trials extends AppCompatActivity {
         }
     }
 
-    public boolean checkPermissionFromDevice() {
+    /*public boolean checkPermissionFromDevice() {
         int write_external_storage_result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
         return write_external_storage_result == PackageManager.PERMISSION_GRANTED &&
                 record_audio_result == PackageManager.PERMISSION_GRANTED;
-    }
+    }*/
 }
