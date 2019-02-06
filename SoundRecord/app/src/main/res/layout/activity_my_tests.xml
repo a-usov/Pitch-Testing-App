@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Results">
+    tools:context=".MyTests">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme"
+        app:expanded="true" />
 
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_results" />
+    <include layout="@layout/content_my_tests" />
 
 </android.support.design.widget.CoordinatorLayout>
