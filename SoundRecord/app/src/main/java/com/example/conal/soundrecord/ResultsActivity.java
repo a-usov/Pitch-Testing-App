@@ -31,9 +31,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static com.example.conal.soundrecord.Home.MyPREFERENCES;
+import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
-public class MyTests extends AppCompatActivity {
+public class ResultsActivity extends AppCompatActivity {
 
     final int REQUEST_PERMISSION_CODE = 1000;
     private Button createPDF;
@@ -45,7 +45,7 @@ public class MyTests extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_tests);
+        setContentView(R.layout.activity_results);
 //        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
@@ -59,7 +59,7 @@ public class MyTests extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Location loc = intent.getParcelableExtra(Processing.LOCATION);
+        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
         try {generateCSV(loc);} //Change this to generateCSV(pitchTest)
         catch (IOException e) {}
 
@@ -152,7 +152,7 @@ public class MyTests extends AppCompatActivity {
 
     public void generateReportPDF() throws IOException {
 
-        Toast.makeText(MyTests.this, "PDF created.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ResultsActivity.this, "PDF created.", Toast.LENGTH_SHORT).show();
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
 
@@ -167,7 +167,7 @@ public class MyTests extends AppCompatActivity {
         Font labelRed = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);
         Font other = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
         Intent intent = getIntent();
-        Location loc = intent.getParcelableExtra(Processing.LOCATION);
+        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
         LatLng coord = loc.getLocation();
 
         try{

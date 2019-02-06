@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,14 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Set;
 
-import static com.example.conal.soundrecord.Home.MyPREFERENCES;
+import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
-public class FormPDF extends AppCompatActivity {
+public class FormPDFActivity extends AppCompatActivity {
 //    private int jobNo;
 //    private String contract;
 //    private String surfaceName;

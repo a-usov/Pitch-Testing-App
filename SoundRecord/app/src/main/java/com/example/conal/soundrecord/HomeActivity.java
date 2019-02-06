@@ -12,15 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.sql.Time;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Calendar;
 import java.util.Locale;
 
-public class Home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private Button footballBtn;
     private Button hockeyBtn;
@@ -104,12 +100,12 @@ public class Home extends AppCompatActivity {
     }
 
     public void openHomePage(){
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
     public void openMyTestsPage(){
-        Intent intent = new Intent(this, MyTests.class);
+        Intent intent = new Intent(this, ResultsActivity.class);
         startActivity(intent);
     }
 
@@ -126,7 +122,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void openFormPDF(){
-        Intent intent = new Intent(this,FormPDF.class);
+        Intent intent = new Intent(this, FormPDFActivity.class);
         startActivity(intent);
     }
 
