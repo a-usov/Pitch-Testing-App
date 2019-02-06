@@ -1,13 +1,24 @@
 package com.example.conal.soundrecord;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class Home extends AppCompatActivity {
 
@@ -15,13 +26,45 @@ public class Home extends AppCompatActivity {
     private Button hockeyBtn;
     private Button rugbyBtn;
     private Button tennisBtn;
+    SharedPreferences sharedpreferences;
+    public static final String MyPREFERENCES = "MyPrefs" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //Conall was here
+//        //Conall was here
+//        DateFormat currentTime = Calendar.getInstance().
+//        Log.i("getDate", "The current date is " + currentTime.toString());
+
+        Date today;
+        Date currentTime;
+        String timeOutput;
+        String output;
+        SimpleDateFormat formatter;
+        SimpleDateFormat timeFormatter;
+        String pattern = "dd.MM.yy";
+        String timePattern = "h:mm a";
+        Locale currentLocale = Locale.UK;
+        formatter = new SimpleDateFormat(pattern,currentLocale);
+        timeFormatter = new SimpleDateFormat(timePattern, currentLocale);
+        currentTime = new Date();
+        today = new Date();
+        output = formatter.format(today);
+        timeOutput = timeFormatter.format(currentTime);
+        Log.i("getDate",pattern + " " + output);
+        Log.i("getDate", timePattern + " " + timeOutput);
+
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("currentDate",output);
+        editor.putString("currentTime", timeOutput);
+        editor.apply();
+        Log.i("passing", "Date and time saved.");
+
+
 
 
         footballBtn = (Button) findViewById(R.id.footballBtn);
@@ -32,7 +75,7 @@ public class Home extends AppCompatActivity {
         footballBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMapsPage();
+                openFormPDF();
             }
         });
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +96,7 @@ public class Home extends AppCompatActivity {
                 openMainActivity();
             }
         });
+
     }
     public void openMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);

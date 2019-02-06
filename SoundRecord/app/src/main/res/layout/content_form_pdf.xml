@@ -200,6 +200,20 @@
                 android:hint="@string/uncertainty_measurement" />
         </android.support.design.widget.TextInputLayout>
 
+        <Button
+            android:id="@+id/btnSubmitForm"
+            android:layout_weight="1"
+            android:text="Submit"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="40dp"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnStopRecord"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"/>
     </android.support.design.widget.TextInputLayout>
+
 
 </android.support.v4.widget.NestedScrollView>
