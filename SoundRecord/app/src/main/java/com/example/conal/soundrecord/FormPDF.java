@@ -17,6 +17,7 @@ import android.widget.Button;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 import static com.example.conal.soundrecord.Home.MyPREFERENCES;
 
@@ -43,6 +44,26 @@ public class FormPDF extends AppCompatActivity {
 
 
     private TextInputLayout jobNo;
+    private Set<String> values;
+//     job_no">Job Number</string>
+//    contract">Contract</string>
+//    test_condition">Test Condition</string>
+//    ubstrate_type">Substrate Type</string>
+//    surface_name">Surface Name</string>
+//    air_temp">Air Temp</string>
+//    surface_temp">Surface Temp</string>
+//    humidity">Humidity</string>
+//    wind_speed">Wind speed</string>
+//    day_book">Day Book</string>
+//    client">Client</string>
+//    construction_date">Date of Construction</string>
+//    carpet_type">Carpet Type</string>
+//    infill_type">Infill Type</string>
+//    shockpad">Shockpad</string>
+//    weather_conditions">Weather Conditions</string>
+//    lead_technician">Lead Technician</string>
+//    additional_technician">Additional Technician</string>
+//    uncertainty_measurement">Uncertainty Measurement</string>
 //    private TextInputEditText contract;
 //    private TextInputEditText surfaceName;
 //    private TextInputEditText airTemp;
@@ -120,6 +141,7 @@ public class FormPDF extends AppCompatActivity {
     protected void submitPDF(){
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
+        
         editor.putString("jobNo", jobNo.getEditText().getText().toString());
         editor.apply();
         Log.i("passing", "Job number saved.");
