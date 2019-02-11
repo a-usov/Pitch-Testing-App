@@ -30,4 +30,5 @@
     <string name="lead_technician">Lead Technician</string>
     <string name="additional_technician">Additional Technician</string>
     <string name="uncertainty_measurement">Uncertainty Measurement</string>
+    <string name="other_option">"Other (please specify)"</string>
 </resources>

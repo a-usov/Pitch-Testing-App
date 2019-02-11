@@ -200,19 +200,113 @@
                 android:hint="@string/uncertainty_measurement" />
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/fifa_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Select the version:"
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp"/>
+
+        <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+            <RadioButton
+            android:id="@+id/fifa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="FIFA Quality 0.6 - 1.0m" />
+
+        <RadioButton
+            android:id="@+id/fifa_pro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="FIFA Quality Pro 0.6 - 0.85m" />
+    </RadioGroup>
+
+        <TextView
+            android:id="@+id/fifa_equipment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Select the equipment set:"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/uk1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="UK 1" />
+
+        <RadioButton
+            android:id="@+id/uk2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="UK 2" />
+
+        <RadioButton
+            android:id="@+id/flight3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Flight 3" />
+
+        <RadioButton
+            android:id="@+id/flight4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Flight 4" />
+
+        <RadioButton
+            android:id="@+id/flight5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Flight 5" />
+
+
+    </RadioGroup>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/other"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/other_option" />
+        </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/btnSubmitForm"
-            android:layout_weight="1"
-            android:text="Submit"
             android:layout_width="110dp"
             android:layout_height="55dp"
             android:layout_marginTop="40dp"
+            android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
+            android:text="Submit"
             android:textColor="@android:color/white"
             android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/btnStopRecord"
             app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
     </android.support.design.widget.TextInputLayout>
 
 
