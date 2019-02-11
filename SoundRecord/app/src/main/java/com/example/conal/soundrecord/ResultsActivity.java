@@ -1,10 +1,12 @@
 package com.example.conal.soundrecord;
 
-import android.content.Context;
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +22,7 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -30,6 +33,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
@@ -352,7 +357,7 @@ public class ResultsActivity extends AppCompatActivity {
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
 
-            /*picture cell
+            //picture cell
             try {
                 InputStream ims = getAssets().open("pitch.png");
                 Bitmap bmp = BitmapFactory.decodeStream(ims);
@@ -367,7 +372,7 @@ public class ResultsActivity extends AppCompatActivity {
                 table.addCell(imageCell);
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
 
             insertCell(table, "The picture of the pitch goes here", Element.ALIGN_CENTER, 7, 4, labelBlack, BaseColor.WHITE);
             insertCell(table, "FIFA Quality: 0.6 - 1.0m \t" + "FIFA Quality Pro: 0.6 - 0.85m", Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
