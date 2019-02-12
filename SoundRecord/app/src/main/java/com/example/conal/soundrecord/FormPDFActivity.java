@@ -51,6 +51,7 @@ public class FormPDFActivity extends AppCompatActivity {
         btnSubmitPDF = this.<Button>findViewById(R.id.btnSubmitForm);
 
         jobNo = this.<TextInputLayout>findViewById(R.id.job_no);
+        contract = this.findViewById(R.id.contract);
         surfaceName = this.<TextInputLayout>findViewById(R.id.surface_name);
         airTemp = this.<TextInputLayout>findViewById(R.id.air_temp);
         surfaceTemp = this.<TextInputLayout>findViewById(R.id.surface_temp);
