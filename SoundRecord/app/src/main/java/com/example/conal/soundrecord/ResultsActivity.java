@@ -60,6 +60,10 @@ public class ResultsActivity extends AppCompatActivity {
     private String weatherConditions;
     private String leadTechnician;
     private String additionalTechnician;
+    private String substrateType;
+    private String testCondition;
+    private String uncertainityMeasurement;
+
 
     private String defaultValue;
 
@@ -92,6 +96,12 @@ public class ResultsActivity extends AppCompatActivity {
         leadTechnician = sharedPref.getString("leadTechnician", defaultValue);
         additionalTechnician = sharedPref.getString("additionalTechnician", defaultValue);
         jobNo = sharedPref.getString("jobNo", defaultValue);
+        uncertainityMeasurement = sharedPref.getString("uncertaintyMeasurement", defaultValue);
+        testCondition = sharedPref.getString("testConditions", defaultValue);
+        substrateType = sharedPref.getString("substrateType", defaultValue);
+
+
+
 
         Log.i("currentDate", "The current date is " + currentDate);
         Log.i("currentDate", "The time recorded is " + currentTime);
@@ -230,10 +240,10 @@ public class ResultsActivity extends AppCompatActivity {
             insertCell(table, "Test Date", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, currentDate, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Test Condition", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, testCondition, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, substrateType, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Surface Name", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, surfaceName, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
@@ -274,7 +284,7 @@ public class ResultsActivity extends AppCompatActivity {
             insertCell(table, additionalTechnician, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Uncertainty Measurement:", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, uncertainityMeasurement, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, coord.toString(), Element.ALIGN_CENTER, 4, 1, other, BaseColor.WHITE);
 
             insertCell(table, "", Element.ALIGN_LEFT, 7, 1, labelBlack,BaseColor.BLACK);
@@ -368,6 +378,7 @@ public class ResultsActivity extends AppCompatActivity {
                 image.setAlignment(Element.ALIGN_CENTER);
                 PdfPCell imageCell = new PdfPCell(image);
                 imageCell.setRowspan(4);
+                imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 imageCell.setColspan(7);
                 table.addCell(imageCell);
             } catch (IOException e) {
