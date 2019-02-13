@@ -63,7 +63,20 @@ public class ResultsActivity extends AppCompatActivity {
     private String substrateType;
     private String testCondition;
     private String uncertainityMeasurement;
-
+    private Boolean fifaPro;
+    private String fifaProString;
+    private Boolean uk1;
+    private Boolean uk2;
+    private Boolean flight3;
+    private Boolean flight4;
+    private Boolean flight5;
+    private String X = "X";
+    private String uk1String = "";
+    private String uk2String = "";
+    private String flight3String = "";
+    private String flight4String = "";
+    private String flight5tring = "";
+    private String otherEquip;
 
     private String defaultValue;
 
@@ -99,6 +112,26 @@ public class ResultsActivity extends AppCompatActivity {
         uncertainityMeasurement = sharedPref.getString("uncertaintyMeasurement", defaultValue);
         testCondition = sharedPref.getString("testConditions", defaultValue);
         substrateType = sharedPref.getString("substrateType", defaultValue);
+        fifaPro = sharedPref.getBoolean("fifaPro", false);
+
+        uk1 = sharedPref.getBoolean("uk1", false);
+        uk2 = sharedPref.getBoolean("uk2", false);
+        flight3 = sharedPref.getBoolean("flight3", false);
+        flight4 = sharedPref.getBoolean("flight4", false);
+        flight5 = sharedPref.getBoolean("flight5", false);
+
+        otherEquip = sharedPref.getString("other", defaultValue);
+
+
+        if(fifaPro) fifaProString =  "FIFA Quality Pro: 0.6 - 0.85m";
+        else fifaProString = "FIFA Quality: 0.6 - 1.0m";
+
+        /** Equipment radio buttons **/
+        if(uk1) uk1String = X;
+        if(uk2) uk2String = X;
+        if(flight3) flight3String = X;
+        if(flight4) flight4String = X;
+        if(flight5) flight5tring = X;
 
 
 
@@ -386,20 +419,21 @@ public class ResultsActivity extends AppCompatActivity {
             }
 
             insertCell(table, "The picture of the pitch goes here", Element.ALIGN_CENTER, 7, 4, labelBlack, BaseColor.WHITE);
-            insertCell(table, "FIFA Quality: 0.6 - 1.0m \t" + "FIFA Quality Pro: 0.6 - 0.85m", Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
+//          insertCell(table, "FIFA Quality: 0.6 - 1.0m \t" + "FIFA Quality Pro: 0.6 - 0.85m", Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, fifaProString, Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
 
             insertCell(table, "UK 1", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.YELLOW);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, uk1String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 3", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.BLUE);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, flight3String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 4", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.RED);
-            insertCell(table, "", Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, flight4String, Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "UK 2", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.GREEN);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, uk2String, Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 5 (Norway)", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.CYAN);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, flight5tring, Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
             insertCell(table, "Other please state -", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.MAGENTA);
-            insertCell(table, "", Element.ALIGN_CENTER, 2, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, otherEquip, Element.ALIGN_CENTER, 2, 1,labelBlack, BaseColor.WHITE);
 
             report.add(table);
 

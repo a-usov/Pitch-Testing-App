@@ -45,10 +45,16 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout leadTechnician;
     private TextInputLayout additionalTechnician;
     private TextInputLayout uncertaintyMeasurement;
+    private TextInputLayout otherEquipment;
 
     /** Radio buttons **/
-    private RadioGroup fifa_group;
-    private RadioButton fifa_Radio;
+    private Boolean fifaPro; // button for Fifa Pro spec or not
+    private Boolean uk1 = false;
+    private Boolean uk2 = false;
+    private Boolean flight3 = false;
+    private Boolean flight4 = false;
+    private Boolean flight5 = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,15 +83,9 @@ public class FormPDFActivity extends AppCompatActivity {
         substrateType = this.findViewById(R.id.substrate_type);
         testCondition = this.findViewById(R.id.test_conditions);
         uncertaintyMeasurement = this.findViewById(R.id.uncertainty_measurement);
+        otherEquipment = this.findViewById(R.id.other);
 
-        fifa_group = (RadioGroup) findViewById(R.id.fifaRadioGroup);
 
-        /** Fifa normal vs fifa pro **/
-        // get selected radio button from radio group
-        int selectedID = fifa_group.getCheckedRadioButtonId();
-        Log.i("forms","The fifa selected ID is " + selectedID);
-        // find the radio button by the returned id
-        fifa_Radio = (RadioButton)findViewById(selectedID);
 
 
 
@@ -135,12 +135,55 @@ public class FormPDFActivity extends AppCompatActivity {
                 if (checked)
                     // Normal FIFA is best
                     Log.i("forms", "Normal fifa is best");
+                    fifaPro = false;
                     break;
             case R.id.fifa_pro:
                 if (checked)
                     // FIFA PRO all the way
                     Log.i("forms", "FIFA PRO!!");
+                    fifaPro = true;
                     break;
+        }
+    }
+
+    public void onEquipmentRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.uk1:
+                if (checked)
+                    // UK1 equipment
+                    Log.i("forms", "UK1 equipment");
+                uk1 = true;
+                break;
+            case R.id.uk2:
+                if (checked)
+                    // UK 2 equipment
+                    // FIFA PRO all the way
+                    Log.i("forms", "UK2 equipment");
+                uk2 = true;
+
+                break;
+            case R.id.flight3:
+                if (checked)
+                    // Flight3
+                    Log.i("forms", "Flight 3 ");
+                flight3 = true;
+                break;
+            case R.id.flight4:
+                if (checked)
+                    // Flight 5 equipment
+                    Log.i("forms", "Flight 4");
+                flight4 = true;
+                break;
+            case R.id.flight5:
+                if (checked)
+                    // Flight 5
+                    Log.i("forms", "Flight 5");
+                flight5 = true;
+                break;
         }
     }
 
@@ -171,6 +214,13 @@ public class FormPDFActivity extends AppCompatActivity {
         editor.putString("substrateType", substrateType.getEditText().getText().toString());
         editor.putString("testConditions", testCondition.getEditText().getText().toString());
         editor.putString("uncertaintyMeasurement", testCondition.getEditText().getText().toString());
+        editor.putBoolean("fifaPro", fifaPro);
+        editor.putBoolean("uk1", uk1);
+        editor.putBoolean("uk2", uk2);
+        editor.putBoolean("flight3", flight3);
+        editor.putBoolean("flight4", flight4);
+        editor.putBoolean("flight5", flight5);
+        editor.putString("other", testCondition.getEditText().getText().toString());
 
         // Save data
         editor.apply();

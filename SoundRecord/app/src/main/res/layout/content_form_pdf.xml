@@ -246,6 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onFifaRadioButtonClicked"
                 android:text="FIFA Quality 0.6 - 1.0m" />
 
             <RadioButton
@@ -253,6 +254,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onFifaRadioButtonClicked"
                 android:text="FIFA Quality Pro 0.6 - 0.85m" />
         </RadioGroup>
 
@@ -276,6 +278,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onEquipmentRadioButtonClicked"
             android:text="UK 1" />
 
         <RadioButton
@@ -283,6 +286,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onEquipmentRadioButtonClicked"
             android:text="UK 2" />
 
         <RadioButton
@@ -290,6 +294,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onEquipmentRadioButtonClicked"
             android:text="Flight 3" />
 
         <RadioButton
@@ -297,6 +302,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onEquipmentRadioButtonClicked"
             android:text="Flight 4" />
 
         <RadioButton
@@ -304,6 +310,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onEquipmentRadioButtonClicked"
             android:text="Flight 5" />
 
 
