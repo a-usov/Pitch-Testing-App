@@ -365,7 +365,7 @@ public class ResultsActivity extends AppCompatActivity {
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 Image image = Image.getInstance(stream.toByteArray());
                 image.scalePercent(30);
-                image.setAlignment(Element.ALIGN_LEFT);
+                image.setAlignment(Element.ALIGN_CENTER);
                 PdfPCell imageCell = new PdfPCell(image);
                 imageCell.setRowspan(4);
                 imageCell.setColspan(7);
