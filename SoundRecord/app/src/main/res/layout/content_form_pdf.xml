@@ -20,7 +20,8 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/job_no" />
+                android:hint="@string/job_no"
+                android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -78,7 +79,8 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/air_temp" />
+                android:hint="@string/air_temp"
+                android:inputType="numberDecimal" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -89,7 +91,8 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/surface_temp" />
+                android:hint="@string/surface_temp"
+                android:inputType="numberDecimal" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -144,7 +147,8 @@
             <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/construction_date" />
+                android:hint="@string/construction_date"
+                android:inputType="date" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -234,24 +238,25 @@
             android:textSize="18dp"/>
 
         <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+            android:id="@+id/fifaRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <RadioButton
-            android:id="@+id/fifa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="FIFA Quality 0.6 - 1.0m" />
+                android:id="@+id/fifa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FIFA Quality 0.6 - 1.0m" />
 
-        <RadioButton
-            android:id="@+id/fifa_pro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="FIFA Quality Pro 0.6 - 0.85m" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/fifa_pro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FIFA Quality Pro 0.6 - 0.85m" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/fifa_equipment"
