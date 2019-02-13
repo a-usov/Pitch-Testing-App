@@ -139,7 +139,7 @@ public class FormPDFActivity extends AppCompatActivity {
             case R.id.fifa_pro:
                 if (checked)
                     // FIFA PRO all the way
-                    Log.i("forms", "FIFA PRO!!")
+                    Log.i("forms", "FIFA PRO!!");
                     break;
         }
     }
