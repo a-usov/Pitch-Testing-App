@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/test_conditions" />
         </android.support.design.widget.TextInputLayout>
-        
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/air_temp"
             android:layout_width="match_parent"
@@ -227,9 +227,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Select the version:"
+            android:text="@string/select_version"
             android:textColor="@color/colorAccent"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
         <RadioGroup
         android:layout_width="match_parent"
@@ -241,14 +241,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="FIFA Quality 0.6 - 1.0m" />
+            android:text="@string/quality" />
 
         <RadioButton
             android:id="@+id/fifa_pro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="FIFA Quality Pro 0.6 - 0.85m" />
+            android:text="@string/quality_pro" />
     </RadioGroup>
 
         <TextView
@@ -256,7 +256,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Select the equipment set:"
+            android:text="@string/select_equipment"
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
 
@@ -271,35 +271,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="UK 1" />
+            android:text="@string/uk1" />
 
         <RadioButton
             android:id="@+id/uk2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="UK 2" />
+            android:text="@string/uk2" />
 
         <RadioButton
             android:id="@+id/flight3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Flight 3" />
+            android:text="@string/flight3" />
 
         <RadioButton
             android:id="@+id/flight4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Flight 4" />
+            android:text="@string/flight4" />
 
         <RadioButton
             android:id="@+id/flight5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Flight 5" />
+            android:text="@string/flight5" />
 
 
     </RadioGroup>
@@ -322,9 +322,9 @@
             android:layout_marginTop="40dp"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
-            android:text="Submit"
+            android:text="@string/submit"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/btnStopRecord"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent" />
