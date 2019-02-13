@@ -43,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Button btnStartRecord, btnStopRecord, btnGetLocation;
     TextView txtLocation;
     String pathSave = "";
-    MediaRecorder mediaRecorder;
+    private WavRecorder recorder;
     private GoogleMap mMap;
     private FusedLocationProviderClient client;
     private double lat;
@@ -60,7 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         btnStopRecord = this.<Button>findViewById(R.id.btnStopRecord);
         btnStartRecord = this.<Button>findViewById(R.id.btnStartRecord);
-
 
 
         btnStartRecord.setEnabled(true);
@@ -88,16 +87,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-
         // Get the current location
-        if(ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED ){
+        if (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // If permission is not granted, request permissions.
             requestPermission();
         }
         client.getLastLocation().addOnSuccessListener(MapsActivity.this, new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                if(location!=null){
+                if (location != null) {
                     Log.i("yada", "Location: " + location.toString());
 //                    txtLocation.setText(location.toString());
                     lat = location.getLatitude();
@@ -109,7 +107,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng cPos = new LatLng(lat, longi);
                     mMap.addMarker(new MarkerOptions().position(cPos).title("Current location."));
                     float maxZoomLevel = mMap.getMaxZoomLevel();
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cPos,maxZoomLevel));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cPos, maxZoomLevel));
                     Log.i("location", "Latitude " + lat);
                     Log.i("location", "Longitude" + longi);
                     // Ready /update map
@@ -119,25 +117,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     intent.putExtra(POSITION, cPos);
 
 
-
-                }
-                else{
+                } else {
                     Log.i("location", "Location is null.");
                 }
 
             }
         });
 
-
-    }
-
-    private void setupMediaRecorder() {
-        mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-        mediaRecorder.setOutputFile(pathSave);
-        Log.i("Recording", "setting up Media Recoder is done ");
 
     }
 
@@ -177,7 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /*
  Testing startRecording button instead of event listener
   */
-    public void startRecording(View view){
+    public void startRecording(View view) {
         Log.i("Recording", "Yay we're at recording.");
         if (checkPermissionFromDevice()) {
             Toast.makeText(this, "Recording...", Toast.LENGTH_SHORT).show();
@@ -186,7 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             /** Making a folder to hold the 5 recordings **/
             Log.i("Recording", "Creating folder");
 //                File folderRecordings = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
-            if (!folderRecordings.exists()){
+            if (!folderRecordings.exists()) {
                 folderRecordings.mkdir();
                 Log.i("Recording", "Folder is created.");
 
@@ -196,19 +182,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String folderPath = folderRecordings.toString();
 
             // Save recording in folder
-            pathSave = folderRecordings.getPath() + "/" +  UUID.randomUUID().toString() + "_audio_record.3_gpp";
+            pathSave = folderRecordings.getPath() + "/" + UUID.randomUUID().toString() + "_audio_record.wav";
 
-            setupMediaRecorder();
+            recorder = new WavRecorder(pathSave);
             Log.i("Recording", "Set up media recorder");
 
-            try {
-                Log.i("Recording", "Preparing to record.");
-                mediaRecorder.prepare();
-                Log.i("Recording", "Starting to record.");
-                mediaRecorder.start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Log.i("Recording", "Starting to record.");
+            recorder.startRecording();
 
             btnStartRecord.setEnabled(false);
             btnStopRecord.setEnabled(true);
@@ -218,39 +198,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void stopRecording(View view){
-                Log.i("Recording", "Stopping recording");
-                mediaRecorder.stop();
-                btnStartRecord.setEnabled(true);
-                btnStopRecord.setEnabled(false);
-                numRecordings++;
+    public void stopRecording(View view) {
+        Log.i("Recording", "Stopping recording");
+        recorder.stopRecording();
+        btnStartRecord.setEnabled(true);
+        btnStopRecord.setEnabled(false);
+        numRecordings++;
 
-                intent.putExtra(FOLDER,folderRecordings);
-                intent.setClass(this, ProcessingActivity.class);
+        intent.putExtra(FOLDER, folderRecordings);
+        intent.setClass(this, ProcessingActivity.class);
 
-                //Code below ensures enough bounces (change 2 to 6 in final version)
-                if (numRecordings > 2) openProcessingActivity(intent);
-                else {
-                    intent.setClass(view.getContext(), MapsActivity.class);
-                    startActivity(intent);
-                }
+        //Code below ensures enough bounces (change 2 to 6 in final version)
+        if (numRecordings > 2) openProcessingActivity(intent);
+        else {
+            intent.setClass(view.getContext(), MapsActivity.class);
+            startActivity(intent);
+        }
     }
 
-    public void openProcessingActivity(Intent intent){
+    public void openProcessingActivity(Intent intent) {
         //Intent intent = new Intent(this, ProcessingActivity.class);
         startActivity(intent);
     }
 
-    public void openHomePage(){
+    public void openHomePage() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
-    public void openMyTestsPage(){
+    public void openMyTestsPage() {
         Intent intent = new Intent(this, ResultsActivity.class);
         startActivity(intent);
     }
-
 
 
     //dropdown menu
@@ -263,12 +242,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.home) {
+        if (item.getItemId() == R.id.home) {
             openHomePage();
-        }
-        else if(item.getItemId() == R.id.my_tests){
+        } else if (item.getItemId() == R.id.my_tests) {
             openMyTestsPage();
-        }else{
+        } else {
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 
