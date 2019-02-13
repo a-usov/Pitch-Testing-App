@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
@@ -40,6 +42,10 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout additionalTechnician;
     private TextInputLayout uncertaintyMeasurement;
 
+    /** Radio buttons **/
+    private RadioGroup fifa_group;
+    private RadioButton fifa_Radio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +74,16 @@ public class FormPDFActivity extends AppCompatActivity {
         testCondition = this.findViewById(R.id.test_conditions);
         uncertaintyMeasurement = this.findViewById(R.id.uncertainty_measurement);
 
+        fifa_group = (RadioGroup) findViewById(R.id.fifaRadioGroup);
+
+        /** Fifa normal vs fifa pro **/
+        // get selected radio button from radio group
+        int selectedID = fifa_group.getCheckedRadioButtonId();
+        Log.i("forms","The fifa selected ID is " + selectedID);
+        // find the radio button by the returned id
+        fifa_Radio = (RadioButton)findViewById(selectedID);
+
+
 
 
 
@@ -80,8 +96,6 @@ public class FormPDFActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     @Override
@@ -90,6 +104,27 @@ public class FormPDFActivity extends AppCompatActivity {
 
 
     }
+
+    public void onFifaRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.fifa:
+                if (checked)
+                    // Normal FIFA is best
+                    Log.i("forms", "Normal fifa is best");
+                    break;
+            case R.id.fifa_pro:
+                if (checked)
+                    // FIFA PRO all the way
+                    Log.i("forms", "FIFA PRO!!");
+                    break;
+        }
+    }
+
+
 
     protected void submitPDF(){
         /** Create a shared preferences to store the user inputted data **/
@@ -128,4 +163,6 @@ public class FormPDFActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MapsActivity.class);
         startActivity(intent);
     }
+
+
 }
