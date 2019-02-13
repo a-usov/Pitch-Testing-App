@@ -14,7 +14,7 @@
     <string name="job_no">Job Number</string>
     <string name="contract">Contract</string>
     <string name="test_condition">Test Condition</string>
-    <string name="ubstrate_type">Substrate Type</string>
+    <string name="substrate_type">Substrate Type</string>
     <string name="surface_name">Surface Name</string>
     <string name="air_temp">Air Temp</string>
     <string name="surface_temp">Surface Temp</string>
@@ -30,7 +30,6 @@
     <string name="lead_technician">Lead Technician</string>
     <string name="additional_technician">Additional Technician</string>
     <string name="uncertainty_measurement">Uncertainty Measurement</string>
-    <string name="substarte_type">Substrate Type</string>
     <string name="test_conditions">Test Conditions</string>
     <string name="other_option">"Other (please specify)"</string>
 </resources>

@@ -23,12 +23,13 @@ public class FormPDFActivity extends AppCompatActivity {
     private Button btnSubmitPDF;
 
 
-     //    private String fields = "job_no,contract,test_condition,substrate_type,surface_name,air_temp,surface_temp,humidity,wind_speed,day_book,client,construction_date,carpet_type,infill_type,shockpad,weather_conditions,lead_technician,additional_technician,uncertainty_measurement";
 
     private TextInputLayout jobNo;
     private TextInputLayout contract;
     private TextInputLayout surfaceName;
     private TextInputLayout airTemp;
+    private TextInputLayout substrateType;
+    private TextInputLayout testCondition;
     private TextInputLayout surfaceTemp;
     private TextInputLayout humidity;
     private TextInputLayout windSpeed;
@@ -41,6 +42,7 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout weatherConditions;
     private TextInputLayout leadTechnician;
     private TextInputLayout additionalTechnician;
+    private TextInputLayout uncertaintyMeasurement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,10 @@ public class FormPDFActivity extends AppCompatActivity {
         weatherConditions = this.<TextInputLayout>findViewById(R.id.weather_conditions);
         leadTechnician = this.<TextInputLayout>findViewById(R.id.lead_technician);
         additionalTechnician = this.<TextInputLayout>findViewById(R.id.additional_technician);
+        substrateType = this.findViewById(R.id.substrate_type);
+        testCondition = this.findViewById(R.id.test_conditions);
+        uncertaintyMeasurement = this.findViewById(R.id.uncertainty_measurement);
+
 
 
 
@@ -125,6 +131,9 @@ public class FormPDFActivity extends AppCompatActivity {
         editor.putString("weatherConditions", weatherConditions.getEditText().getText().toString());
         editor.putString("leadTechnician", leadTechnician.getEditText().getText().toString());
         editor.putString("additionalTechnician", additionalTechnician.getEditText().getText().toString());
+        editor.putString("substrateType", substrateType.getEditText().getText().toString());
+        editor.putString("testConditions", testCondition.getEditText().getText().toString());
+        editor.putString("uncertaintyMeasurement", testCondition.getEditText().getText().toString());
 
         // Save data
         editor.apply();
