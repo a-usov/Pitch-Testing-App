@@ -136,7 +136,7 @@ public class FormPDFActivity extends AppCompatActivity {
                     // Normal FIFA is best
                     Log.i("forms", "Normal fifa is best");
                     break;
-            case R.id.fifa_pro;
+            case R.id.fifa_pro:
                 if (checked)
                     // FIFA PRO all the way
                     Log.i("forms", "FIFA PRO!!")
