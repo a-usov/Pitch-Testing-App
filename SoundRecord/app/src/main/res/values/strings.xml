@@ -30,5 +30,7 @@
     <string name="lead_technician">Lead Technician</string>
     <string name="additional_technician">Additional Technician</string>
     <string name="uncertainty_measurement">Uncertainty Measurement</string>
+    <string name="substarte_type">Substrate Type</string>
+    <string name="test_conditions">Test Conditions</string>
     <string name="other_option">"Other (please specify)"</string>
 </resources>
