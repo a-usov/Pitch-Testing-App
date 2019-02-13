@@ -30,9 +30,9 @@ public class SoundProcessing {
         this.bufferSize = bufferSize;
     }
 
-    public double process(File file){
+    public double process(String file){
         // setup our audio stream of our wav file
-        PipedAudioStream f = new PipedAudioStream(file.toString());
+        PipedAudioStream f = new PipedAudioStream(file);
         TarsosDSPAudioInputStream stream = f.getMonoStream(sampleRate,0);
 
         // create processor that applies fft and filtering to chunks of sound
@@ -57,6 +57,9 @@ public class SoundProcessing {
                 fft.modulus(transformBuffer, power);
 
                 // max power entry
+                // TODO redo filtering
+
+                /*
                 int maxIdx = 1;
                 {
                     float m = power[1];
@@ -76,6 +79,7 @@ public class SoundProcessing {
                 // cut off above that power
                 for (int i = (maxIdx+1)*2; i < transformBuffer.length; ++i)
                     transformBuffer[i] = 0;
+                */
 
                 fft.backwardsTransform(transformBuffer);
 
@@ -129,8 +133,12 @@ public class SoundProcessing {
             soundArray[i] = sound.get(i);
         }
 
-        List<Integer> peaks = Peaks.findPeaks(soundArray, 150, 0.3);
+        List<Integer> peaks = Peaks.findPeaks(soundArray, 25000, 0.10);
 
-        return ( (peaks.get(1) - (double)peaks.get(0)) / sampleRate);
+        try{
+            return ( (peaks.get(1) - (double)peaks.get(0)) / sampleRate);
+        } catch (IndexOutOfBoundsException e){
+            return -1;
+        }
     }
 }

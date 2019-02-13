@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.media.MediaRecorder;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -30,7 +29,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -50,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double longi;
     private static int numRecordings = 0;
     private Intent intent = new Intent();
+    public static final String PATH = "com.example.soundRecord.PATH";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,6 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         intent.putExtra(FOLDER, folderRecordings);
         intent.setClass(this, ProcessingActivity.class);
+        intent.putExtra(PATH, pathSave);
 
         //Code below ensures enough bounces (change 2 to 6 in final version)
         if (numRecordings > 2) openProcessingActivity(intent);
