@@ -36,5 +36,4 @@
     <include layout="@layout/content_form_pdf" />
 
 
-
 </android.support.design.widget.CoordinatorLayout>

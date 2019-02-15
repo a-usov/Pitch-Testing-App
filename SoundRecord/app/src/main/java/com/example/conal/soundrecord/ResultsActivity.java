@@ -1,10 +1,12 @@
 package com.example.conal.soundrecord;
 
-import android.content.Context;
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -20,16 +22,19 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
@@ -40,20 +45,100 @@ public class ResultsActivity extends AppCompatActivity {
     private String currentDate;
     private String currentTime;
     private String jobNo;
+    private String contract;
+    private String surfaceName;
+    private String airTemp;
+    private String surfaceTemp;
+    private String humidity;
+    private String windSpeed;
+    private String dayBook;
+    private String client;
+    private String dateOfConstruction;
+    private String carpetType;
+    private String infillType;
+    private String shockpad;
+    private String weatherConditions;
+    private String leadTechnician;
+    private String additionalTechnician;
+    private String substrateType;
+    private String testCondition;
+    private String uncertainityMeasurement;
+    private Boolean fifaPro;
+    private String fifaProString;
+    private Boolean uk1;
+    private Boolean uk2;
+    private Boolean flight3;
+    private Boolean flight4;
+    private Boolean flight5;
+    private String X = "X";
+    private String uk1String = "";
+    private String uk2String = "";
+    private String flight3String = "";
+    private String flight4String = "";
+    private String flight5tring = "";
+    private String otherEquip;
+
+    private String defaultValue;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        defaultValue = "defaultValueIfNothingIsFound";
+        /** Get the shared preferences **/
         setContentView(R.layout.activity_results);
-//        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+        /** Get date and time taken from home **/
         String dateKey = "currentDate";
         String dateTime = "currentTime";
         currentDate = sharedPref.getString("currentDate", "defaultStringIfNothingFound");
         currentTime = sharedPref.getString("currentTime", "defaultStringIfNothingFound");
-        jobNo = sharedPref.getString("jobNo", "defaultStringIfNothingIsFound");
+        contract = sharedPref.getString("contract", defaultValue);
+        surfaceName = sharedPref.getString("surfaceName", defaultValue);
+        humidity = sharedPref.getString("humidity", defaultValue);
+        airTemp = sharedPref.getString("airTemp", defaultValue);
+        surfaceTemp = sharedPref.getString("surfaceTemp", defaultValue);
+        windSpeed = sharedPref.getString("windSpeed", defaultValue);
+        dayBook = sharedPref.getString("dayBook", defaultValue);
+        client = sharedPref.getString("client", defaultValue);
+        dateOfConstruction = sharedPref.getString("dateOfConstruction", defaultValue);
+        carpetType = sharedPref.getString("carpetTye", defaultValue);
+        infillType = sharedPref.getString("infillType", defaultValue);
+        shockpad = sharedPref.getString("shockpad", defaultValue);
+        weatherConditions = sharedPref.getString("weatherConditions", defaultValue);
+        leadTechnician = sharedPref.getString("leadTechnician", defaultValue);
+        additionalTechnician = sharedPref.getString("additionalTechnician", defaultValue);
+        jobNo = sharedPref.getString("jobNo", defaultValue);
+        uncertainityMeasurement = sharedPref.getString("uncertaintyMeasurement", defaultValue);
+        testCondition = sharedPref.getString("testConditions", defaultValue);
+        substrateType = sharedPref.getString("substrateType", defaultValue);
+        fifaPro = sharedPref.getBoolean("fifaPro", false);
+
+        uk1 = sharedPref.getBoolean("uk1", false);
+        uk2 = sharedPref.getBoolean("uk2", false);
+        flight3 = sharedPref.getBoolean("flight3", false);
+        flight4 = sharedPref.getBoolean("flight4", false);
+        flight5 = sharedPref.getBoolean("flight5", false);
+
+        otherEquip = sharedPref.getString("other", defaultValue);
+
+
+        if(fifaPro) fifaProString =  "FIFA Quality Pro: 0.6 - 0.85m";
+        else fifaProString = "FIFA Quality: 0.6 - 1.0m";
+
+        /** Equipment radio buttons **/
+        if(uk1) uk1String = X;
+        if(uk2) uk2String = X;
+        if(flight3) flight3String = X;
+        if(flight4) flight4String = X;
+        if(flight5) flight5tring = X;
+
+
+
+
         Log.i("currentDate", "The current date is " + currentDate);
         Log.i("currentDate", "The time recorded is " + currentTime);
 
@@ -186,56 +271,56 @@ public class ResultsActivity extends AppCompatActivity {
             insertCell(table, "Job No", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, jobNo, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Contract", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, contract, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Test Date", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, currentDate, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Test Condition", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, testCondition, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Substrate Type", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, substrateType, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Surface Name", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, surfaceName, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Time of day", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             insertCell(table, currentTime, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Air temp: (ºC)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, airTemp, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Surface temp: (ºC)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, surfaceTemp, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Humidity: (%)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, humidity, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Wind Speed: (m/s)", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
             // insertCell(table, "", Element.ALIGN_LEFT, 2);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, windSpeed, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Day Book", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, dayBook, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Client", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, client, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Date of Construction", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, dateOfConstruction, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Carpet Type", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, carpetType, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Infill Type", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, infillType, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Shockpad", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, shockpad, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Weather Conditions", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, weatherConditions, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Lead Technician", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, leadTechnician, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, "Additional Technician", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
+            insertCell(table, additionalTechnician, Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
 
             insertCell(table, "Uncertainty Measurement:", Element.ALIGN_LEFT, 2, 1, other, BaseColor.WHITE);
-            insertCell(table, "", Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
+            insertCell(table, uncertainityMeasurement, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, coord.toString(), Element.ALIGN_CENTER, 4, 1, other, BaseColor.WHITE);
 
             insertCell(table, "", Element.ALIGN_LEFT, 7, 1, labelBlack,BaseColor.BLACK);
@@ -318,7 +403,7 @@ public class ResultsActivity extends AppCompatActivity {
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
 
-            /*picture cell
+            //picture cell
             try {
                 InputStream ims = getAssets().open("pitch.png");
                 Bitmap bmp = BitmapFactory.decodeStream(ims);
@@ -326,30 +411,32 @@ public class ResultsActivity extends AppCompatActivity {
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 Image image = Image.getInstance(stream.toByteArray());
                 image.scalePercent(30);
-                image.setAlignment(Element.ALIGN_LEFT);
+                image.setAlignment(Element.ALIGN_CENTER);
                 PdfPCell imageCell = new PdfPCell(image);
                 imageCell.setRowspan(4);
+                imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 imageCell.setColspan(7);
                 table.addCell(imageCell);
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
 
-            insertCell(table, "The picture of the pitch goes here", Element.ALIGN_CENTER, 7, 4, labelBlack, BaseColor.WHITE);
-            insertCell(table, "FIFA Quality: 0.6 - 1.0m \t" + "FIFA Quality Pro: 0.6 - 0.85m", Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
 
+
+            insertCell(table, fifaProString, Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "UK 1", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.YELLOW);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, uk1String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 3", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.BLUE);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, flight3String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 4", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.RED);
-            insertCell(table, "", Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, flight4String, Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, "X", Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "UK 2", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.GREEN);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, uk2String, Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 5 (Norway)", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.CYAN);
-            insertCell(table, "", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, flight5tring, Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
             insertCell(table, "Other please state -", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.MAGENTA);
-            insertCell(table, "", Element.ALIGN_CENTER, 2, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, otherEquip, Element.ALIGN_CENTER, 2, 1,labelBlack, BaseColor.WHITE);
 
             report.add(table);
 
