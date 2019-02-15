@@ -116,6 +116,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openBluetoothPage() {
+        Intent intent = new Intent(this, BluetoothActivity.class);
+        startActivity(intent);
+    }
+
     //dropdown menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,7 +143,10 @@ public class HomeActivity extends AppCompatActivity {
             openResultsPage();
         }else if(item.getItemId() == R.id.formPDF) {
                 openFormPDF();
-        }else{
+        }
+        else if(item.getItemId() == R.id.bluetooth) {
+            openBluetoothPage();
+        }else {
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 

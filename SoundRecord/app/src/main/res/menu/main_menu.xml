@@ -24,4 +24,8 @@
         android:title="@string/title_activity_form_pdf"
         app:showAsAction="never"/>
 
+    <item android:id="@+id/bluetooth"
+        android:title="Bluetooth"
+        app:showAsAction="never"/>
+
 </menu>
