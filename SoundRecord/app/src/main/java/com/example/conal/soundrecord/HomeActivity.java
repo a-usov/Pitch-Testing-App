@@ -1,9 +1,14 @@
 package com.example.conal.soundrecord;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,10 +23,12 @@ import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
 
+    final int REQUEST_PERMISSION_CODE = 1000;
     private Button footballBtn;
     private Button hockeyBtn;
     private Button rugbyBtn;
     private Button tennisBtn;
+    Intent intent;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
 
@@ -30,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        intent = getIntent();
 //        //Conall was here
 //        DateFormat currentTime = Calendar.getInstance().
 //        Log.i("getDate", "The current date is " + currentTime.toString());
@@ -71,28 +79,39 @@ public class HomeActivity extends AppCompatActivity {
         footballBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFormPDF();
-            }
-        });
-        hockeyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMapsPage();
-            }
-        });
-        rugbyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMapsPage();
-            }
-        });
-        tennisBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMapsPage();
+                if (!checkPermissionFromDevice()) requestPermission();
+                else openFormPDF();
             }
         });
 
+        hockeyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(HomeActivity.this, MapsActivity.class);
+                if (!checkPermissionFromDevice()) {
+                    requestPermission();
+
+                    if (checkPermissionFromDevice()) openMapsPage();
+                }
+                else openMapsPage();
+            }
+        });
+
+        rugbyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkPermissionFromDevice()) requestPermission();
+                else openMapsPage();
+            }
+        });
+
+        tennisBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkPermissionFromDevice()) requestPermission();
+                else openMapsPage();
+            }
+        });
     }
 
     public void openHomePage(){
@@ -113,6 +132,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public void openFormPDF(){
         Intent intent = new Intent(this, FormPDFActivity.class);
+        startActivity(intent);
+    }
+
+    public void openActivity() {
         startActivity(intent);
     }
 
@@ -143,5 +166,41 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+        }, REQUEST_PERMISSION_CODE);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PERMISSION_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                    openActivity();
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+            break;
+
+        }
+    }
+
+    private boolean checkPermissionFromDevice() {
+        int write_external_storage_result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
+        int access_coarse_location_result = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        return write_external_storage_result == PackageManager.PERMISSION_GRANTED &&
+                record_audio_result == PackageManager.PERMISSION_GRANTED &&
+                access_coarse_location_result == PackageManager.PERMISSION_GRANTED;
     }
 }
