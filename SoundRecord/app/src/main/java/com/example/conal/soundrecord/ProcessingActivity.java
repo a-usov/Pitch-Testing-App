@@ -48,7 +48,8 @@ public class ProcessingActivity extends AppCompatActivity {
         new AndroidFFMPEGLocator(this);
         runner = new AsyncRunner().execute(path);
 
-        intent.setClass(this, ResultsActivity.class);
+        intent.setClass(this, FinalActivity.class);
+        intent.putExtra(LOCATION, loc);
 
         // time is super long(5min), but timer cancels early whenever processing is done
         new CountDownTimer(500000, 1000) {

@@ -101,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void openResultsPage(){
-        Intent intent = new Intent(this, ResultsActivity.class);
+        Intent intent = new Intent(this, FinalActivity.class);
         startActivity(intent);
     }
 
