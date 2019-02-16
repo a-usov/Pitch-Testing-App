@@ -3,7 +3,7 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_my_tests">My Tests</string>
     <string name="title_activity_my_account">My Account</string>
-    <string name="title_activity_results">Results</string>
+
     <string name="radio_button_good">Positive result</string>
     <string name="radio_button_bad">Negative result</string>
     <string name="title_activity_trials">Trials</string>
@@ -66,6 +66,7 @@
     <string name="avg">Average</string>
     <string name="fifa_quality_pro">FIFA Quality Pro: 0.6 - 0.85m</string>
     <string name="fifa_normal">FIFA Quality: 0.6 - 1.0m</string>
+    <string name="title_activity_results">ResultsActivity</string>
 
 
 </resources>
