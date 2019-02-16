@@ -38,12 +38,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static final String FOLDER = "com.example.soundrecord.FOLDER";
     private static File folderRecordings = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
     //Declare variables
-    Button btnStartRecord, btnStopRecord, btnGetLocation;
+    Button btnStartRecord, btnStopRecord, btnBegin;
     TextView txtLocation;
     String pathSave = "";
     private WavRecorder recorder;
     private GoogleMap mMap;
     private FusedLocationProviderClient client;
+    LatLng cPos;
+    com.example.conal.soundrecord.Location loc;
     private double lat;
     private double longi;
     private static int numRecordings = 0;
@@ -59,7 +61,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         btnStopRecord = this.<Button>findViewById(R.id.btnStopRecord);
         btnStartRecord = this.<Button>findViewById(R.id.btnStartRecord);
+        btnBegin = this.<Button>findViewById(R.id.btnBegin);
 
+        btnBegin.setEnabled(true);
+
+        btnBegin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                try {
+                    //LatLng latlng = new LatLng();
+                    loc = new com.example.conal.soundrecord.Location(cPos);
+                }
+                catch(NullPointerException n) {
+                    Toast.makeText(MapsActivity.this, "No LatLng", Toast.LENGTH_LONG).show();
+                }
+                Intent intent = getIntent();
+                intent.setClass(MapsActivity.this, RecordingActivity.class); //This class needs created
+                intent.putExtra(POSITION,loc);
+            }
+        });
 
         btnStartRecord.setEnabled(true);
         btnStopRecord.setEnabled(false);
@@ -103,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     // Add a marker in Sydney and move the camera
 //              Log.i("yada", "Map is ready");
 //               Toast.makeText(this, "Map is ready", Toast.LENGTH_LONG).show();
-                    LatLng cPos = new LatLng(lat, longi);
+                    cPos = new LatLng(lat, longi);
                     mMap.addMarker(new MarkerOptions().position(cPos).title("Current location."));
                     float maxZoomLevel = mMap.getMaxZoomLevel();
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cPos, maxZoomLevel));
