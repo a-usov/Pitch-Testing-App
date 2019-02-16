@@ -17,8 +17,6 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.File;
 import java.io.IOException;
 
-import be.tarsos.dsp.io.android.AndroidFFMPEGLocator;
-
 public class ProcessingActivity extends AppCompatActivity {
     //Declare variables
     TextView mTextField;
@@ -66,7 +64,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
         //Toast.makeText(this, l.toString() + " " + loc.getHeights(), Toast.LENGTH_SHORT).show();
 
-        intent.setClass(this, ResultsActivity.class);
+        intent.setClass(this, FinalActivity.class);
         intent.putExtra(LOCATION, loc);
 
 

@@ -38,7 +38,7 @@ import java.io.InputStream;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
-public class ResultsActivity extends AppCompatActivity {
+public class FinalActivity extends AppCompatActivity {
 
     final int REQUEST_PERMISSION_CODE = 1000;
     private Button createPDF;
@@ -88,7 +88,7 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         defaultValue = "defaultValueIfNothingIsFound";
         /** Get the shared preferences **/
-        setContentView(R.layout.activity_results);
+        setContentView(R.layout.activity_final);
         SharedPreferences sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         /** Get date and time taken from home **/
@@ -237,7 +237,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     public void generateReportPDF() throws IOException {
 
-        Toast.makeText(ResultsActivity.this, "PDF created.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(FinalActivity.this, "PDF created.", Toast.LENGTH_SHORT).show();
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
 

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#abcdef"
-    tools:context=".ResultsActivity"
-    tools:showIn="@layout/activity_results">
+    tools:context=".FinalActivity"
+    tools:showIn="@layout/activity_final">
 
 
     <TableLayout
