@@ -56,6 +56,8 @@
     <string name="next_drop">Next Drop</string>
     <string name="redo">Redo</string>
     <string name="finish">Finish</string>
+    <string name="new_test">New Test</string>
+    <string name="discard_test">Discard Test</string>
 
     <string name="choose_test">Choose the test</string>
 
