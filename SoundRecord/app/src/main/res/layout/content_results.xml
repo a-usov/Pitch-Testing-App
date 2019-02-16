@@ -4,22 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#abcdef"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ResultsActivity"
     tools:showIn="@layout/activity_results">
 
 
     <TableLayout
+        android:id="@+id/tableLayout2"
         android:layout_width="401dp"
-        android:layout_height="87dp"
+        android:layout_height="69dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginBottom="120dp"
+        android:background="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <TableRow
             android:layout_width="match_parent"
@@ -30,7 +35,7 @@
                 android:id="@+id/dropNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Drop No"
+                android:text="@string/drop_no"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -40,7 +45,7 @@
                 android:id="@+id/drop1"
                 android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="@string/drop1"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -50,7 +55,7 @@
                 android:id="@+id/drop2"
                 android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:text="2"
+                android:text="@string/drop2"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -60,7 +65,7 @@
                 android:id="@+id/drop3"
                 android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:text="3"
+                android:text="@string/drop3"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -70,7 +75,7 @@
                 android:id="@+id/drop4"
                 android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:text="4"
+                android:text="@string/drop4"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -80,7 +85,7 @@
                 android:id="@+id/drop5"
                 android:layout_width="46dp"
                 android:layout_height="wrap_content"
-                android:text="5"
+                android:text="@string/drop5"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -90,7 +95,7 @@
                 android:id="@+id/avg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Average"
+                android:text="@string/avg"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -107,7 +112,7 @@
                 android:layout_width="101dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/holo_blue_bright"
-                android:text="Rebound Height"
+                android:text="@string/rebound_H"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
@@ -170,7 +175,75 @@
 
     </TableLayout>
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="376dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/good75" />
 
+    <Button
+        android:id="@+id/next_drop_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="@string/next_drop"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/redo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="@string/redo"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/next_drop_btn"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/finish_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="@string/finish"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.655"
+        app:layout_constraintStart_toEndOf="@+id/redo_btn"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

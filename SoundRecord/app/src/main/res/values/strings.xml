@@ -53,10 +53,13 @@
     <string name="tennis">Tennis</string>
     <string name="hockey">Hockey</string>
     <string name="createPDF">Create PDF</string>
+    <string name="next_drop">Next Drop</string>
+    <string name="redo">Redo</string>
+    <string name="finish">Finish</string>
 
     <string name="choose_test">Choose the test</string>
 
-    //ResultsActivity table
+    //FinalActivity table
     <string name="loc1">1</string>
     <string name="loc2">2</string>
     <string name="loc3">3</string>
@@ -67,6 +70,16 @@
     <string name="fifa_quality_pro">FIFA Quality Pro: 0.6 - 0.85m</string>
     <string name="fifa_normal">FIFA Quality: 0.6 - 1.0m</string>
     <string name="title_activity_results">ResultsActivity</string>
+
+    //Results activity table
+    <string name="drop1">1</string>
+    <string name="drop2">2</string>
+    <string name="drop3">3</string>
+    <string name="drop4">4</string>
+    <string name="drop5">5</string>
+    <string name="drop_no">Drop No</string>
+    <string name="rebound_H">Rebound Height</string>
+
 
 
 </resources>
