@@ -1,5 +1,7 @@
 package com.example.conal.soundrecord;
 
+import android.os.AsyncTask;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,13 +113,7 @@ public class SoundProcessing {
             public void processingFinished() {
             }
         });
-
-        /*try {
-            dispatcher.addAudioProcessor(new WriterProcessor(stream.getFormat(), new RandomAccessFile("transform.wav", "rw")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
-
+        
         Thread t1 = new Thread(dispatcher);
 
         t1.start();
