@@ -208,12 +208,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         intent.setClass(this, ProcessingActivity.class);
         intent.putExtra(PATH, pathSave);
 
-        //Code below ensures enough bounces (change 2 to 6 in final version)
-        if (numRecordings > 2) openProcessingActivity(intent);
-        else {
-            intent.setClass(view.getContext(), MapsActivity.class);
-            startActivity(intent);
-        }
+        openProcessingActivity(intent);
     }
 
     public void openProcessingActivity(Intent intent) {
