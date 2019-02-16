@@ -51,5 +51,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map" />
 
+    <Button
+        android:id="@+id/btnBegin"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="128dp"
+        android:background="@android:color/holo_blue_light"
+        android:baselineAligned="false"
+        android:onClick="stopRecording"
+        android:text="BEGIN"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map" />
+
 
 </android.support.constraint.ConstraintLayout>
