@@ -19,6 +19,8 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.File;
 import java.io.IOException;
 
+import be.tarsos.dsp.io.android.AndroidFFMPEGLocator;
+
 public class ProcessingActivity extends AppCompatActivity {
     //Declare variables
     public static final String LOCATION = "com.example.conal.soundrecord.LOCATION";
