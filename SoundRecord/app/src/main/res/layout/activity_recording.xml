@@ -8,13 +8,23 @@
 
     <ToggleButton
         android:id="@+id/btnRecording"
-        android:layout_width="271dp"
-        android:layout_height="273dp"
+        android:layout_width="252dp"
+        android:layout_height="261dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginBottom="300dp"
         android:background="@drawable/button_record"
         android:checked="false"
         android:text=""
         android:textOff=""
         android:textOn="Recording"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="129dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
