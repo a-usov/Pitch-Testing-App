@@ -3,6 +3,7 @@ package com.example.conal.soundrecord;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -77,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMapsPage();
+                openRecordingPage();
             }
         });
         rugbyBtn.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +114,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void openFormPDF(){
         Intent intent = new Intent(this, FormPDFActivity.class);
+        startActivity(intent);
+    }
+
+    public void openRecordingPage(){
+        Intent intent = new Intent(this, RecordingActivity.class);
         startActivity(intent);
     }
 

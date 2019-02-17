@@ -6,11 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".RecordingActivity">
 
-    <Switch
-        android:id="@+id/record_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="272dp" />
+    <ToggleButton
+        android:id="@+id/btnRecording"
+        android:layout_width="271dp"
+        android:layout_height="273dp"
+        android:background="@drawable/button_record"
+        android:checked="false"
+        android:text=""
+        android:textOff=""
+        android:textOn="Recording"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="129dp" />
 </android.support.constraint.ConstraintLayout>
