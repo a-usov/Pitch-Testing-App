@@ -430,7 +430,6 @@ public class FinalActivity extends AppCompatActivity {
             insertCell(table, flight3String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 4", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.RED);
             insertCell(table, flight4String, Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
-            insertCell(table, "X", Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "UK 2", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.GREEN);
             insertCell(table, uk2String, Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 5 (Norway)", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.CYAN);
