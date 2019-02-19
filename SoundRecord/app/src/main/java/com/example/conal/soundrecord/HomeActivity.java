@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.icu.text.AlphabeticIndex;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -94,6 +93,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openRecordingPage();
+                /*intent.setClass(HomeActivity.this, FormPDFActivity.class);
+                if (!checkPermissionFromDevice()) {
+                    requestPermission();
+
+                    if (checkPermissionFromDevice()) openFormPDF();
+                }
+                else openFormPDF();*/
             }
         });
 
