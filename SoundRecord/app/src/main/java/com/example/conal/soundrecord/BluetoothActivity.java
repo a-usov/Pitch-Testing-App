@@ -71,6 +71,10 @@ public class BluetoothActivity extends AppCompatActivity {
             Toast.makeText(BluetoothActivity.this, devices.get(0)[1], Toast.LENGTH_LONG).show();
             //AT THIS POINT: got list of paired devices with names and MAC addresses -- String[] devices
 
+            /*Intent discoverableIntent =
+                    new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+            startActivity(discoverableIntent);*/
 
             boolean success = mBluetoothAdapter.startDiscovery();
 
