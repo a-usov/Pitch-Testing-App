@@ -79,7 +79,12 @@ public class HomeActivity extends AppCompatActivity {
         footballBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!checkPermissionFromDevice()) requestPermission();
+                intent.setClass(HomeActivity.this, FormPDFActivity.class);
+                if (!checkPermissionFromDevice()) {
+                    requestPermission();
+
+                    if (checkPermissionFromDevice()) openFormPDF();
+                }
                 else openFormPDF();
             }
         });
@@ -87,29 +92,39 @@ public class HomeActivity extends AppCompatActivity {
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(HomeActivity.this, MapsActivity.class);
+                intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
-                    if (checkPermissionFromDevice()) openMapsPage();
+                    if (checkPermissionFromDevice()) openFormPDF();
                 }
-                else openMapsPage();
+                else openFormPDF();
             }
         });
 
         rugbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!checkPermissionFromDevice()) requestPermission();
-                else openMapsPage();
+                intent.setClass(HomeActivity.this, FormPDFActivity.class);
+                if (!checkPermissionFromDevice()) {
+                    requestPermission();
+
+                    if (checkPermissionFromDevice()) openFormPDF();
+                }
+                else openFormPDF();
             }
         });
 
         tennisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!checkPermissionFromDevice()) requestPermission();
-                else openMapsPage();
+                intent.setClass(HomeActivity.this, FormPDFActivity.class);
+                if (!checkPermissionFromDevice()) {
+                    requestPermission();
+
+                    if (checkPermissionFromDevice()) openFormPDF();
+                }
+                else openFormPDF();
             }
         });
     }
@@ -185,7 +200,7 @@ public class HomeActivity extends AppCompatActivity {
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED
                     && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                    openActivity();
+                    openFormPDF();
                 } else {
                     Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
                 }
