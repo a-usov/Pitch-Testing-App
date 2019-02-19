@@ -25,7 +25,7 @@
         app:showAsAction="never"/>
 
     <item android:id="@+id/bluetooth"
-        android:title="Bluetooth"
+        android:title="@string/title_activity_bluetooth"
         app:showAsAction="never"/>
 
 </menu>

@@ -2,6 +2,7 @@ package com.example.conal.soundrecord;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +12,8 @@ import android.os.ParcelUuid;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -18,23 +21,35 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.UUID;
 
 public class BluetoothActivity extends AppCompatActivity {
 
     private ArrayList<String[]> devices = new ArrayList<String[]>();
+    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    Button btnBluetooth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth);
 
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        btnBluetooth = this.<Button>findViewById(R.id.btn_blu);
+
+        btnBluetooth.setOnClickListener(new View.OnClickListener() {
+           public void onClick(View v) {
+
+            }
+        });
+
+
         if (mBluetoothAdapter == null) {
             // Device doesn't support Bluetooth
             Toast.makeText(this, "Bluetooth is not supported", Toast.LENGTH_LONG).show();
         }
         else {
-            Toast.makeText(this, "Bluetooth is supported", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Bluetooth is supported", Toast.LENGTH_LONG).show();
 
             if (!mBluetoothAdapter.isEnabled()) {
                 final int REQUEST_ENABLE_BT = 1;
@@ -53,13 +68,70 @@ public class BluetoothActivity extends AppCompatActivity {
                 }
             }
 
+            Toast.makeText(BluetoothActivity.this, devices.get(0)[1], Toast.LENGTH_LONG).show();
+            //AT THIS POINT: got list of paired devices with names and MAC addresses -- String[] devices
+
+
             boolean success = mBluetoothAdapter.startDiscovery();
 
             if (success) {
+                Toast.makeText(this,"Discovery started", Toast.LENGTH_LONG).show();
                 IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
                 registerReceiver(mReceiver, filter);
             }
             else Toast.makeText(this,"Discovery did not start", Toast.LENGTH_LONG).show();
+
+            class AcceptThread extends Thread {
+                private final BluetoothServerSocket mmServerSocket;
+
+                public AcceptThread() {
+                    // Use a temporary object that is later assigned to mmServerSocket
+                    // because mmServerSocket is final.
+                    BluetoothServerSocket tmp = null;
+                    try {
+                        // MY_UUID is the app's UUID string, also used by the client code.
+                        tmp = mBluetoothAdapter.listenUsingRfcommWithServiceRecord(devices.get(0)[0], myUUID);
+                    } catch (IOException e) {
+                        Log.e("bluetooth", "Socket's listen() method failed", e);
+                    }
+                    mmServerSocket = tmp;
+                }
+
+                public void run() {
+                    BluetoothSocket socket = null;
+                    // Keep listening until exception occurs or a socket is returned.
+                    while (true) {
+                        try {
+                            socket = mmServerSocket.accept();
+                        } catch (IOException e) {
+                            Log.e("bluetooth", "Socket's accept() method failed", e);
+                            break;
+                        }
+
+                        if (socket != null) {
+                            // A connection was accepted. Perform work associated with
+                            // the connection in a separate thread.
+                            manageMyConnectedSocket(socket);
+                            try {
+                                mmServerSocket.close();
+                            }
+                            catch(IOException i) {
+                                Toast.makeText(BluetoothActivity.this,"Couldn't close socket.", Toast.LENGTH_LONG).show();
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                // Closes the connect socket and causes the thread to finish.
+                public void cancel() {
+                    try {
+                        mmServerSocket.close();
+                    } catch (IOException e) {
+                        Log.e("bluetooth", "Could not close the connect socket", e);
+                    }
+                }
+            }
 
         }
     }
@@ -85,6 +157,12 @@ public class BluetoothActivity extends AppCompatActivity {
 
         // Don't forget to unregister the ACTION_FOUND receiver.
         unregisterReceiver(mReceiver);
+    }
+
+
+
+    private void manageMyConnectedSocket(BluetoothSocket socket) {
+
     }
 
     /*private OutputStream outputStream;
