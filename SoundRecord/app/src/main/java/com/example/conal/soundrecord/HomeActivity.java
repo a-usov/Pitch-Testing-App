@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.AlphabeticIndex;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -92,13 +93,7 @@ public class HomeActivity extends AppCompatActivity {
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(HomeActivity.this, FormPDFActivity.class);
-                if (!checkPermissionFromDevice()) {
-                    requestPermission();
-
-                    if (checkPermissionFromDevice()) openFormPDF();
-                }
-                else openFormPDF();
+                openRecordingPage();
             }
         });
 
@@ -150,7 +145,8 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openActivity() {
+    public void openRecordingPage(){
+        Intent intent = new Intent(this, RecordingActivity.class);
         startActivity(intent);
     }
 
