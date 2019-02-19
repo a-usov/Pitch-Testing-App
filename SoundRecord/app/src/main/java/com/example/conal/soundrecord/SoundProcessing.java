@@ -1,8 +1,8 @@
 package com.example.conal.soundrecord;
 
-import android.os.AsyncTask;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,25 +20,21 @@ public class SoundProcessing {
     // set parameters about sound and FFT
     private int sampleRate;
     private int bufferSize;
-    private int windowSize = 0;
 
     private List<Double> sound = new ArrayList<>();
-
-    private float maxGlobalPower = 0;
-    private double maxPowerFreq;
 
     public SoundProcessing(int sampleRate, int bufferSize){
         this.sampleRate = sampleRate;
         this.bufferSize = bufferSize;
     }
 
-    public double process(String file){
+    public Result process(String file){
         // setup our audio stream of our wav file
         PipedAudioStream f = new PipedAudioStream(file);
         TarsosDSPAudioInputStream stream = f.getMonoStream(sampleRate,0);
 
         // create processor that applies fft and filtering to chunks of sound
-        AudioDispatcher dispatcher = new AudioDispatcher(stream, bufferSize, windowSize);
+        AudioDispatcher dispatcher = new AudioDispatcher(stream, bufferSize, 0);
 
         dispatcher.addAudioProcessor(new AudioProcessor() {
 
@@ -58,10 +54,9 @@ public class SoundProcessing {
                 fft.forwardTransform(transformBuffer);
                 fft.modulus(transformBuffer, power);
 
-                // max power entry
                 // TODO redo filtering
-
                 /*
+                // max power entry
                 int maxIdx = 1;
                 {
                     float m = power[1];
@@ -95,8 +90,6 @@ public class SoundProcessing {
             }
         });
 
-        //dispatcher.addAudioProcessor(new BandPass((float) maxPowerFreq, 100, sampleRate));
-
         dispatcher.addAudioProcessor(new AudioProcessor() {
             @Override
             public boolean process(AudioEvent audioEvent) {
@@ -113,7 +106,7 @@ public class SoundProcessing {
             public void processingFinished() {
             }
         });
-        
+
         Thread t1 = new Thread(dispatcher);
 
         t1.start();
@@ -132,9 +125,11 @@ public class SoundProcessing {
         List<Integer> peaks = Peaks.findPeaks(soundArray, 25000, 0.10);
 
         try{
-            return ( (peaks.get(1) - (double)peaks.get(0)) / sampleRate);
+            return new Result(sound, peaks.get(0), peaks.get(1), (peaks.get(1) - (double)peaks.get(0)) / sampleRate);
         } catch (IndexOutOfBoundsException e){
-            return -1;
+            return null;
         }
     }
+
+
 }
