@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#abcdef"
-    tools:context=".Home"
+    tools:context=".HomeActivity"
     tools:showIn="@layout/activity_home">
 
     <Button
@@ -19,9 +19,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Rugby"
+        android:text="@string/rugby"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tennisBtn"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +39,9 @@
         android:layout_marginRight="60dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Tennis"
+        android:text="@string/tennis"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -59,12 +59,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Football"
+        android:text="@string/football"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/hockeyBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date2" />
+        app:layout_constraintTop_toBottomOf="@+id/text" />
 
     <Button
         android:id="@+id/hockeyBtn"
@@ -76,16 +76,16 @@
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
         android:background="@android:color/holo_blue_light"
-        android:text="Hockey"
+        android:text="@string/hockey"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/footballBtn"
-        app:layout_constraintTop_toBottomOf="@+id/date2" />
+        app:layout_constraintTop_toBottomOf="@+id/text" />
 
     <TextView
-        android:id="@+id/date2"
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -94,10 +94,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="350dp"
-        android:text="Choose the test"
+        android:text="@string/choose_test"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
-        android:textSize="40dp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

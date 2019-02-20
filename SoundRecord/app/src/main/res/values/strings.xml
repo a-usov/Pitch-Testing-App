@@ -4,9 +4,84 @@
     <string name="title_activity_my_tests">My Tests</string>
     <string name="title_activity_my_account">My Account</string>
     <string name="title_activity_results">Results</string>
+    <string name="title_activity_bluetooth">Bluetooth</string>
     <string name="radio_button_good">Positive result</string>
     <string name="radio_button_bad">Negative result</string>
     <string name="title_activity_trials">Trials</string>
     <string name="title_activity_processing">Processing</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_form_pdf">FormPDF</string>
+
+    //form PDF strings
+    <string name="action_settings">Settings</string>
+    <string name="job_no">Job Number</string>
+    <string name="contract">Contract</string>
+    <string name="test_condition">Test Condition</string>
+    <string name="substrate_type">Substrate Type</string>
+    <string name="surface_name">Surface Name</string>
+    <string name="air_temp">Air Temp</string>
+    <string name="surface_temp">Surface Temp</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="day_book">Day Book</string>
+    <string name="client">Client</string>
+    <string name="construction_date">Date of Construction</string>
+    <string name="carpet_type">Carpet Type</string>
+    <string name="infill_type">Infill Type</string>
+    <string name="shockpad">Shockpad</string>
+    <string name="weather_conditions">Weather Conditions</string>
+    <string name="lead_technician">Lead Technician</string>
+    <string name="additional_technician">Additional Technician</string>
+    <string name="uncertainty_measurement">Uncertainty Measurement</string>
+    <string name="test_conditions">Test Conditions</string>
+
+    //Radio buttons stuff in PDF form
+    <string name="other_option">"Other (please specify)"</string>
+    <string name="select_version">Select the version:</string>
+    <string name="quality">FIFA Quality 0.6 - 1.0m</string>
+    <string name="quality_pro">FIFA Quality Pro 0.6 - 0.85m</string>
+    <string name="select_equipment">Select the equipment set:</string>
+    <string name="uk1">UK 1</string>
+    <string name="uk2">UK 2</string>
+    <string name="flight3">Flight 3</string>
+    <string name="flight4">Flight 4</string>
+    <string name="flight5">Flight 5</string>
+
+    //Buttons names
+    <string name="submit">Submit</string>
+    <string name="football">Football</string>
+    <string name="rugby">Rugby</string>
+    <string name="tennis">Tennis</string>
+    <string name="hockey">Hockey</string>
+    <string name="createPDF">Create PDF</string>
+    <string name="next_drop">Next Drop</string>
+    <string name="redo">Redo</string>
+    <string name="finish">Finish</string>
+    <string name="new_test">New Test</string>
+    <string name="discard_test">Discard Test</string>
+
+    <string name="choose_test">Choose the test</string>
+
+    //FinalActivity table
+    <string name="loc1">1</string>
+    <string name="loc2">2</string>
+    <string name="loc3">3</string>
+    <string name="loc4">4</string>
+    <string name="loc5">5</string>
+    <string name="loc6">6</string>
+    <string name="avg">Average</string>
+    <string name="fifa_quality_pro">FIFA Quality Pro: 0.6 - 0.85m</string>
+    <string name="fifa_normal">FIFA Quality: 0.6 - 1.0m</string>
+
+    //Results activity table
+    <string name="drop1">1</string>
+    <string name="drop2">2</string>
+    <string name="drop3">3</string>
+    <string name="drop4">4</string>
+    <string name="drop5">5</string>
+    <string name="drop_no">Drop No</string>
+    <string name="rebound_H">Rebound Height</string>
+
+
+
 </resources>
