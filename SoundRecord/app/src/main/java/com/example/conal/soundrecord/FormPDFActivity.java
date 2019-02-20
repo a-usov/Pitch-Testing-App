@@ -43,6 +43,7 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout uncertaintyMeasurement;
     private TextInputLayout otherEquipment;
 
+
     /** Radio buttons **/
     private Boolean fifaPro; // button for Fifa Pro spec or not
     private Boolean uk1 = false;
@@ -205,7 +206,7 @@ public class FormPDFActivity extends AppCompatActivity {
         // Save data
         editor.apply();
         Log.i("passing", "Job number saved.");
-        openMapsActivity();
+        openMapsActivity(); // Need location from offset so it will always go to this first
 
     }
 
