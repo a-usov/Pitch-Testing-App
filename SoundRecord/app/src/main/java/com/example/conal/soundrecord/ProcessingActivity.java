@@ -40,16 +40,15 @@ public class ProcessingActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        LatLng l = intent.getParcelableExtra(MapsActivity.POSITION);
-        String path = intent.getStringExtra(MapsActivity.PATH);
+        LatLng l = intent.getParcelableExtra(RecordingActivity.POSITION);
+        String path = intent.getStringExtra(RecordingActivity.PATH);
 
         loc = new Location(l);
 
         new AndroidFFMPEGLocator(this);
         runner = new AsyncRunner().execute(path);
 
-        intent.setClass(this, FinalActivity.class);
-        intent.putExtra(LOCATION, loc);
+        intent.setClass(this, ResultsActivity.class);
 
         // time is super long(5min), but timer cancels early whenever processing is done
         new CountDownTimer(500000, 1000) {
@@ -78,7 +77,7 @@ public class ProcessingActivity extends AppCompatActivity {
             intent.putExtra(LOCATION, loc);
         } else {
             Log.i("Recordings", "bounceTime was 0");
-            intent.setClass(this, MapsActivity.class);
+            intent.setClass(this, RecordingActivity.class);
         }
 
         File folderRecordings = (File) intent.getSerializableExtra(MapsActivity.FOLDER);
