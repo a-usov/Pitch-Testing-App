@@ -21,44 +21,13 @@
     </fragment>
 
     <Button
-        android:id="@+id/btnStopRecord"
-        android:layout_width="110dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="40dp"
-        android:background="@android:color/holo_red_light"
-        android:baselineAligned="false"
-        android:text="STOP "
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        android:onClick="stopRecording"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnStartRecord"
-        app:layout_constraintTop_toBottomOf="@+id/map" />
-
-    <Button
-        android:id="@+id/btnStartRecord"
-        android:layout_width="110dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="40dp"
-        android:background="@android:color/holo_blue_light"
-        android:text="RECORD"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        android:onClick="startRecording"
-        app:layout_constraintEnd_toStartOf="@+id/btnStopRecord"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map" />
-
-    <Button
         android:id="@+id/btnBegin"
         android:layout_width="110dp"
         android:layout_height="55dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="136dp"
         android:background="@android:color/holo_blue_light"
         android:baselineAligned="false"
-        android:onClick="stopRecording"
+        android:onClick="openRecordingPage"
         android:text="BEGIN"
         android:textColor="@android:color/white"
         android:textSize="20dp"
