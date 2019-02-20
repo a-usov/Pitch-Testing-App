@@ -76,6 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 try {
                     //LatLng latlng = new LatLng();
                     loc = new com.example.conal.soundrecord.Location(cPos);
+
                 }
                 catch(NullPointerException n) {
                     Toast.makeText(MapsActivity.this, "No LatLng", Toast.LENGTH_LONG).show();
@@ -85,11 +86,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = getIntent();
                 intent.setClass(MapsActivity.this, RecordingActivity.class); //This class needs created
                 intent.putExtra(POSITION,loc);
+                openRecordingPage();
             }
         });
 
 
 
+        if (!checkPermissionFromDevice()) requestPermission();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -98,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-        if (!checkPermissionFromDevice()) requestPermission();
+
     }
 
     @Override
@@ -123,12 +126,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     cPos = new LatLng(lat, longi);
                     mMap.addMarker(new MarkerOptions().position(cPos).title("Current location."));
-                    float maxZoomLevel = mMap.getMaxZoomLevel();
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cPos, 18));
+                    float maxZoomLevel = 18;
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cPos, maxZoomLevel));
                     Log.i("location", "Latitude " + lat);
                     Log.i("location", "Longitude" + longi);
                     intent.putExtra(POSITION, cPos);
-                    openRecordingPage();
+
 
 
                 } else {
