@@ -1,6 +1,8 @@
 package com.example.conal.soundrecord;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -21,6 +23,8 @@ import java.io.IOException;
 
 import be.tarsos.dsp.io.android.AndroidFFMPEGLocator;
 
+import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
+
 public class ProcessingActivity extends AppCompatActivity {
     //Declare variables
     public static final String LOCATION = "com.example.conal.soundrecord.LOCATION";
@@ -28,6 +32,8 @@ public class ProcessingActivity extends AppCompatActivity {
     double bounceTime;
     Location loc;
     AsyncTask<String, Void, Double> runner;
+    SharedPreferences sharedPreferences;
+    private boolean mapNeeded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +80,24 @@ public class ProcessingActivity extends AppCompatActivity {
             loc.addHeight((float) bounceHeight);
             Log.i("Recordings", "bounceHeight: " + bounceHeight);
 
+            if(loc.getHeights().size() == 5){
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                final SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putBoolean("mapNeeded", true);
+
+            }
+
             intent.putExtra(LOCATION, loc);
+
+
+
         } else {
             Log.i("Recordings", "bounceTime was 0");
+<<<<<<< HEAD
             intent.setClass(this, RecordingActivity.class);
+=======
+            intent.setClass(this,ResultsActivity.class);
+>>>>>>> 5e0a44e639045b3089a1deceff3029f05d8ed633
         }
 
         File folderRecordings = (File) intent.getSerializableExtra(MapsActivity.FOLDER);

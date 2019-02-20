@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     Intent intent;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
+    public boolean mapNeeded = true; // For global variable in sharedPrefs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +64,13 @@ public class HomeActivity extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
+
         editor.putString("currentDate",output);
         editor.putString("currentTime", timeOutput);
         editor.apply();
         Log.i("passing", "Date and time saved.");
+
+        editor.putBoolean("mapNeeded", mapNeeded);
 
 
 
@@ -102,7 +106,6 @@ public class HomeActivity extends AppCompatActivity {
                 else openFormPDF();*/
             }
         });
-
         rugbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +118,6 @@ public class HomeActivity extends AppCompatActivity {
                 else openFormPDF();
             }
         });
-
         tennisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +130,7 @@ public class HomeActivity extends AppCompatActivity {
                 else openFormPDF();
             }
         });
+
     }
 
     public void openHomePage(){
@@ -148,6 +151,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void openFormPDF(){
         Intent intent = new Intent(this, FormPDFActivity.class);
+        startActivity(intent);
+    }
+
+    public void openBluetoothPage() {
+        Intent intent = new Intent(this, BluetoothActivity.class);
         startActivity(intent);
     }
 
@@ -178,7 +186,10 @@ public class HomeActivity extends AppCompatActivity {
             openResultsPage();
         }else if(item.getItemId() == R.id.formPDF) {
                 openFormPDF();
-        }else{
+        }
+        else if(item.getItemId() == R.id.bluetooth) {
+            openBluetoothPage();
+        }else {
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 
