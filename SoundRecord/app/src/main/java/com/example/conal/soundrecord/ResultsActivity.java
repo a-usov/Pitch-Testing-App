@@ -1,12 +1,9 @@
 package com.example.conal.soundrecord;
 
-<<<<<<< HEAD
 import android.content.Intent;
-=======
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
->>>>>>> 5e0a44e639045b3089a1deceff3029f05d8ed633
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,7 +26,7 @@ public class ResultsActivity extends AppCompatActivity {
 
     private SeekBar sb;
     Intent intent;
-
+    final TextView height1 = (TextView) findViewById(R.id.height1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +34,9 @@ public class ResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_results);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final TextView height1 = (TextView) findViewById(R.id.height1);
 
 
         intent = getIntent();
-        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
 
         btnNextDrop = this.findViewById(R.id.next_drop_btn);
         btnFinish = this.findViewById(R.id.finish_btn); // End the test early
@@ -107,7 +102,7 @@ public class ResultsActivity extends AppCompatActivity {
         });
 
         sb.setProgress(50);
-
+        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
         height1.setText(loc.getHeights().get(0).toString().substring(0, 4));
 
 //

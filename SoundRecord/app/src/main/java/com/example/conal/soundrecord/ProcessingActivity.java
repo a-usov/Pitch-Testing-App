@@ -93,11 +93,8 @@ public class ProcessingActivity extends AppCompatActivity {
 
         } else {
             Log.i("Recordings", "bounceTime was 0");
-<<<<<<< HEAD
             intent.setClass(this, RecordingActivity.class);
-=======
             intent.setClass(this,ResultsActivity.class);
->>>>>>> 5e0a44e639045b3089a1deceff3029f05d8ed633
         }
 
         File folderRecordings = (File) intent.getSerializableExtra(MapsActivity.FOLDER);
