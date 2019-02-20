@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="200px"
+    android:layout_width="200px">
+    <item android:drawable = "@drawable/stop_embossed"
+        android:state_checked="true"/>
+    <item android:drawable="@drawable/record_embossed"
+        android:state_checked="false"/>
+</selector>

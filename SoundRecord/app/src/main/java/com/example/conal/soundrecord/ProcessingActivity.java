@@ -1,6 +1,10 @@
 package com.example.conal.soundrecord;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 
@@ -15,71 +20,112 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
+
+import be.tarsos.dsp.io.android.AndroidFFMPEGLocator;
+
+import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
 public class ProcessingActivity extends AppCompatActivity {
     //Declare variables
-    TextView mTextField;
     public static final String LOCATION = "com.example.conal.soundrecord.LOCATION";
     Intent intent;
+    double bounceTime;
+    Location loc;
+    AsyncTask<String, Void, Double> runner;
+    SharedPreferences sharedPreferences;
+    private boolean mapNeeded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_processing);
 
-        mTextField = this.<TextView>findViewById(R.id.mTextField);
-
         final ProgressBar spinner;
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
-        spinner.setVisibility(View.GONE);
-
+        spinner = (ProgressBar) findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
-        mTextField.setVisibility(View.VISIBLE);
 
         intent = getIntent();
 
         LatLng l = intent.getParcelableExtra(MapsActivity.POSITION);
-        //Toast.makeText(this,"gi", Toast.LENGTH_SHORT).show();
+        String path = intent.getStringExtra(MapsActivity.PATH);
 
-        Location loc = new Location(l);
+        loc = new Location(l);
 
-        // DO PROCESSING HERE
-        for(int i = 0; i < 5; i++) {
-            Random rand = new Random();
-            int n = rand.nextInt(10) + 60; //Gets a "random" bounce between 60 and 70 (from our own bounce tests)
-            loc.addHeight((float)n);
-        }
+        new AndroidFFMPEGLocator(this);
+        runner = new AsyncRunner().execute(path);
 
-        //Toast.makeText(this, l.toString() + " " + loc.getHeights(), Toast.LENGTH_SHORT).show();
-
-        intent.setClass(this, ResultsActivity.class);
+        intent.setClass(this, FinalActivity.class);
         intent.putExtra(LOCATION, loc);
 
-
-        new CountDownTimer(3000, 1000) {
+        // time is super long(5min), but timer cancels early whenever processing is done
+        new CountDownTimer(500000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                mTextField.setText("seconds remaining: " + (millisUntilFinished + 1000) / 1000);
+                if (runner.getStatus() == Status.FINISHED){
+                    afterProcessing();
+                    this.cancel();
+                }
             }
 
+            // realistically never executes
             public void onFinish() {
-                //mTextField.setText("done!");
                 spinner.setVisibility(View.GONE);
-                mTextField.setVisibility(View.GONE);
-                startActivity(intent);
-                }
+                afterProcessing();
+            }
         }.start();
+    }
 
-        File folderRecordings = (File)intent.getSerializableExtra(MapsActivity.FOLDER);
+    private void afterProcessing() {
+        if (bounceTime != -1) {
+            double bounceHeight = 1.23 * Math.pow((bounceTime - 0.025), 2.0);
+            loc.addHeight((float) bounceHeight);
+            Log.i("Recordings", "bounceHeight: " + bounceHeight);
 
+            if(loc.getHeights().size() == 5){
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                final SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putBoolean("mapNeeded", true);
+
+            }
+
+            intent.putExtra(LOCATION, loc);
+
+
+
+        } else {
+            Log.i("Recordings", "bounceTime was 0");
+            intent.setClass(this,ResultsActivity.class);
+        }
+
+        File folderRecordings = (File) intent.getSerializableExtra(MapsActivity.FOLDER);
         try {
             FileUtils.deleteDirectory(folderRecordings);
             Log.i("Recordings", "Folder is deleted.");
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             Log.i("Recordings", "No folder to delete.");
         }
+
+        startActivity(intent);
+    }
+
+
+    private class AsyncRunner extends AsyncTask<String, Void, Double> {
+        SoundProcessing processor;
+
+        protected Double doInBackground(String... strings) {
+            Log.i("Recordings", "In Runner");
+            return processor.process(strings[0]);
+        }
+
+        protected void onPreExecute() {
+            processor = new SoundProcessing(44100, 2048);
+        }
+
+        protected void onPostExecute(Double result) {
+            bounceTime = result;
+        }
+
+
     }
 }

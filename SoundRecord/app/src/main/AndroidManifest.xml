@@ -19,6 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".BluetoothActivity"></activity>
+        <activity android:name=".RecordingActivity"></activity>
+        <activity
+            android:name=".ResultsActivity"
+            android:label="@string/title_activity_results"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -30,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ResultsActivity"
+            android:name=".FinalActivity"
             android:label="@string/title_activity_my_tests"
             android:theme="@style/AppTheme" />
         <activity

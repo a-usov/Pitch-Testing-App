@@ -10,69 +10,48 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.Set;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
 public class FormPDFActivity extends AppCompatActivity {
-//    private int jobNo;
-//    private String contract;
-//    private String surfaceName;
-//    private Float airtTemp;
-//    private Float surfaceTemp;
-//    private Float humidity;
-//    private Float windSpeed;
-//    private String dayBook;
-//    private String client;
-//    private Date dateOfConstruction;
-//    private String carpetType;
-//    private String infillType;
-//    private String shockpad;
-//    private String weatherConditions;
-//    private String leadTechnician;
-//    private String additionalTechnician;
 
     private SharedPreferences sharedpreferences;
     private Button btnSubmitPDF;
 
 
+
     private TextInputLayout jobNo;
-    private Set<String> values;
-//     job_no">Job Number</string>
-//    contract">Contract</string>
-//    test_condition">Test Condition</string>
-//    ubstrate_type">Substrate Type</string>
-//    surface_name">Surface Name</string>
-//    air_temp">Air Temp</string>
-//    surface_temp">Surface Temp</string>
-//    humidity">Humidity</string>
-//    wind_speed">Wind speed</string>
-//    day_book">Day Book</string>
-//    client">Client</string>
-//    construction_date">Date of Construction</string>
-//    carpet_type">Carpet Type</string>
-//    infill_type">Infill Type</string>
-//    shockpad">Shockpad</string>
-//    weather_conditions">Weather Conditions</string>
-//    lead_technician">Lead Technician</string>
-//    additional_technician">Additional Technician</string>
-//    uncertainty_measurement">Uncertainty Measurement</string>
-//    private TextInputEditText contract;
-//    private TextInputEditText surfaceName;
-//    private TextInputEditText airTemp;
-//    private TextInputEditText surfaceTemp;
-//    private TextInputEditText humidity;
-//    private TextInputEditText windSpeed;
-//    private TextInputEditText dayBook;
-//    private TextInputEditText client;
-//    private TextInputEditText dateOfConstruction;
-//    private TextInputEditText carpetType;
-//    private TextInputEditText infillType;
-//    private TextInputEditText shockpad;
-//    private TextInputEditText weatherConditions;
-//    private TextInputEditText leadTechnician;
-//    private TextInputEditText additionalTechnician;
+    private TextInputLayout contract;
+    private TextInputLayout surfaceName;
+    private TextInputLayout airTemp;
+    private TextInputLayout substrateType;
+    private TextInputLayout testCondition;
+    private TextInputLayout surfaceTemp;
+    private TextInputLayout humidity;
+    private TextInputLayout windSpeed;
+    private TextInputLayout dayBook;
+    private TextInputLayout client;
+    private TextInputLayout dateOfConstruction;
+    private TextInputLayout carpetType;
+    private TextInputLayout infillType;
+    private TextInputLayout shockpad;
+    private TextInputLayout weatherConditions;
+    private TextInputLayout leadTechnician;
+    private TextInputLayout additionalTechnician;
+    private TextInputLayout uncertaintyMeasurement;
+    private TextInputLayout otherEquipment;
+
+
+    /** Radio buttons **/
+    private Boolean fifaPro; // button for Fifa Pro spec or not
+    private Boolean uk1 = false;
+    private Boolean uk2 = false;
+    private Boolean flight3 = false;
+    private Boolean flight4 = false;
+    private Boolean flight5 = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,21 +62,32 @@ public class FormPDFActivity extends AppCompatActivity {
         btnSubmitPDF = this.<Button>findViewById(R.id.btnSubmitForm);
 
         jobNo = this.<TextInputLayout>findViewById(R.id.job_no);
-//        contract = this.<TextInputEditText>findViewById(R.id.contract);
-//        surfaceName = this.<TextInputEditText>findViewById(R.id.surface_name);
-//        airTemp = this.<TextInputEditText>findViewById(R.id.air_temp);
-//        surfaceTemp = this.<TextInputEditText>findViewById(R.id.surface_temp);
-//        humidity = this.<TextInputEditText>findViewById(R.id.humidity);
-//        windSpeed = this.<TextInputEditText>findViewById(R.id.wind_speed);
-//        dayBook = this.<TextInputEditText>findViewById(R.id.day_book);
-//        client = this.<TextInputEditText>findViewById(R.id.client);
-//        dateOfConstruction = this.<TextInputEditText>findViewById(R.id.construction_date);
-//        carpetType = this.<TextInputEditText>findViewById(R.id.carpet_type);
-//        infillType = this.<TextInputEditText>findViewById(R.id.infill_type);
-//        shockpad = this.<TextInputEditText>findViewById(R.id.shockpad);
-//        weatherConditions = this.<TextInputEditText>findViewById(R.id.weather_conditions);
-//        leadTechnician = this.<TextInputEditText>findViewById(R.id.lead_technician);
-//        additionalTechnician = this.<TextInputEditText>findViewById(R.id.additional_technician);
+        contract = this.findViewById(R.id.contract);
+        surfaceName = this.<TextInputLayout>findViewById(R.id.surface_name);
+        airTemp = this.<TextInputLayout>findViewById(R.id.air_temp);
+        surfaceTemp = this.<TextInputLayout>findViewById(R.id.surface_temp);
+        humidity = this.<TextInputLayout>findViewById(R.id.humidity);
+        windSpeed = this.<TextInputLayout>findViewById(R.id.wind_speed);
+        dayBook = this.<TextInputLayout>findViewById(R.id.day_book);
+        client = this.<TextInputLayout>findViewById(R.id.client);
+        dateOfConstruction = this.<TextInputLayout>findViewById(R.id.construction_date);
+        carpetType = this.<TextInputLayout>findViewById(R.id.carpet_type);
+        infillType = this.<TextInputLayout>findViewById(R.id.infill_type);
+        shockpad = this.<TextInputLayout>findViewById(R.id.shockpad);
+        weatherConditions = this.<TextInputLayout>findViewById(R.id.weather_conditions);
+        leadTechnician = this.<TextInputLayout>findViewById(R.id.lead_technician);
+        additionalTechnician = this.<TextInputLayout>findViewById(R.id.additional_technician);
+        substrateType = this.findViewById(R.id.substrate_type);
+        testCondition = this.findViewById(R.id.test_conditions);
+        uncertaintyMeasurement = this.findViewById(R.id.uncertainty_measurement);
+        otherEquipment = this.findViewById(R.id.other);
+
+
+
+
+
+
+
 
         btnSubmitPDF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,22 +96,6 @@ public class FormPDFActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
 
     }
 
@@ -132,14 +106,107 @@ public class FormPDFActivity extends AppCompatActivity {
 
     }
 
+    public void onFifaRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.fifa:
+                if (checked)
+                    // Normal FIFA is best
+                    Log.i("forms", "Normal fifa is best");
+                    fifaPro = false;
+                    break;
+            case R.id.fifa_pro:
+                if (checked)
+                    // FIFA PRO all the way
+                    Log.i("forms", "FIFA PRO!!");
+                    fifaPro = true;
+                    break;
+        }
+    }
+
+    public void onEquipmentRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.uk1:
+                if (checked)
+                    // UK1 equipment
+                    Log.i("forms", "UK1 equipment");
+                uk1 = true;
+                break;
+            case R.id.uk2:
+                if (checked)
+                    // UK 2 equipment
+                    // FIFA PRO all the way
+                    Log.i("forms", "UK2 equipment");
+                uk2 = true;
+
+                break;
+            case R.id.flight3:
+                if (checked)
+                    // Flight3
+                    Log.i("forms", "Flight 3 ");
+                flight3 = true;
+                break;
+            case R.id.flight4:
+                if (checked)
+                    // Flight 5 equipment
+                    Log.i("forms", "Flight 4");
+                flight4 = true;
+                break;
+            case R.id.flight5:
+                if (checked)
+                    // Flight 5
+                    Log.i("forms", "Flight 5");
+                flight5 = true;
+                break;
+        }
+    }
+
+
+
     protected void submitPDF(){
+        /** Create a shared preferences to store the user inputted data **/
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        
+
+        // Store data
         editor.putString("jobNo", jobNo.getEditText().getText().toString());
+        editor.putString("contract", contract.getEditText().getText().toString());
+        editor.putString("surfaceName", surfaceName.getEditText().getText().toString());
+        editor.putString("humidity", humidity.getEditText().getText().toString());
+        editor.putString("airTemp", airTemp.getEditText().getText().toString());
+        editor.putString("surfaceTemp", surfaceTemp.getEditText().getText().toString());
+        editor.putString("windSpeed", windSpeed.getEditText().getText().toString());
+        editor.putString("dayBook", dayBook.getEditText().getText().toString());
+        editor.putString("client", client.getEditText().getText().toString());
+        editor.putString("dateOfConstruction", dateOfConstruction.getEditText().getText().toString());
+        editor.putString("carpetTye", carpetType.getEditText().getText().toString());
+        editor.putString("infillType", infillType.getEditText().getText().toString());
+        editor.putString("shockpad", shockpad.getEditText().getText().toString());
+        editor.putString("weatherConditions", weatherConditions.getEditText().getText().toString());
+        editor.putString("leadTechnician", leadTechnician.getEditText().getText().toString());
+        editor.putString("additionalTechnician", additionalTechnician.getEditText().getText().toString());
+        editor.putString("substrateType", substrateType.getEditText().getText().toString());
+        editor.putString("testConditions", testCondition.getEditText().getText().toString());
+        editor.putString("uncertaintyMeasurement", testCondition.getEditText().getText().toString());
+        editor.putBoolean("fifaPro", fifaPro);
+        editor.putBoolean("uk1", uk1);
+        editor.putBoolean("uk2", uk2);
+        editor.putBoolean("flight3", flight3);
+        editor.putBoolean("flight4", flight4);
+        editor.putBoolean("flight5", flight5);
+        editor.putString("other", testCondition.getEditText().getText().toString());
+
+        // Save data
         editor.apply();
         Log.i("passing", "Job number saved.");
-        openMapsActivity();
+        openMapsActivity(); // Need location from offset so it will always go to this first
 
     }
 
@@ -147,4 +214,6 @@ public class FormPDFActivity extends AppCompatActivity {
         Intent intent = new Intent(this,MapsActivity.class);
         startActivity(intent);
     }
+
+
 }
