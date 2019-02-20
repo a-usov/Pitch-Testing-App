@@ -72,7 +72,6 @@
     <string name="avg">Average</string>
     <string name="fifa_quality_pro">FIFA Quality Pro: 0.6 - 0.85m</string>
     <string name="fifa_normal">FIFA Quality: 0.6 - 1.0m</string>
-    <string name="title_activity_results">ResultsActivity</string>
 
     //Results activity table
     <string name="drop1">1</string>
