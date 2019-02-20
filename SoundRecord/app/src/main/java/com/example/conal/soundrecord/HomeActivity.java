@@ -154,6 +154,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openBluetoothPage() {
+        Intent intent = new Intent(this, BluetoothActivity.class);
+        startActivity(intent);
+    }
+
     public void openRecordingPage(){
         Intent intent = new Intent(this, RecordingActivity.class);
         startActivity(intent);
@@ -181,7 +186,10 @@ public class HomeActivity extends AppCompatActivity {
             openResultsPage();
         }else if(item.getItemId() == R.id.formPDF) {
                 openFormPDF();
-        }else{
+        }
+        else if(item.getItemId() == R.id.bluetooth) {
+            openBluetoothPage();
+        }else {
             Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
         }
 
