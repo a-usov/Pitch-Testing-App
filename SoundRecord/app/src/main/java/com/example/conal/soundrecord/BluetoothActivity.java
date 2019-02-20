@@ -57,6 +57,17 @@ public class BluetoothActivity extends AppCompatActivity {
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
 
+            //This is where code was that I moved to onResume
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mBluetoothAdapter.isEnabled()) {
+
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 
             if (pairedDevices.size() > 0) {
@@ -68,7 +79,8 @@ public class BluetoothActivity extends AppCompatActivity {
                 }
             }
 
-            Toast.makeText(BluetoothActivity.this, devices.get(0)[1], Toast.LENGTH_LONG).show();
+            Toast.makeText(BluetoothActivity.this, devices.get(0)[0]
+                    + " " + devices.get(0)[1], Toast.LENGTH_LONG).show();
             //AT THIS POINT: got list of paired devices with names and MAC addresses -- String[] devices
 
             /*Intent discoverableIntent =
@@ -79,11 +91,10 @@ public class BluetoothActivity extends AppCompatActivity {
             boolean success = mBluetoothAdapter.startDiscovery();
 
             if (success) {
-                Toast.makeText(this,"Discovery started", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Discovery started", Toast.LENGTH_LONG).show();
                 IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
                 registerReceiver(mReceiver, filter);
-            }
-            else Toast.makeText(this,"Discovery did not start", Toast.LENGTH_LONG).show();
+            } else Toast.makeText(this, "Discovery did not start", Toast.LENGTH_LONG).show();
 
             class AcceptThread extends Thread {
                 private final BluetoothServerSocket mmServerSocket;
@@ -118,9 +129,8 @@ public class BluetoothActivity extends AppCompatActivity {
                             manageMyConnectedSocket(socket);
                             try {
                                 mmServerSocket.close();
-                            }
-                            catch(IOException i) {
-                                Toast.makeText(BluetoothActivity.this,"Couldn't close socket.", Toast.LENGTH_LONG).show();
+                            } catch (IOException i) {
+                                Toast.makeText(BluetoothActivity.this, "Couldn't close socket.", Toast.LENGTH_LONG).show();
                             }
                             break;
                         }
@@ -136,7 +146,6 @@ public class BluetoothActivity extends AppCompatActivity {
                     }
                 }
             }
-
         }
     }
 
