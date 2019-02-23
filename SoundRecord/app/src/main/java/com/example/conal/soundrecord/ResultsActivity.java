@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.PointsGraphSeries;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -39,7 +45,8 @@ public class ResultsActivity extends AppCompatActivity {
         intent = getIntent();
 
         Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
-        height1.setText(loc.getHeights().get(0).toString().substring(0, 4));
+        Double bounceHeight = loc.getResults().get(0).bounceHeight;
+        height1.setText(bounceHeight.toString().substring(0, 4));
 
         btnNextDrop = this.findViewById(R.id.next_drop_btn);
         btnFinish = this.findViewById(R.id.finish_btn); // End the test early
@@ -74,6 +81,35 @@ public class ResultsActivity extends AppCompatActivity {
         });
 
         sb.setProgress(50);
+
+        double[] sound = intent.getDoubleArrayExtra(ProcessingActivity.SOUND);
+
+
+        DataPoint[] points = new DataPoint[sound.length];
+        for (int i = 0; i < sound.length; i++) {
+            points[i] = new DataPoint(i, sound[i]);
+        }
+
+
+        GraphView graph = findViewById(R.id.graph);
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
+        graph.addSeries(series);
+
+        // Weird stuff where scaling of graph doesnt work properly if you try to do both points at the same time
+        // So do 2 point graphs, adding second point first so scales properly
+        PointsGraphSeries<DataPoint> series2 = new PointsGraphSeries<>(new DataPoint[]{
+                new DataPoint(loc.getResults().get(0).firstBounce, sound[loc.getResults().get(0).firstBounce]),
+                new DataPoint(loc.getResults().get(0).secondBounce, sound[loc.getResults().get(0).secondBounce])
+        });
+        graph.addSeries(series2);
+        series2.setShape(PointsGraphSeries.Shape.POINT);
+        series2.setColor(Color.RED);
+        series2.setSize(10);
+
+        graph.getViewport().setScalable(true);
+
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
 
         btnNextDrop.setOnClickListener(new View.OnClickListener() {
