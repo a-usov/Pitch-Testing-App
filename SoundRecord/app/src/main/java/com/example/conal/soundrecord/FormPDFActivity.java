@@ -51,8 +51,6 @@ public class FormPDFActivity extends AppCompatActivity {
     private Boolean flight4 = false;
     private Boolean flight5 = false;
 
-    /** Concrete testing **/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,7 +201,6 @@ public class FormPDFActivity extends AppCompatActivity {
         editor.putBoolean("flight4", flight4);
         editor.putBoolean("flight5", flight5);
         editor.putString("other", testCondition.getEditText().getText().toString());
-        editor.putBoolean("concreteTesting", true);
 
         // Save data
         editor.apply();
