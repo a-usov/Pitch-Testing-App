@@ -47,9 +47,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double lat;
     private double longi;
     private Intent intent = new Intent();
+    private Intent concreteIntent = new Intent();
+    private boolean concreteTesting;
 
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String CONCRETE = "concreteTesting"; // Key for sharedPrefs on keeping track of concrete testing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedpreferences.edit();
-
+        concreteTesting = sharedpreferences.getBoolean(CONCRETE, false);
 
         btnBegin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -79,10 +82,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 editor.putBoolean("mapNeeded", false);
                 editor.apply();
+
                 Intent intent = getIntent();
-                intent.setClass(MapsActivity.this, RecordingActivity.class); //This class needs created
+                intent.setClass(MapsActivity.this, RecordingActivity.class);
                 intent.putExtra(POSITION,loc);
-                openRecordingPage();
+
+
+
             }
         });
 

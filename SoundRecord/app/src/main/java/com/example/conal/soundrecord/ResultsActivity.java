@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
@@ -24,6 +25,8 @@ public class ResultsActivity extends AppCompatActivity {
     Button btnNextDrop, btnFinish, btnRedo;
     SharedPreferences sharedPreferences;
     private boolean mapNeeded;
+    private boolean concreteTesting;
+    TableLayout tableLayout;
 
     private SeekBar sb;
     Intent intent;
@@ -36,7 +39,11 @@ public class ResultsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final TextView height1 = (TextView) findViewById(R.id.height1);
 
+
         intent = getIntent();
+
+        concreteTesting = sharedPreferences.getBoolean(MapsActivity.CONCRETE, false);
+
 
         Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
         height1.setText(loc.getHeights().get(0).toString().substring(0, 4));
@@ -44,8 +51,16 @@ public class ResultsActivity extends AppCompatActivity {
         btnNextDrop = this.findViewById(R.id.next_drop_btn);
         btnFinish = this.findViewById(R.id.finish_btn); // End the test early
         btnRedo = this.findViewById(R.id.redo_btn);
+        tableLayout = this.findViewById(R.id.tableLayout);
 
         sb = (SeekBar) findViewById(R.id.seekBar);
+
+        if(concreteTesting){ // If concrete testing result hide table and next drop button
+            tableLayout.setEnabled(false);
+            btnNextDrop.setEnabled(false);
+
+
+        }
 
         /** Doesn't allow the user to change the progress but still displays the marker on the seekbar**/
         sb.setOnTouchListener(new View.OnTouchListener() {
@@ -86,6 +101,15 @@ public class ResultsActivity extends AppCompatActivity {
                 if (mapNeeded) {
                     openMapsActivity();
                 } else {
+                    openRecordingsPage();
+                }
+
+            }
+        });
+
+        btnRedo.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                if(concreteTesting){
                     openRecordingsPage();
                 }
 
