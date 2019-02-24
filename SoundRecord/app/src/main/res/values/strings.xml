@@ -59,6 +59,7 @@
     <string name="finish">Finish</string>
     <string name="new_test">New Test</string>
     <string name="discard_test">Discard Test</string>
+    <string name="recording">Recording</string>
 
     <string name="choose_test">Choose the test</string>
 
