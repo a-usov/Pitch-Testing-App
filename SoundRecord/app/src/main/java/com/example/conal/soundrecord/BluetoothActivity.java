@@ -32,7 +32,6 @@ public class BluetoothActivity extends AppCompatActivity {
     Button btnBluetooth;
 
     String mac = "98:D3:32:31:23:DA"; // MAC address of magnet drop
-    //BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
