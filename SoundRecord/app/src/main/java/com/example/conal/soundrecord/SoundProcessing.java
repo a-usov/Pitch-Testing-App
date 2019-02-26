@@ -1,8 +1,5 @@
 package com.example.conal.soundrecord;
 
-import android.os.AsyncTask;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +11,7 @@ import be.tarsos.dsp.io.PipedAudioStream;
 import be.tarsos.dsp.io.TarsosDSPAudioInputStream;
 import be.tarsos.dsp.util.fft.FFT;
 
-
 public class SoundProcessing {
-
     // set parameters about sound and FFT
     private int sampleRate;
     private int bufferSize;
@@ -37,7 +32,6 @@ public class SoundProcessing {
         AudioDispatcher dispatcher = new AudioDispatcher(stream, bufferSize, 0);
 
         dispatcher.addAudioProcessor(new AudioProcessor() {
-
             @Override
             public boolean process(AudioEvent audioEvent) {
                 FFT fft = new FFT(bufferSize);
@@ -54,30 +48,7 @@ public class SoundProcessing {
                 fft.forwardTransform(transformBuffer);
                 fft.modulus(transformBuffer, power);
 
-                // max power entry
                 // TODO redo filtering
-
-                /*
-                int maxIdx = 1;
-                {
-                    float m = power[1];
-                    for (int i = 2; i < power.length; ++i) {
-                        if (power[i] > m) {
-                            m = power[i];
-                            maxIdx = i;
-                        }
-                    }
-                }
-
-                if (power[maxIdx] > maxGlobalPower) {
-                    maxGlobalPower = power[maxIdx];
-                    maxPowerFreq = fft.binToHz(maxIdx, sampleRate);
-                }
-
-                // cut off above that power
-                for (int i = (maxIdx+1)*2; i < transformBuffer.length; ++i)
-                    transformBuffer[i] = 0;
-                */
 
                 fft.backwardsTransform(transformBuffer);
 
@@ -90,8 +61,6 @@ public class SoundProcessing {
             public void processingFinished() {
             }
         });
-
-        //dispatcher.addAudioProcessor(new BandPass((float) maxPowerFreq, 100, sampleRate));
 
         dispatcher.addAudioProcessor(new AudioProcessor() {
             @Override

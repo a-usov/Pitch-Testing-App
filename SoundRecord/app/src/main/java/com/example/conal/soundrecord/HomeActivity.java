@@ -10,30 +10,19 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 public class HomeActivity extends AppCompatActivity {
 
-    final int REQUEST_PERMISSION_CODE = 1000;
-    private Button footballBtn;
-    private Button hockeyBtn;
-    private Button rugbyBtn;
-    private Button tennisBtn;
+    private final int REQUEST_PERMISSION_CODE = 1000;
+    private Intent intent;
 
-    Intent intent;
-    SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String MyPREFERENCES = "MyPrefs";
     public boolean mapNeeded = true; // For global variable in sharedPrefs
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,138 +31,93 @@ public class HomeActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        Date today;
-        Date currentTime;
-        String timeOutput;
-        String output;
-        SimpleDateFormat formatter;
-        SimpleDateFormat timeFormatter;
-        String pattern = "dd.MM.yy";
-        String timePattern = "h:mm a";
-        Locale currentLocale = Locale.UK;
-        formatter = new SimpleDateFormat(pattern,currentLocale);
-        timeFormatter = new SimpleDateFormat(timePattern, currentLocale);
-        currentTime = new Date();
-        today = new Date();
-        output = formatter.format(today);
-        timeOutput = timeFormatter.format(currentTime);
-        Log.i("getDate",pattern + " " + output);
-        Log.i("getDate", timePattern + " " + timeOutput);
-
-
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-
-        editor.putString("currentDate",output);
-        editor.putString("currentTime", timeOutput);
-        editor.apply();
-        Log.i("passing", "Date and time saved.");
-
         editor.putBoolean("mapNeeded", mapNeeded);
+        editor.apply();
 
-
-
-        footballBtn = (Button) findViewById(R.id.footballBtn);
-        hockeyBtn = (Button) findViewById(R.id.hockeyBtn);
-        rugbyBtn = (Button) findViewById(R.id.rugbyBtn);
-        tennisBtn = (Button) findViewById(R.id.tennisBtn);
+        Button footballBtn = findViewById(R.id.footballBtn);
+        Button hockeyBtn = findViewById(R.id.hockeyBtn);
+        Button rugbyBtn = findViewById(R.id.rugbyBtn);
+        Button tennisBtn = findViewById(R.id.tennisBtn);
 
         footballBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
                     if (checkPermissionFromDevice()) openFormPDF();
+                } else {
+                    openFormPDF();
                 }
-                else openFormPDF();
-
             }
         });
 
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                openRecordingPage();
-                /*intent.setClass(HomeActivity.this, FormPDFActivity.class);
+                intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
                     if (checkPermissionFromDevice()) openFormPDF();
+                } else {
+                    openFormPDF();
                 }
-                else openFormPDF();*/
-
             }
         });
+
         rugbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
                     if (checkPermissionFromDevice()) openFormPDF();
+                } else {
+                    openFormPDF();
                 }
-                else openFormPDF();
-
             }
         });
+
         tennisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
                     if (checkPermissionFromDevice()) openFormPDF();
+                } else {
+                    openFormPDF();
                 }
-                else openFormPDF();
-
             }
         });
     }
 
-
-    public void openHomePage(){
+    private void openHomePage() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
-
-    //temporary way to get to the result page
-    public void openResultsPage(){
-
+    //temporary way to get to the result page - TODO REMOVE
+    private void openResultsPage() {
         Intent intent = new Intent(this, FinalActivity.class);
         startActivity(intent);
     }
 
-    //temporary way to get to the maps page, for football atm
-    public void openMapsPage(){
-        Intent intent = new Intent(this,MapsActivity.class);
-        startActivity(intent);
-    }
-
-
-    public void openFormPDF(){
+    private void openFormPDF() {
         Intent intent = new Intent(this, FormPDFActivity.class);
         startActivity(intent);
     }
 
-    public void openBluetoothPage() {
+    private void openBluetoothPage() {
         Intent intent = new Intent(this, BluetoothActivity.class);
         startActivity(intent);
     }
-
-    public void openRecordingPage(){
-        Intent intent = new Intent(this, RecordingActivity.class);
-        startActivity(intent);
-    }
-
 
     //dropdown menu
     @Override
@@ -185,22 +129,14 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.home) {
+        if (item.getItemId() == R.id.home) {
             openHomePage();
-        }
-      else if(item.getItemId() ==  R.id.footballBtn){ // In development of getting gps positions
-            openMapsPage();
-        }
-        else if(item.getItemId() == R.id.results) {
+        } else if (item.getItemId() == R.id.results) {
             openResultsPage();
-
-        }else if(item.getItemId() == R.id.formPDF) {
-                openFormPDF();
-        }
-        else if(item.getItemId() == R.id.bluetooth) {
+        } else if (item.getItemId() == R.id.bluetooth) {
             openBluetoothPage();
-        }else {
-            Toast.makeText(this, "This will be My Account page", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "This will be My Test page", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -212,7 +148,6 @@ public class HomeActivity extends AppCompatActivity {
                 Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.ACCESS_FINE_LOCATION,
         }, REQUEST_PERMISSION_CODE);
-
     }
 
     @Override
@@ -220,8 +155,8 @@ public class HomeActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_PERMISSION_CODE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
                     openFormPDF();
                 } else {
@@ -229,7 +164,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
             break;
-
         }
     }
 

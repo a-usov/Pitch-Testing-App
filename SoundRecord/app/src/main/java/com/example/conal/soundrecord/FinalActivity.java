@@ -81,7 +81,6 @@ public class FinalActivity extends AppCompatActivity {
     private String defaultValue;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -126,17 +125,15 @@ public class FinalActivity extends AppCompatActivity {
         otherEquip = sharedPref.getString("other", defaultValue);
 
 
-        if(fifaPro) fifaProString =  "FIFA Quality Pro: 0.6 - 0.85m";
+        if (fifaPro) fifaProString = "FIFA Quality Pro: 0.6 - 0.85m";
         else fifaProString = "FIFA Quality: 0.6 - 1.0m";
 
         /** Equipment radio buttons **/
-        if(uk1) uk1String = X;
-        if(uk2) uk2String = X;
-        if(flight3) flight3String = X;
-        if(flight4) flight4String = X;
-        if(flight5) flight5tring = X;
-
-
+        if (uk1) uk1String = X;
+        if (uk2) uk2String = X;
+        if (flight3) flight3String = X;
+        if (flight4) flight4String = X;
+        if (flight5) flight5tring = X;
 
 
         Log.i("currentDate", "The current date is " + currentDate);
@@ -144,12 +141,14 @@ public class FinalActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
-        try {generateCSV(loc);} //Change this to generateCSV(pitchTest)
-        catch (IOException e) {}
+        PitchTest test = intent.getParcelableExtra(MapsActivity.TEST);
+        try {
+            generateCSV(test);
+        } //Change this to generateCSV(pitchTest)
+        catch (IOException e) {
+        }
 
-        createPDF = (Button) findViewById(R.id.btnPDF);
-
+        createPDF = findViewById(R.id.btnPDF);
 
 
         createPDF.setOnClickListener(new View.OnClickListener() {
@@ -158,13 +157,14 @@ public class FinalActivity extends AppCompatActivity {
                 try {
                     generateReportPDF();
 
-                } catch (IOException e){}
+                } catch (IOException e) {
+                }
             }
         });
 
     }
 
-    private void insertCell(PdfPTable table, String text, int align, int colspan, int rowspan, Font font, BaseColor color ) {
+    private void insertCell(PdfPTable table, String text, int align, int colspan, int rowspan, Font font, BaseColor color) {
 
         //create a new cell with the specified Text and Font
         PdfPCell cell = new PdfPCell(new Phrase(text.trim(), font));
@@ -181,7 +181,7 @@ public class FinalActivity extends AppCompatActivity {
         table.addCell(cell);
     }
 
-    public void generateCSV(Location location) throws IOException { // Change this method to take PitchTest
+    public void generateCSV(PitchTest test) throws IOException { // Change this method to take PitchTest
         if (checkPermissionFromDevice()) {
             File folder = new File(Environment.getExternalStorageDirectory()
                     + "/CSV Files");
@@ -217,7 +217,7 @@ public class FinalActivity extends AppCompatActivity {
                 fw.append("1.4");
                 fw.append(',');
 
-                fw.append(location.toString());
+                fw.append(test.toString());
                 fw.append(',');
 
                 fw.append('\n');
@@ -225,10 +225,9 @@ public class FinalActivity extends AppCompatActivity {
                 fw.close();
 
                 Toast.makeText(this, "Written to file \"" + folder.toString() + filename + "/\"", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) { }
-        }
-
-        else {
+            } catch (Exception e) {
+            }
+        } else {
             requestPermission();
             this.finish();
             Toast.makeText(this, "Cannot create CSV without permission.", Toast.LENGTH_SHORT).show();
@@ -241,7 +240,7 @@ public class FinalActivity extends AppCompatActivity {
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
 
-        if(!folderPDF.exists()) folderPDF.mkdir();
+        if (!folderPDF.exists()) folderPDF.mkdir();
 
         String filePDF = folderPDF.toString() + "/" + "Report.pdf";
 
@@ -252,17 +251,17 @@ public class FinalActivity extends AppCompatActivity {
         Font labelRed = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);
         Font other = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
         Intent intent = getIntent();
-        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
-        LatLng coord = loc.getLocation();
+        PitchTest test = intent.getParcelableExtra(MapsActivity.TEST);
+        LatLng coord = test.getLocation(0).getLocation();
 
-        try{
+        try {
             Document report = new Document();
             report.setPageSize(PageSize.A4);
             PdfWriter.getInstance(report, new FileOutputStream(filePDF));
 
             report.open();
 
-            float [] pointColumnWidths = {600F, 600F, 600F, 600F, 600F, 600F, 600F};
+            float[] pointColumnWidths = {600F, 600F, 600F, 600F, 600F, 600F, 600F};
             PdfPTable table = new PdfPTable(pointColumnWidths);
 
             // Adding cells to the table
@@ -323,7 +322,7 @@ public class FinalActivity extends AppCompatActivity {
             insertCell(table, uncertainityMeasurement, Element.ALIGN_LEFT, 1, 1, other, BaseColor.WHITE);
             insertCell(table, coord.toString(), Element.ALIGN_CENTER, 4, 1, other, BaseColor.WHITE);
 
-            insertCell(table, "", Element.ALIGN_LEFT, 7, 1, labelBlack,BaseColor.BLACK);
+            insertCell(table, "", Element.ALIGN_LEFT, 7, 1, labelBlack, BaseColor.BLACK);
             insertCell(table, "Calibrate ball on concrete", Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Limit: 1.35m ± 0.02m", Element.ALIGN_CENTER, 7, 1, labelRed, BaseColor.WHITE);
 
@@ -422,7 +421,6 @@ public class FinalActivity extends AppCompatActivity {
             }
 
 
-
             insertCell(table, fifaProString, Element.ALIGN_CENTER, 7, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "UK 1", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.YELLOW);
             insertCell(table, uk1String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
@@ -430,18 +428,19 @@ public class FinalActivity extends AppCompatActivity {
             insertCell(table, flight3String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 4", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.RED);
             insertCell(table, flight4String, Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
-            insertCell(table, "UK 2", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.GREEN);
-            insertCell(table, uk2String, Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, "UK 2", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.GREEN);
+            insertCell(table, uk2String, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Flight 5 (Norway)", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.CYAN);
-            insertCell(table, flight5tring, Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.WHITE);
-            insertCell(table, "Other please state -", Element.ALIGN_CENTER, 1, 1,labelBlack, BaseColor.MAGENTA);
-            insertCell(table, otherEquip, Element.ALIGN_CENTER, 2, 1,labelBlack, BaseColor.WHITE);
+            insertCell(table, flight5tring, Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
+            insertCell(table, "Other please state -", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.MAGENTA);
+            insertCell(table, otherEquip, Element.ALIGN_CENTER, 2, 1, labelBlack, BaseColor.WHITE);
 
             report.add(table);
 
             report.close();
 
-        }catch(Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     private void requestPermission() {

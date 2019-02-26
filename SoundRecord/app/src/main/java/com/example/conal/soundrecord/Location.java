@@ -9,52 +9,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Location implements Parcelable {
-    private boolean passFail;
     private LatLng location;
     private List<Result> results;
+    private int numDone;
 
     public Location(LatLng location) {
-        this.passFail = false;
         this.results = new ArrayList<>();
         this.location = location;
+        this.numDone = 0;
     }
 
-    public boolean getPassFail(){
-        return passFail;
+    public Location() {
+        this.results = new ArrayList<>();
+        this.location = null;
+        this.numDone = 0;
     }
 
-    public void setPassFail(boolean bool){
-        passFail = bool;
+    List<Result> getResults() {
+        return results;
     }
 
-    public LatLng getLocation(){
+    void addResult(Result result) {
+        results.add(result);
+    }
+
+    void deleteResult() {
+        results.remove(results.size() - 1);
+    }
+
+    LatLng getLocation() throws NullPointerException {
         return location;
     }
 
-    public void setLocation(LatLng place){
-        location = place;
+    int getNumDone() {
+        return numDone;
     }
 
-    public List<Result> getResults() { return results; }
-
-    public void addResult(Result result){ results.add(result); }
-
-    public int getNumLocations(){
-        return results.size();
+    void incrementNumDone() {
+        this.numDone += 1;
     }
 
-    public Float getRunningAvg(){
-        float total = 0f;
+    Double getRunningAvg() {
+        double total = 0.0;
 
         for (Result result : results) {
-            total += result.bounceHeight;
+            total += result.getBounceHeight();
         }
 
-        return total/(results.size());
+        return total / (results.size());
     }
 
-    public String toString() {
-        return location + " " + results;
+    protected Location(Parcel in) {
+        location = (LatLng) in.readValue(LatLng.class.getClassLoader());
+        if (in.readByte() == 0x01) {
+            results = new ArrayList<>();
+            in.readList(results, Result.class.getClassLoader());
+        } else {
+            results = null;
+        }
+        numDone = in.readInt();
     }
 
     @Override
@@ -64,21 +77,21 @@ public class Location implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte(this.passFail ? (byte) 1 : (byte) 0);
-        dest.writeParcelable(this.location, flags);
-        dest.writeTypedList(this.results);
+        dest.writeValue(location);
+        if (results == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(results);
+        }
+        dest.writeInt(numDone);
     }
 
-    protected Location(Parcel in) {
-        this.passFail = in.readByte() != 0;
-        this.location = in.readParcelable(LatLng.class.getClassLoader());
-        this.results = in.createTypedArrayList(Result.CREATOR);
-    }
-
-    public static final Creator<Location> CREATOR = new Creator<Location>() {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() {
         @Override
-        public Location createFromParcel(Parcel source) {
-            return new Location(source);
+        public Location createFromParcel(Parcel in) {
+            return new Location(in);
         }
 
         @Override

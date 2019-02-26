@@ -2,7 +2,6 @@ package com.example.conal.soundrecord;
 
 import android.content.Intent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,13 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -25,14 +20,16 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
+import static com.example.conal.soundrecord.MapsActivity.TEST;
+import static com.example.conal.soundrecord.ProcessingActivity.SOUND;
+
 public class ResultsActivity extends AppCompatActivity {
 
-    Button btnNextDrop, btnFinish, btnRedo;
-    SharedPreferences sharedPreferences;
     private boolean mapNeeded;
-
-    private SeekBar sb;
-    Intent intent;
+    private PitchTest test;
+    private Intent intent;
+    private Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +37,44 @@ public class ResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_results);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final TextView height1 = (TextView) findViewById(R.id.height1);
 
         intent = getIntent();
+        test = intent.getParcelableExtra(TEST);
+        loc = test.getLocation(test.getNumDone());
 
-        Location loc = intent.getParcelableExtra(ProcessingActivity.LOCATION);
-        Double bounceHeight = loc.getResults().get(0).bounceHeight;
-        height1.setText(bounceHeight.toString().substring(0, 4));
 
-        btnNextDrop = this.findViewById(R.id.next_drop_btn);
-        btnFinish = this.findViewById(R.id.finish_btn); // End the test early
-        btnRedo = this.findViewById(R.id.redo_btn);
+        // SET TABLE
+        final TextView height1 = findViewById(R.id.height1);
+        final TextView height2 = findViewById(R.id.height2);
+        final TextView height3 = findViewById(R.id.height3);
+        final TextView height4 = findViewById(R.id.height4);
+        final TextView height5 = findViewById(R.id.height5);
+        final TextView average = findViewById(R.id.avg_H);
 
-        sb = (SeekBar) findViewById(R.id.seekBar);
+        switch (loc.getNumDone()) {
+            case 4:
+                Double bounceHeight = loc.getResults().get(4).getBounceHeight();
+                height5.setText(bounceHeight.toString().substring(0, 4));
+            case 3:
+                bounceHeight = loc.getResults().get(3).getBounceHeight();
+                height4.setText(bounceHeight.toString().substring(0, 4));
+            case 2:
+                bounceHeight = loc.getResults().get(2).getBounceHeight();
+                height3.setText(bounceHeight.toString().substring(0, 4));
+            case 1:
+                bounceHeight = loc.getResults().get(1).getBounceHeight();
+                height2.setText(bounceHeight.toString().substring(0, 4));
+            case 0:
+                bounceHeight = loc.getResults().get(0).getBounceHeight();
+                height1.setText(bounceHeight.toString().substring(0, 4));
+        }
 
-        /** Doesn't allow the user to change the progress but still displays the marker on the seekbar**/
+        average.setText(loc.getRunningAvg().toString().substring(0, 4));
+
+        // SET SLIDER
+        SeekBar sb = findViewById(R.id.seekBar);
+
+        // Doesn't allow the user to change the progress but still displays the marker on the seekbar
         sb.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -82,25 +102,23 @@ public class ResultsActivity extends AppCompatActivity {
 
         sb.setProgress(50);
 
-        double[] sound = intent.getDoubleArrayExtra(ProcessingActivity.SOUND);
 
+        // SET GRAPH
+        GraphView graph = findViewById(R.id.graph);
+
+        double[] sound = intent.getDoubleArrayExtra(SOUND);
 
         DataPoint[] points = new DataPoint[sound.length];
         for (int i = 0; i < sound.length; i++) {
             points[i] = new DataPoint(i, sound[i]);
         }
 
-
-        GraphView graph = findViewById(R.id.graph);
-
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
         graph.addSeries(series);
 
-        // Weird stuff where scaling of graph doesnt work properly if you try to do both points at the same time
-        // So do 2 point graphs, adding second point first so scales properly
         PointsGraphSeries<DataPoint> series2 = new PointsGraphSeries<>(new DataPoint[]{
-                new DataPoint(loc.getResults().get(0).firstBounce, sound[loc.getResults().get(0).firstBounce]),
-                new DataPoint(loc.getResults().get(0).secondBounce, sound[loc.getResults().get(0).secondBounce])
+                new DataPoint(loc.getResults().get(loc.getNumDone()).getFirstBounce(), sound[loc.getResults().get(loc.getNumDone()).getFirstBounce()]),
+                new DataPoint(loc.getResults().get(loc.getNumDone()).getSecondBounce(), sound[loc.getResults().get(loc.getNumDone()).getSecondBounce()])
         });
         graph.addSeries(series2);
         series2.setShape(PointsGraphSeries.Shape.POINT);
@@ -112,33 +130,52 @@ public class ResultsActivity extends AppCompatActivity {
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
 
+        // SET BUTTONS
+        Button btnNextDrop = this.findViewById(R.id.next_drop_btn);
+        Button btnFinish = this.findViewById(R.id.finish_btn);
+        Button btnRedo = this.findViewById(R.id.redo_btn);
+
         btnNextDrop.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-
                 mapNeeded = sharedpreferences.getBoolean("mapNeeded", false);
 
-                if (mapNeeded) {
+                if (loc.getNumDone() == 4) {
+                    test.incrementNumDone();
+                } else {
+                    test.increaseLocNumDone(test.getNumDone());
+                }
+
+                if (test.getNumDone() == 5) {
+                    openFinalActivityPage();
+                } else if (mapNeeded) {
                     openMapsActivity();
                 } else {
                     openRecordingsPage();
                 }
-
             }
         });
     }
 
-    public void openMapsActivity() {
-        Intent intent = new Intent(this, MapsActivity.class);
+    private void openMapsActivity() {
+        intent = getIntent();
+        intent.setClass(this, MapsActivity.class);
+        intent.putExtra(TEST, test);
         startActivity(intent);
 
     }
 
-    public void openRecordingsPage() {
-        Intent intent = new Intent(this, RecordingActivity.class);
+    private void openRecordingsPage() {
+        intent = getIntent();
+        intent.setClass(this, RecordingActivity.class);
+        intent.putExtra(TEST, test);
         startActivity(intent);
     }
 
-
+    private void openFinalActivityPage() {
+        intent = getIntent();
+        intent.setClass(this, FinalActivity.class);
+        intent.putExtra(TEST, test);
+        startActivity(intent);
+    }
 }

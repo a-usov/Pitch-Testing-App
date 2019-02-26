@@ -4,10 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Result implements Parcelable {
-    int firstBounce;
-    int secondBounce;
-    double timeOfBounce;
-    double bounceHeight;
+    private int firstBounce;
+    private int secondBounce;
+    private double timeOfBounce;
+    private double bounceHeight;
 
     public Result(int firstBounce, int secondBounce, double timeOfBounce) {
         this.firstBounce = firstBounce;
@@ -15,7 +15,23 @@ public class Result implements Parcelable {
         this.timeOfBounce = timeOfBounce;
     }
 
-    public void setBounceHeight(double bounceHeight) {
+    int getFirstBounce() {
+        return firstBounce;
+    }
+
+    int getSecondBounce() {
+        return secondBounce;
+    }
+
+    double getTimeOfBounce() {
+        return timeOfBounce;
+    }
+
+    double getBounceHeight() {
+        return bounceHeight;
+    }
+
+    void setBounceHeight(double bounceHeight) {
         this.bounceHeight = bounceHeight;
     }
 
