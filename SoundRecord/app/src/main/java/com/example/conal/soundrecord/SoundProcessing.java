@@ -16,7 +16,11 @@ public class SoundProcessing {
     private int sampleRate;
     private int bufferSize;
     private List<Double> sound = new ArrayList<>();
-    double[] soundArray;
+    private double[] soundArray;
+
+    public double[] getSoundArray() {
+        return soundArray;
+    }
 
     public SoundProcessing(int sampleRate, int bufferSize) {
         this.sampleRate = sampleRate;
