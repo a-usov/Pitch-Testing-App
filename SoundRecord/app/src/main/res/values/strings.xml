@@ -1,16 +1,13 @@
 <resources>
     <string name="app_name">Sound Record</string>
     <string name="title_activity_home">Home</string>
-    <string name="title_activity_my_tests">My Tests</string>
-    <string name="title_activity_my_account">My Account</string>
     <string name="title_activity_results">Results</string>
     <string name="title_activity_bluetooth">Bluetooth</string>
-    <string name="radio_button_good">Positive result</string>
-    <string name="radio_button_bad">Negative result</string>
-    <string name="title_activity_trials">Trials</string>
     <string name="title_activity_processing">Processing</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_form_pdf">FormPDF</string>
+    <string name="title_activity_recording">Recording</string>
+    <string name="title_activity_final">All Results</string>
 
     //form PDF strings
     <string name="action_settings">Settings</string>
@@ -59,6 +56,7 @@
     <string name="finish">Finish</string>
     <string name="new_test">New Test</string>
     <string name="discard_test">Discard Test</string>
+    <string name="recording">Recording</string>
 
     <string name="choose_test">Choose the test</string>
 

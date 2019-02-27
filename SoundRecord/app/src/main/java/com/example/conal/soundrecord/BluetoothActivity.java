@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -27,8 +28,10 @@ public class BluetoothActivity extends AppCompatActivity {
 
     private ArrayList<String[]> devices = new ArrayList<String[]>();
     BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    static final UUID myUUID = UUID.fromString("5004c681-e952-4df6-b361-0ccb2a3d1213");
     Button btnBluetooth;
+
+    String mac = "98:D3:32:31:23:DA"; // MAC address of magnet drop
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +39,6 @@ public class BluetoothActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bluetooth);
 
         btnBluetooth = this.findViewById(R.id.btn_blu);
-
-        btnBluetooth.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v) {
-
-            }
-        });
-
 
         if (mBluetoothAdapter == null) {
             // Device doesn't support Bluetooth
@@ -66,6 +62,8 @@ public class BluetoothActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+
+
         if (mBluetoothAdapter.isEnabled()) {
 
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
@@ -76,19 +74,24 @@ public class BluetoothActivity extends AppCompatActivity {
                     String[] dev = {device.getName(), device.getAddress()};
 
                     devices.add(dev);
+
                 }
             }
 
             Toast.makeText(BluetoothActivity.this, devices.get(0)[0]
                     + " " + devices.get(0)[1], Toast.LENGTH_LONG).show();
+
             //AT THIS POINT: got list of paired devices with names and MAC addresses -- String[] devices
+
+
+
 
             /*Intent discoverableIntent =
                     new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
             discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
             startActivity(discoverableIntent);*/
 
-            boolean success = mBluetoothAdapter.startDiscovery();
+            /*boolean success = mBluetoothAdapter.startDiscovery();
 
             if (success) {
                 Toast.makeText(this, "Discovery started", Toast.LENGTH_LONG).show();
@@ -145,9 +148,84 @@ public class BluetoothActivity extends AppCompatActivity {
                         Log.e("bluetooth", "Could not close the connect socket", e);
                     }
                 }
+            }*/
+            BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
+            BluetoothSocket tmp = null;
+            BluetoothSocket mmSocket = null;
+
+            // Get a BluetoothSocket for a connection with the
+            // given BluetoothDevice
+            try {
+                tmp = device.createRfcommSocketToServiceRecord(myUUID);
+                //Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
+                //tmp = (BluetoothSocket) m.invoke(device, 1);
+                tmp.connect();
+            } catch (IOException e) {
+                Toast.makeText(this,"hi",Toast.LENGTH_LONG).show();
+            }
+
+            mmSocket = tmp;
+
+            try {
+                init();
+                write("1");
+                //run();
+            }
+            catch (IOException i) {
+                Toast.makeText(this, "oops", Toast.LENGTH_LONG).show();
             }
         }
     }
+
+    private OutputStream outputStream;
+    private InputStream inStream;
+
+    private void init() throws IOException {
+        BluetoothAdapter blueAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (blueAdapter != null) {
+            if (blueAdapter.isEnabled()) {
+                Set<BluetoothDevice> bondedDevices = blueAdapter.getBondedDevices();
+                Toast.makeText(this, bondedDevices.toString(), Toast.LENGTH_LONG).show();
+
+                if(bondedDevices.size() > 0) {
+                    Object[] devices = (Object []) bondedDevices.toArray();
+                    BluetoothDevice device = (BluetoothDevice) mBluetoothAdapter.getRemoteDevice(mac);
+                    ParcelUuid[] uuids = device.getUuids();
+                    BluetoothSocket socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
+                    socket.connect();
+                    outputStream = socket.getOutputStream();
+                    outputStream.write(1);
+                    inStream = socket.getInputStream();
+                }
+
+                Log.e("error", "No appropriate paired devices.");
+                Toast.makeText(this, "No appropriate paired devices.", Toast.LENGTH_LONG).show();
+            } else {
+                Log.e("error", "Bluetooth is disabled.");
+                Toast.makeText(this, "Bluetooth is disabled.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void write(String s) throws IOException {
+        outputStream.write(s.getBytes());
+    }
+
+    public void run() {
+        final int BUFFER_SIZE = 1024;
+        byte[] buffer = new byte[BUFFER_SIZE];
+        int bytes = 0;
+        int b = BUFFER_SIZE;
+
+        while (true) {
+            try {
+                bytes = inStream.read(buffer, bytes, BUFFER_SIZE - bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     // Create a BroadcastReceiver for ACTION_FOUND.
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {

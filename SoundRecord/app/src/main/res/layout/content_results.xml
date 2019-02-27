@@ -12,17 +12,16 @@
 
     <TableLayout
         android:id="@+id/tableLayout2"
-        android:layout_width="401dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="164dp"
         android:background="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent">
 
         <TableRow
@@ -37,57 +36,57 @@
                 android:text="@string/drop_no"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/drop1"
-                android:layout_width="46dp"
+                android:layout_width="43dp"
                 android:layout_height="wrap_content"
                 android:text="@string/drop1"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/drop2"
-                android:layout_width="46dp"
+                android:layout_width="43dp"
                 android:layout_height="wrap_content"
                 android:text="@string/drop2"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/drop3"
-                android:layout_width="46dp"
+                android:layout_width="43dp"
                 android:layout_height="wrap_content"
                 android:text="@string/drop3"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/drop4"
-                android:layout_width="46dp"
+                android:layout_width="43dp"
                 android:layout_height="wrap_content"
                 android:text="@string/drop4"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/drop5"
-                android:layout_width="46dp"
+                android:layout_width="43dp"
                 android:layout_height="wrap_content"
                 android:text="@string/drop5"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -97,7 +96,7 @@
                 android:text="@string/avg"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </TableRow>
@@ -108,18 +107,18 @@
 
             <TextView
                 android:id="@+id/rebound_H"
-                android:layout_width="101dp"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/holo_blue_bright"
                 android:text="@string/rebound_H"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/height1"
-                android:layout_width="46dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=""
                 android:textAlignment="center"
@@ -128,7 +127,7 @@
 
             <TextView
                 android:id="@+id/height2"
-                android:layout_width="46dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=""
                 android:textAlignment="center"
@@ -137,7 +136,7 @@
 
             <TextView
                 android:id="@+id/height3"
-                android:layout_width="46dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=""
                 android:textAlignment="center"
@@ -146,7 +145,7 @@
 
             <TextView
                 android:id="@+id/height4"
-                android:layout_width="46dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=""
                 android:textAlignment="center"
@@ -155,7 +154,7 @@
 
             <TextView
                 android:id="@+id/height5"
-                android:layout_width="46dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=""
                 android:textAlignment="center"
@@ -181,12 +180,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_light"
         android:text="@string/next_drop"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/redo_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
         app:layout_constraintVertical_bias="0.0" />
@@ -195,15 +197,18 @@
         android:id="@+id/redo_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_light"
         android:text="@string/redo"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/finish_btn"
         app:layout_constraintStart_toEndOf="@+id/next_drop_btn"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
         app:layout_constraintVertical_bias="0.0" />
@@ -215,8 +220,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_light"
         android:text="@string/finish"
@@ -224,47 +229,39 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.655"
         app:layout_constraintStart_toEndOf="@+id/redo_btn"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="382dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="335dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.826"
         app:srcCompat="@drawable/result_bar" />
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="400dp"
+        android:layout_width="0dp"
         android:layout_height="22dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginBottom="36dp"
         android:max="120"
-        android:progress="70"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintVertical_bias="0.99" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"

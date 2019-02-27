@@ -7,11 +7,6 @@
         android:title="@string/title_activity_home"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/my_tests"
-        android:title="@string/title_activity_my_tests"
-        app:showAsAction="never" />
-
     <item android:id="@+id/results"
         android:title="@string/title_activity_results"
         app:showAsAction="never"/>
