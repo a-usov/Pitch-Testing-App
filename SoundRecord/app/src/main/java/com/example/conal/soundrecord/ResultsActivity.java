@@ -135,6 +135,21 @@ public class ResultsActivity extends AppCompatActivity {
         Button btnFinish = this.findViewById(R.id.finish_btn);
         Button btnRedo = this.findViewById(R.id.redo_btn);
 
+        btnRedo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test.getLocation(test.getNumDone()).deleteResult();
+                openRecordingsPage();
+            }
+        });
+
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFinalActivityPage();
+            }
+        });
+
         btnNextDrop.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
