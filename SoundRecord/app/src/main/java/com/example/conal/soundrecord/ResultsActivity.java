@@ -106,7 +106,7 @@ public class ResultsActivity extends AppCompatActivity {
         // SET GRAPH
         GraphView graph = findViewById(R.id.graph);
 
-        double[] sound = intent.getDoubleArrayExtra(SOUND);
+        double[] sound = ProcessingActivity.sound;
 
         DataPoint[] points = new DataPoint[sound.length];
         for (int i = 0; i < sound.length; i++) {

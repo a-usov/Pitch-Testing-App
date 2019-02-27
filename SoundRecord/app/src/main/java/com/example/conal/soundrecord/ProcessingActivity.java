@@ -31,7 +31,7 @@ public class ProcessingActivity extends AppCompatActivity {
     private Result result;
     private PitchTest test;
     private AsyncTask<String, Void, Result> runner;
-    private double[] sound;
+    public static double[] sound;
 
     public static final String SOUND = "com.example.conal.soundrecord.SOUND";
 
@@ -129,7 +129,6 @@ public class ProcessingActivity extends AppCompatActivity {
         intent = getIntent();
 
         intent.putExtra(TEST, test);
-        intent.putExtra(SOUND, sound);
 
         intent.setClass(this, ResultsActivity.class);
         startActivity(intent);
