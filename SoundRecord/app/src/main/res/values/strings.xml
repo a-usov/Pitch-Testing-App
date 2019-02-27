@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sound Record</string>
+    <string name="app_name">Sports Labs</string>
     <string name="title_activity_home">Home</string>
     <string name="title_activity_results">Results</string>
     <string name="title_activity_bluetooth">Bluetooth</string>
