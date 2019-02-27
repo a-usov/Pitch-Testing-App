@@ -118,7 +118,7 @@ public class ProcessingActivity extends AppCompatActivity {
 
         protected void onPostExecute(Result returnResult) {
             if (returnResult != null) {
-                sound = processor.soundArray;
+                sound = processor.getSoundArray();
                 result = returnResult;
                 result.setBounceHeight(1.23 * Math.pow((result.getTimeOfBounce() - 0.025), 2.0));
             }
