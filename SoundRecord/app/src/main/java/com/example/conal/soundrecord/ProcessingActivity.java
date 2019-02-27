@@ -70,6 +70,10 @@ public class ProcessingActivity extends AppCompatActivity {
         }.start();
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private void afterProcessing() {
         File folderRecordings = (File) intent.getSerializableExtra(FOLDER);
         try {

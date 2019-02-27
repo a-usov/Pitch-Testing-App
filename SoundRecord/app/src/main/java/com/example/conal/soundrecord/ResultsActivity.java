@@ -157,6 +157,10 @@ public class ResultsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     private void openMapsActivity() {
         intent = getIntent();
         intent.setClass(this, MapsActivity.class);

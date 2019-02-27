@@ -54,6 +54,10 @@ public class RecordingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     // Testing startRecording button instead of event listener
     private void startRecording() {
         Log.i("Recording", "Yay we're at recording.");
