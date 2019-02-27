@@ -37,11 +37,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
+import static com.example.conal.soundrecord.MapsActivity.TEST;
 
 public class FinalActivity extends AppCompatActivity {
 
-    final int REQUEST_PERMISSION_CODE = 1000;
-    private Button createPDF;
+    private final int REQUEST_PERMISSION_CODE = 1000;
+    private Intent intent;
+
     private String currentDate;
     private String currentTime;
     private String jobNo;
@@ -139,17 +141,19 @@ public class FinalActivity extends AppCompatActivity {
         Log.i("currentDate", "The current date is " + currentDate);
         Log.i("currentDate", "The time recorded is " + currentTime);
 
-        Intent intent = getIntent();
+        intent = getIntent();
 
         PitchTest test = intent.getParcelableExtra(MapsActivity.TEST);
+
         try {
             generateCSV(test);
         } //Change this to generateCSV(pitchTest)
         catch (IOException e) {
         }
 
-        createPDF = findViewById(R.id.btnPDF);
-
+        Button createPDF = this.findViewById(R.id.btnPDF);
+        Button newTest = this.findViewById(R.id.new_test_btn);
+        Button discard = this.findViewById(R.id.discard_test_btn);
 
         createPDF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +163,20 @@ public class FinalActivity extends AppCompatActivity {
 
                 } catch (IOException e) {
                 }
+            }
+        });
+
+        newTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPDFActivity();
+            }
+        });
+
+        discard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHomePage();
             }
         });
 
@@ -460,6 +478,21 @@ public class FinalActivity extends AppCompatActivity {
         int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
         return write_external_storage_result == PackageManager.PERMISSION_GRANTED &&
                 record_audio_result == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void openPDFActivity() {
+        intent = getIntent();
+        intent.removeExtra(TEST);
+        intent.setClass(this, FormPDFActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void openHomePage() {
+        intent = getIntent();
+        intent.removeExtra(TEST);
+        intent.setClass(this, HomeActivity.class);
+        startActivity(intent);
     }
 }
 
