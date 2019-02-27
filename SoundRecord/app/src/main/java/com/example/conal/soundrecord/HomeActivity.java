@@ -19,32 +19,49 @@ import android.widget.Toast;
 public class HomeActivity extends AppCompatActivity {
 
     private final int REQUEST_PERMISSION_CODE = 1000;
-    private Intent intent;
 
     public static final String MyPREFERENCES = "MyPrefs";
-    public boolean mapNeeded = true; // For global variable in sharedPrefs
+    public static String CONCRETETESTING = "concreteTesting";
+    public static String MAPNEEDED = "mapNeeded"; // For global variable in sharedPrefs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        intent = getIntent();
-
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putBoolean("mapNeeded", mapNeeded);
+        editor.putBoolean(CONCRETETESTING, false);
+        editor.putBoolean(MAPNEEDED, true);
         editor.apply();
 
         Button footballBtn = findViewById(R.id.footballBtn);
         Button hockeyBtn = findViewById(R.id.hockeyBtn);
         Button rugbyBtn = findViewById(R.id.rugbyBtn);
         Button tennisBtn = findViewById(R.id.tennisBtn);
+        Button concreteBtn = findViewById(R.id.concreteBtn);
+
+        concreteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putBoolean(CONCRETETESTING, true);
+                editor.apply();
+
+                if (!checkPermissionFromDevice()) {
+                    requestPermission();
+
+                    if (checkPermissionFromDevice()) openMapsPage();
+                } else {
+                    openMapsPage();
+                }
+            }
+        });
 
         footballBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
@@ -58,7 +75,6 @@ public class HomeActivity extends AppCompatActivity {
         hockeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
@@ -72,7 +88,6 @@ public class HomeActivity extends AppCompatActivity {
         rugbyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
@@ -86,7 +101,6 @@ public class HomeActivity extends AppCompatActivity {
         tennisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(HomeActivity.this, FormPDFActivity.class);
                 if (!checkPermissionFromDevice()) {
                     requestPermission();
 
@@ -100,6 +114,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void openHomePage() {
         Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    private void openMapsPage(){
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 

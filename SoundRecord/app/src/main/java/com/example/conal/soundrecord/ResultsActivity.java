@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.SeekBar;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -20,8 +21,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
+import static com.example.conal.soundrecord.HomeActivity.CONCRETETESTING;
 import static com.example.conal.soundrecord.MapsActivity.TEST;
-import static com.example.conal.soundrecord.ProcessingActivity.SOUND;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -35,7 +36,8 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        boolean concreteTesting = sharedpreferences.getBoolean(CONCRETETESTING, false);
 
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -53,9 +55,11 @@ public class ResultsActivity extends AppCompatActivity {
         final TextView height5 = findViewById(R.id.height5);
         final TextView average = findViewById(R.id.avg_H);
 
+        Double bounceHeight = 0.0;
+
         switch (loc.getNumDone()) {
             case 4:
-                Double bounceHeight = loc.getResults().get(4).getBounceHeight();
+                bounceHeight = loc.getResults().get(4).getBounceHeight();
                 height5.setText(bounceHeight.toString().substring(0, 4));
             case 3:
                 bounceHeight = loc.getResults().get(3).getBounceHeight();
@@ -136,19 +140,40 @@ public class ResultsActivity extends AppCompatActivity {
         Button btnNextDrop = this.findViewById(R.id.next_drop_btn);
         Button btnFinish = this.findViewById(R.id.finish_btn);
         Button btnRedo = this.findViewById(R.id.redo_btn);
+        TableLayout tableLayout = this.findViewById(R.id.tableLayout2);
+
+        Button concreteResult = this.findViewById(R.id.concreteResultBtn);
+        concreteResult.setVisibility(View.INVISIBLE);
+        concreteResult.setEnabled(false);
+
+        if (concreteTesting) {
+            tableLayout.setVisibility(View.INVISIBLE);
+            btnNextDrop.setVisibility(View.INVISIBLE);
+            concreteResult.setVisibility(View.VISIBLE);
+            concreteResult.setText(bounceHeight.toString().substring(0, 4) + " meters");
+
+
+            // I think it should go to home, saving csv/pdf might be funny if not gone to pdf activity
+            btnFinish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openHomePage();
+                }
+            });
+        } else {
+            btnFinish.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openFinalActivityPage();
+                }
+            });
+        }
 
         btnRedo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 test.getLocation(test.getNumDone()).deleteResult();
                 openRecordingsPage();
-            }
-        });
-
-        btnFinish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFinalActivityPage();
             }
         });
 
@@ -199,6 +224,13 @@ public class ResultsActivity extends AppCompatActivity {
         intent = getIntent();
         intent.setClass(this, FinalActivity.class);
         intent.putExtra(TEST, test);
+        startActivity(intent);
+    }
+
+    private void openHomePage() {
+        intent = getIntent();
+        intent.setClass(this, HomeActivity.class);
+        intent.removeExtra(TEST);
         startActivity(intent);
     }
 }

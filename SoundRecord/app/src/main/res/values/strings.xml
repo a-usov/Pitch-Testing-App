@@ -79,7 +79,7 @@
     <string name="drop5">5</string>
     <string name="drop_no">Drop No</string>
     <string name="rebound_H">Rebound Height</string>
-
+    <string name="ConcreteCalibration">Concrete Calibration</string>
 
 
 </resources>
