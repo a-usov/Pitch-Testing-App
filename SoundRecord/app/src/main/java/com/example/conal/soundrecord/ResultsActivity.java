@@ -35,6 +35,8 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
+
+
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -149,6 +151,8 @@ public class ResultsActivity extends AppCompatActivity {
                 openFinalActivityPage();
             }
         });
+
+        if (loc.getNumDone() == 4) btnNextDrop.setText("NEXT LOC");
 
         btnNextDrop.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
