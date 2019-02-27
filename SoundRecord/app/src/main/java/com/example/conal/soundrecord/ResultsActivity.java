@@ -1,23 +1,18 @@
 package com.example.conal.soundrecord;
 
-import android.content.Intent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
-
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -32,8 +27,8 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         final TextView height1 = (TextView) findViewById(R.id.height1);
 
         intent = getIntent();
