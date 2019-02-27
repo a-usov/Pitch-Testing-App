@@ -1,64 +1,84 @@
 package com.example.conal.soundrecord;
 
-import java.sql.Time;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-public class PitchTest {
-    private String name;
-    private ArrayList<Location> locations;
-    private Date startDate;
-    private Time time;
+public class PitchTest implements Parcelable {
+    private List<Location> locations;
+    private int numDone;
 
-    public PitchTest(String name, ArrayList<Location> locations, Date startDate, Time time) {
-        this.name = name;
-        this.locations = locations;
-        this.startDate = startDate;
-        this.time = time;
+    public PitchTest() {
+        this.numDone = 0;
+        this.locations = new ArrayList<>();
     }
 
-    public void addLocation(Location location){
+    void addLocation(Location location) {
         locations.add(location);
     }
 
-    public void deleteTest(Location location){
-        locations.remove(location);
+    boolean isEmpty() {
+        return locations.isEmpty();
     }
 
-    public boolean isEmpty(){
-        if (locations.isEmpty()){
-            return true;
+    int getNumDone() {
+        return numDone;
+    }
+
+    void incrementNumDone() {
+        this.numDone += 1;
+    }
+
+    void increaseLocNumDone(int index) {
+        locations.get(index).incrementNumDone();
+    }
+
+    List<Location> getLocations() {
+        return locations;
+    }
+
+    Location getLocation(int index) {
+        return locations.get(index);
+    }
+
+    protected PitchTest(Parcel in) {
+        if (in.readByte() == 0x01) {
+            locations = new ArrayList<Location>();
+            in.readList(locations, Location.class.getClassLoader());
+        } else {
+            locations = null;
         }
-        else{
-            return false;
+        numDone = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (locations == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(locations);
         }
+        dest.writeInt(numDone);
     }
 
-    public ArrayList<Location> getLocations(){ return locations;}
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<PitchTest> CREATOR = new Parcelable.Creator<PitchTest>() {
+        @Override
+        public PitchTest createFromParcel(Parcel in) {
+            return new PitchTest(in);
+        }
 
-    public void setLocations(ArrayList<Location> locations) { this.locations = locations;}
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
+        @Override
+        public PitchTest[] newArray(int size) {
+            return new PitchTest[size];
+        }
+    };
 }

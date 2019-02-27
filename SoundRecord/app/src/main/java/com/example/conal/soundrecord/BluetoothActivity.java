@@ -38,7 +38,7 @@ public class BluetoothActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth);
 
-        btnBluetooth = this.<Button>findViewById(R.id.btn_blu);
+        btnBluetooth = this.findViewById(R.id.btn_blu);
 
         if (mBluetoothAdapter == null) {
             // Device doesn't support Bluetooth
