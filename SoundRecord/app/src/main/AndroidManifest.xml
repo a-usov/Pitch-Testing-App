@@ -24,7 +24,7 @@
         <activity
             android:name=".ResultsActivity"
             android:label="@string/title_activity_results"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".HomeActivity"
@@ -38,14 +38,14 @@
         </activity>
         <activity
             android:name=".FinalActivity"
-            android:label="@string/title_activity_my_tests"
+            android:label="@string/title_activity_final"
             android:theme="@style/AppTheme" />
 
 
         <activity
             android:name=".ProcessingActivity"
             android:label="@string/title_activity_processing"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -64,10 +64,7 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <service
-            android:name=".FetchAddressIntentService"
-            android:exported="false" />
+            android:label="@string/title_activity_maps"/>
 
         <activity
             android:name=".FormPDFActivity"
