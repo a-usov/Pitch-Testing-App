@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -106,8 +107,11 @@ public class ResultsActivity extends AppCompatActivity {
             }
         });
 
-        sb.setProgress(50);
-
+        if (loc.getResults().get(loc.getNumDone()).getBounceHeight() > 1.2) {
+            sb.setProgress(120);
+        } else {
+            sb.setProgress((int) Math.round(loc.getResults().get(loc.getNumDone()).getBounceHeight() * 100));
+        }
 
         // SET GRAPH
         GraphView graph = findViewById(R.id.graph);
@@ -141,12 +145,15 @@ public class ResultsActivity extends AppCompatActivity {
         Button btnFinish = this.findViewById(R.id.finish_btn);
         Button btnRedo = this.findViewById(R.id.redo_btn);
         TableLayout tableLayout = this.findViewById(R.id.tableLayout2);
+        ImageView slider = this.findViewById(R.id.imageView);
 
         Button concreteResult = this.findViewById(R.id.concreteResultBtn);
         concreteResult.setVisibility(View.INVISIBLE);
         concreteResult.setEnabled(false);
 
         if (concreteTesting) {
+            sb.setVisibility(View.INVISIBLE);
+            slider.setVisibility(View.INVISIBLE);
             tableLayout.setVisibility(View.INVISIBLE);
             btnNextDrop.setVisibility(View.INVISIBLE);
             concreteResult.setVisibility(View.VISIBLE);
