@@ -17,16 +17,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@android:color/holo_blue_light"
         android:text="@string/rugby"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/concreteBtn"
         app:layout_constraintEnd_toStartOf="@+id/tennisBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/footballBtn"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/tennisBtn"
@@ -37,17 +37,17 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@android:color/holo_blue_light"
         android:text="@string/tennis"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/concreteBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/rugbyBtn"
         app:layout_constraintTop_toBottomOf="@+id/hockeyBtn"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/footballBtn"
@@ -55,7 +55,7 @@
         android:layout_height="75dp"
         android:layout_marginStart="52dp"
         android:layout_marginLeft="52dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@android:color/holo_blue_light"
@@ -72,7 +72,7 @@
         android:layout_height="75dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
         android:background="@android:color/holo_blue_light"
@@ -86,14 +86,14 @@
 
     <Button
         android:id="@+id/concreteBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/holo_blue_light"
         android:text="@string/ConcreteCalibration"
         android:textColor="@android:color/white"
@@ -103,7 +103,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.65" />
 
     <TextView
         android:id="@+id/text"
