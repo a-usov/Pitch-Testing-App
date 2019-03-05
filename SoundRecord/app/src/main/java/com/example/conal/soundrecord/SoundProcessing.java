@@ -71,8 +71,18 @@ public class SoundProcessing {
             public boolean process(AudioEvent audioEvent) {
                 float[] audioFloatBuffer = audioEvent.getFloatBuffer();
 
-                for (float value : audioFloatBuffer) {
-                    sound.add((double) value);
+                int counter = 0;
+                double average = 0;
+
+                for (float value : audioFloatBuffer){
+                    if (counter == 4){
+                        sound.add(average / 4);
+                        counter = 0;
+                        average = 0;
+                    } else {
+                        average += (double) value;
+                        counter++;
+                    }
                 }
 
                 return true;
@@ -97,10 +107,10 @@ public class SoundProcessing {
             soundArray[i] = sound.get(i);
         }
 
-        List<Integer> peaks = Peaks.findPeaks(soundArray, 25000, 0.10);
+        List<Integer> peaks = Peaks.findPeaks(soundArray, 6250, 0.10);
 
         try {
-            return new Result(peaks.get(0), peaks.get(1), (peaks.get(1) - (double) peaks.get(0)) / sampleRate);
+            return new Result(peaks.get(0), peaks.get(1), (peaks.get(1) * 4 - (double) peaks.get(0) * 4) / sampleRate);
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
