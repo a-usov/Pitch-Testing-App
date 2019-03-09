@@ -122,7 +122,15 @@ public class RecordingActivity extends AppCompatActivity {
                 }
             });
 
-            builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            builder.setCancelable(false);
+            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+
+                }
+            });
+
+            builder.setNegativeButton("None", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     nameDevice = "";
                     SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -153,7 +161,6 @@ public class RecordingActivity extends AppCompatActivity {
 
         ParcelUuid[] uuids = device.getUuids();
 
-
         try {
             socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
             if (!socket.isConnected()) {
@@ -168,6 +175,7 @@ public class RecordingActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(RecordingActivity.this, "Couldn't connect to " + device.getName(), Toast.LENGTH_LONG).show();
         }
+
 
 
     }
