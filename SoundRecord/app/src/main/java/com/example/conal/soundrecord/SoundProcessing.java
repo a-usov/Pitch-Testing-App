@@ -80,8 +80,8 @@ public class SoundProcessing {
 
                 // we downsample sound from 44100hz to 11025hz
                 // for faster processing
-                for (float value : audioFloatBuffer){
-                    if (counter == 3){
+                for (float value : audioFloatBuffer) {
+                    if (counter == 3) {
                         sound.add(average / 4);
                         counter = 0;
                         average = 0;
@@ -90,7 +90,6 @@ public class SoundProcessing {
                         counter++;
                     }
                 }
-
 
 
                 return true;
@@ -120,11 +119,11 @@ public class SoundProcessing {
             soundArray[i] = sound.get(i);
         }
 
-        List<Integer> peaks = Peaks.findPeaks(soundArray, 25000, 0.10);
+        List<Integer> peaks = Peaks.findPeaks(soundArray, 6250, 0.10);
 
         // return Result or null if peak finding wasn't successful
         try {
-            return new Result(peaks.get(0), peaks.get(1), (peaks.get(1) - (double) peaks.get(0)) / sampleRate);
+            return new Result(peaks.get(0), peaks.get(1), (peaks.get(1) - (double) peaks.get(0)) / sampleRate * 4);
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
