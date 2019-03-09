@@ -60,6 +60,17 @@ public class Location implements Parcelable {
         return total / (results.size());
     }
 
+    public String toString() {
+        String s = "";
+
+        s += getLocation().latitude + "," + getLocation().longitude + ",";
+        for (int i = 0; i < 5; i++) {
+            s += getResults().get(i);
+            s += ",";
+        }
+        return s;
+    }
+
     // PARCELABLE METHODS
     protected Location(Parcel in) {
         location = (LatLng) in.readValue(LatLng.class.getClassLoader());

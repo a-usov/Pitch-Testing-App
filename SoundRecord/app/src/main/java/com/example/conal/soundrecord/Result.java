@@ -35,6 +35,10 @@ public class Result implements Parcelable {
         this.bounceHeight = bounceHeight;
     }
 
+    public String toString() {
+        return "" + timeOfBounce;
+    }
+
     // PARCELABLE METHODS
     protected Result(Parcel in) {
         firstBounce = in.readInt();
