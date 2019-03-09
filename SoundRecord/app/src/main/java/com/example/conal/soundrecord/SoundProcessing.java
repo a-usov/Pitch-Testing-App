@@ -75,7 +75,7 @@ public class SoundProcessing {
                 double average = 0;
 
                 for (float value : audioFloatBuffer){
-                    if (counter == 4){
+                    if (counter == 3){
                         sound.add(average / 4);
                         counter = 0;
                         average = 0;
