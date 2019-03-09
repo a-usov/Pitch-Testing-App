@@ -187,14 +187,13 @@ public class RecordingActivity extends AppCompatActivity {
                 canUseBluetooth = true;
                 editor.putString(DEVICE, nameDevice);
                 editor.apply();
-                Toast.makeText(RecordingActivity.this, "Connected to " + device.getName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(RecordingActivity.this, "Connected to " + nameDevice, Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             editor.remove(DEVICE);
             editor.apply();
+            Toast.makeText(RecordingActivity.this, "Couldn't connect to " + nameDevice, Toast.LENGTH_LONG).show();
             nameDevice = null;
-            Toast.makeText(RecordingActivity.this, "Couldn't connect to " + device.getName(), Toast.LENGTH_LONG).show();
-
         }
     }
 
