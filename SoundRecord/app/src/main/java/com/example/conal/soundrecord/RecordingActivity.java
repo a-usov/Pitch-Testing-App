@@ -44,9 +44,6 @@ public class RecordingActivity extends AppCompatActivity {
     private boolean canUseBluetooth = false;
     private String nameDevice;
 
-    private SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-    private final SharedPreferences.Editor editor = sharedpreferences.edit();
-
     public static final String FOLDER = "com.example.soundrecord.FOLDER";
     public static final String PATH = "com.example.soundRecord.PATH";
     public static final String DEVICE = "com.example.soundRecord.DEVICE";
@@ -57,6 +54,7 @@ public class RecordingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recording);
 
         intent = getIntent();
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         nameDevice = sharedpreferences.getString(DEVICE, null);
 
         if (mBluetoothAdapter == null) {
@@ -146,6 +144,8 @@ public class RecordingActivity extends AppCompatActivity {
             builder.setNegativeButton("None", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     nameDevice = "";
+                    SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                    final SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString(DEVICE, nameDevice);
                     editor.apply();
                 }
@@ -164,6 +164,9 @@ public class RecordingActivity extends AppCompatActivity {
     }
 
     private void init() {
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+
         BluetoothDevice device = null;
 
         for (BluetoothDevice d : mBluetoothAdapter.getBondedDevices()) {
