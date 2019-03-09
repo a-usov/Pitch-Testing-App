@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // set default configs
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putBoolean(CONCRETETESTING, false);
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         Button tennisBtn = findViewById(R.id.tennisBtn);
         Button concreteBtn = findViewById(R.id.concreteBtn);
 
+        // for every button, check permission and don't let user proceed without having all of them enabled
         concreteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,7 +162,9 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    // end dropdown menu
 
+    // permission stuff
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,

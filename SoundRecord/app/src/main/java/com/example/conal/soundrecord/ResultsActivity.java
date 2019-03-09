@@ -37,6 +37,8 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
+        // if we are doing concrete calibration, we show different results
+        // compared to normal testing
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         boolean concreteTesting = sharedpreferences.getBoolean(CONCRETETESTING, false);
 
@@ -58,9 +60,12 @@ public class ResultsActivity extends AppCompatActivity {
 
         Double bounceHeight = 0.0;
 
+        // fill out the table depending on how many bounces we've done
+        // correct behaviour relies on fallthrough of cases
         switch (loc.getNumDone()) {
             case 4:
                 bounceHeight = loc.getResults().get(4).getBounceHeight();
+                // substring to get it to 2 decimal places
                 height5.setText(bounceHeight.toString().substring(0, 4));
             case 3:
                 bounceHeight = loc.getResults().get(3).getBounceHeight();
@@ -107,6 +112,8 @@ public class ResultsActivity extends AppCompatActivity {
             }
         });
 
+        // if bounceheight is more than our maximum of 1.2m, set to maximum, else set location by convering from m to cm
+        // we round as it has to be an integer
         if (loc.getResults().get(loc.getNumDone()).getBounceHeight() > 1.2) {
             sb.setProgress(120);
         } else {
@@ -118,6 +125,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         double[] sound = ProcessingActivity.sound;
 
+        // we plot the line graph of the sound by making each value a point on the graph
         DataPoint[] points = new DataPoint[sound.length];
         for (int i = 0; i < sound.length; i++) {
             points[i] = new DataPoint(i, sound[i]);
@@ -126,6 +134,7 @@ public class ResultsActivity extends AppCompatActivity {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
         graph.addSeries(series);
 
+        // we make the two points which are the peaks of where the two bounces are also points on the same graph
         PointsGraphSeries<DataPoint> series2 = new PointsGraphSeries<>(new DataPoint[]{
                 new DataPoint(loc.getResults().get(loc.getNumDone()).getFirstBounce(), sound[loc.getResults().get(loc.getNumDone()).getFirstBounce()]),
                 new DataPoint(loc.getResults().get(loc.getNumDone()).getSecondBounce(), sound[loc.getResults().get(loc.getNumDone()).getSecondBounce()])
@@ -135,8 +144,9 @@ public class ResultsActivity extends AppCompatActivity {
         series2.setColor(Color.RED);
         series2.setSize(10);
 
+        // we scale the graph so it all fits, get rid of x-axis labels
+        // as they dont mean much
         graph.getViewport().setScalable(true);
-
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
 
 
@@ -147,20 +157,25 @@ public class ResultsActivity extends AppCompatActivity {
         TableLayout tableLayout = this.findViewById(R.id.tableLayout2);
         ImageView slider = this.findViewById(R.id.imageView);
 
+        // by default, we assume we are not concrete testing
+        // so hide results button
         Button concreteResult = this.findViewById(R.id.concreteResultBtn);
         concreteResult.setVisibility(View.INVISIBLE);
         concreteResult.setEnabled(false);
 
         if (concreteTesting) {
+            // if we are concrete testing, hide some stuff, display other stuff
             sb.setVisibility(View.INVISIBLE);
             slider.setVisibility(View.INVISIBLE);
             tableLayout.setVisibility(View.INVISIBLE);
             btnNextDrop.setVisibility(View.INVISIBLE);
             concreteResult.setVisibility(View.VISIBLE);
+            // here bounceheight is the very first bounce, which is where we always save the result to. We don't use the rest
+            // of Pitchtest
             concreteResult.setText(bounceHeight.toString().substring(0, 4) + " meters");
 
 
-            // I think it should go to home, saving csv/pdf might be funny if not gone to pdf activity
+            // if we are done, go to home
             btnFinish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -168,6 +183,7 @@ public class ResultsActivity extends AppCompatActivity {
                 }
             });
         } else {
+            // if we are done but its a test, display final table
             btnFinish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -184,8 +200,10 @@ public class ResultsActivity extends AppCompatActivity {
             }
         });
 
+        // if we're done with location, change text of next button to be more informative
         if (loc.getNumDone() == 4) btnNextDrop.setText("NEXT LOC");
 
+        // depending on our progress in the test, next button takes us to different places. And we increment our counters
         btnNextDrop.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -208,6 +226,7 @@ public class ResultsActivity extends AppCompatActivity {
         });
     }
 
+    // stop from going back
     @Override
     public void onBackPressed() {
     }
@@ -234,6 +253,8 @@ public class ResultsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // if we are concrete testing and we are done, remove TEST so when we start again, the old one is not used instead of making
+    // a new one 
     private void openHomePage() {
         intent = getIntent();
         intent.setClass(this, HomeActivity.class);

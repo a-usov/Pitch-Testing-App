@@ -43,6 +43,7 @@ public class PitchTest implements Parcelable {
         return locations.get(index);
     }
 
+    // PARCELABLE methods
     protected PitchTest(Parcel in) {
         if (in.readByte() == 0x01) {
             locations = new ArrayList<Location>();
