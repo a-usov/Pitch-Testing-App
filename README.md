@@ -2,6 +2,8 @@
 # SportsLabs Pitch Testing App
 
 This app is used for the testing of sports pitches by recording the sound of a ball falling from 2 meters high and bouncing twice. The main functionality of the app is to conduct a test of how a certain pitch performs. The pitch is tested at 6 different locations, with 5 drops being conducted at each location. Additional functionality includes calibrating the ball used for the test, exporting the results of the test to a CSV or PDF file and using Bluetooth to operate the drop equipment. 
+
+This software uses code of [FFmpeg](http://ffmpeg.org) licensed under the [LGPLv2.1](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html) and its source can be downloaded [here](https://github.com/FFmpeg/FFmpeg)
  
 ## Getting Started
 
@@ -83,7 +85,10 @@ See also the list of [contributors](http://stgit.dcs.gla.ac.uk/tp3-2018-cs23/cod
 
 ## License
 
-This project is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International license - see the [LICENSE.md](http://stgit.dcs.gla.ac.uk/tp3-2018-cs23/codebase/blob/master/LICENCE) file for details
+This project is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International license - see the [LICENSE.md](http://stgit.dcs.gla.ac.uk/tp3-2018-cs23/codebase/blob/master/LICENCE) file for details.
+
+This project uses FFmpeg which we do not own but can be found at [FFmpeg](http://ffmpeg.org) and its source can be downloaded [here](https://github.com/FFmpeg/FFmpeg)
+ 
 
 ## Acknowledgments
 * TarsosDSP library
