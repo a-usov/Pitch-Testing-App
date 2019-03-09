@@ -37,6 +37,7 @@ public class Location implements Parcelable {
         results.remove(results.size() - 1);
     }
 
+    // location is possibly null when we can't get a GPS signal
     LatLng getLocation() throws NullPointerException {
         return location;
     }
@@ -59,6 +60,7 @@ public class Location implements Parcelable {
         return total / (results.size());
     }
 
+    // PARCELABLE METHODS
     protected Location(Parcel in) {
         location = (LatLng) in.readValue(LatLng.class.getClassLoader());
         if (in.readByte() == 0x01) {
