@@ -13,19 +13,19 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.UUID;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
@@ -44,6 +44,9 @@ public class RecordingActivity extends AppCompatActivity {
     private boolean canUseBluetooth = false;
     private String nameDevice;
 
+    private SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+    private final SharedPreferences.Editor editor = sharedpreferences.edit();
+
     public static final String FOLDER = "com.example.soundrecord.FOLDER";
     public static final String PATH = "com.example.soundRecord.PATH";
     public static final String DEVICE = "com.example.soundRecord.DEVICE";
@@ -53,13 +56,8 @@ public class RecordingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording);
 
-        btnRecording = findViewById(R.id.btnRecording);
-
         intent = getIntent();
-
-        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         nameDevice = sharedpreferences.getString(DEVICE, null);
-        System.out.println(nameDevice);
 
         if (mBluetoothAdapter == null) {
             // Device doesn't support Bluetooth
@@ -72,7 +70,19 @@ public class RecordingActivity extends AppCompatActivity {
             }
         }
 
+        Button btnReconnect = findViewById(R.id.btnReconnect);
+
+        btnReconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nameDevice = null;
+                tryConnect();
+            }
+        });
+
         // Animation for recording button
+        btnRecording = findViewById(R.id.btnRecording);
+
         final ScaleAnimation scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
         scaleAnimation.setDuration(500);
         BounceInterpolator bounceInterpolator = new BounceInterpolator();
@@ -84,6 +94,7 @@ public class RecordingActivity extends AppCompatActivity {
                 if (isChecked) {
                     // The toggle is enabled
                     Log.i("sep", "Recording..");
+                    startRecording();
                     if (canUseBluetooth) {
                         try {
                             //init();
@@ -93,7 +104,6 @@ public class RecordingActivity extends AppCompatActivity {
                             Toast.makeText(RecordingActivity.this, "oops", Toast.LENGTH_LONG).show();
                         }
                     }
-                    startRecording();
                 } else {
                     // the toggle is disabled
                     stopRecording();
@@ -105,7 +115,10 @@ public class RecordingActivity extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
+        tryConnect();
+    }
 
+    private void tryConnect(){
         if (mBluetoothAdapter.isEnabled()) {
             final ArrayList<String> devices = new ArrayList<>();
             for (BluetoothDevice d : mBluetoothAdapter.getBondedDevices()) {
@@ -133,8 +146,6 @@ public class RecordingActivity extends AppCompatActivity {
             builder.setNegativeButton("None", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     nameDevice = "";
-                    SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                    final SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString(DEVICE, nameDevice);
                     editor.apply();
                 }
@@ -142,6 +153,8 @@ public class RecordingActivity extends AppCompatActivity {
 
             if (nameDevice == null) {
                 builder.show();
+            } else if (!nameDevice.equals("")){
+                init();
             }
         }
     }
@@ -164,20 +177,22 @@ public class RecordingActivity extends AppCompatActivity {
         try {
             socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
             if (!socket.isConnected()) {
-                socket.connect(); //Problem starts here
+                socket.connect();
+
+                // at this point we know connection is made
                 outputStream = socket.getOutputStream();
                 canUseBluetooth = true;
-                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-                final SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putString(DEVICE, nameDevice);
                 editor.apply();
+                Toast.makeText(RecordingActivity.this, "Connected to " + device.getName(), Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
+            editor.remove(DEVICE);
+            editor.apply();
+            nameDevice = null;
             Toast.makeText(RecordingActivity.this, "Couldn't connect to " + device.getName(), Toast.LENGTH_LONG).show();
+
         }
-
-
-
     }
 
     @Override
@@ -220,7 +235,6 @@ public class RecordingActivity extends AppCompatActivity {
 
         intent.putExtra(FOLDER, folderPath);
         intent.putExtra(PATH, filePath);
-        intent.putExtra(DEVICE, nameDevice);
         intent.setClass(this, ProcessingActivity.class);
 
         startActivity(intent);
