@@ -36,7 +36,7 @@ public class Result implements Parcelable {
     }
 
     public String toString() {
-        return "" + timeOfBounce;
+        return "" + bounceHeight;
     }
 
     // PARCELABLE METHODS
