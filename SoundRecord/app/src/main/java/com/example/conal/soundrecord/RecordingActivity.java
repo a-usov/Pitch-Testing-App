@@ -175,9 +175,9 @@ public class RecordingActivity extends AppCompatActivity {
             }
         }
 
-        ParcelUuid[] uuids = device.getUuids();
-
         try {
+            ParcelUuid[] uuids = device.getUuids();
+
             socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
             if (!socket.isConnected()) {
                 socket.connect();
