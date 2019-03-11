@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
 public class PitchTestTest {
 
     Location location1;
@@ -21,6 +23,8 @@ public class PitchTestTest {
     public void setUp() throws Exception {
         latlng = new LatLng(55.8642, -4.2518 );
         location1 = new Location(latlng);
+        locations.add(location1);
+
     }
 
     @After
@@ -28,12 +32,15 @@ public class PitchTestTest {
     }
 
     @Test
-    public void addLocation() {
-        addLocation(location1);
+    public void checkAddLocationMethod() {
+        locations.add(location1);
+
     }
 
     @Test
-    public void isEmpty() {
+    public void checkIsEmptyMethod() {
+        System.out.println(locations.isEmpty());
+        assertTrue(false == locations.isEmpty());
     }
 
     @Test
