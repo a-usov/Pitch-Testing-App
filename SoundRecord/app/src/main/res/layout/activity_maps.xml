@@ -28,7 +28,6 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_light"
         android:baselineAligned="false"
-        android:onClick="openRecordingPage"
         android:text="BEGIN"
         android:textColor="@android:color/white"
         android:textSize="20dp"

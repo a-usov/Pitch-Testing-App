@@ -38,6 +38,7 @@ import java.io.InputStream;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 import static com.example.conal.soundrecord.MapsActivity.TEST;
+import static com.example.conal.soundrecord.RecordingActivity.DEVICE;
 
 public class FinalActivity extends AppCompatActivity {
 
@@ -483,6 +484,10 @@ public class FinalActivity extends AppCompatActivity {
     private void openPDFActivity() {
         intent = getIntent();
         intent.removeExtra(TEST);
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.remove(DEVICE);
+        editor.apply();
         intent.setClass(this, FormPDFActivity.class);
         startActivity(intent);
 
@@ -491,6 +496,10 @@ public class FinalActivity extends AppCompatActivity {
     private void openHomePage() {
         intent = getIntent();
         intent.removeExtra(TEST);
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.remove(DEVICE);
+        editor.apply();
         intent.setClass(this, HomeActivity.class);
         startActivity(intent);
     }

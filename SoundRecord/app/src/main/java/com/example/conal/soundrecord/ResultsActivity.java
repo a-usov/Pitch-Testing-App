@@ -24,6 +24,7 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 import static com.example.conal.soundrecord.HomeActivity.CONCRETETESTING;
 import static com.example.conal.soundrecord.MapsActivity.TEST;
+import static com.example.conal.soundrecord.RecordingActivity.DEVICE;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -259,6 +260,11 @@ public class ResultsActivity extends AppCompatActivity {
         intent = getIntent();
         intent.setClass(this, HomeActivity.class);
         intent.removeExtra(TEST);
+        intent.removeExtra(DEVICE);
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.remove(DEVICE);
+        editor.apply();
         startActivity(intent);
     }
 }
