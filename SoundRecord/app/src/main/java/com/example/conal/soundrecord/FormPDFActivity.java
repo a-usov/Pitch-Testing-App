@@ -163,11 +163,11 @@ public class FormPDFActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         Calendar cal = Calendar.getInstance();
-        String date = cal.get(Calendar.DATE) + "/" + cal.get(Calendar.MONTH) + 1 + "/" + cal.get(Calendar.YEAR);
+        String date = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR);
         String time = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
 
         // Store data
-        editor.putString("jobNo", jobNo.getEditText().getText().toString());  
+        editor.putString("jobNo", jobNo.getEditText().getText().toString());
         editor.putString("contract", contract.getEditText().getText().toString());
         editor.putString("surfaceName", surfaceName.getEditText().getText().toString());
         editor.putString("humidity", humidity.getEditText().getText().toString());
