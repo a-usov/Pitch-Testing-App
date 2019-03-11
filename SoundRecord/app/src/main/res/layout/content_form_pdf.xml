@@ -2,6 +2,7 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -9,6 +10,7 @@
     tools:showIn="@layout/activity_form_pdf">
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInput"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -233,7 +235,7 @@
             android:layout_weight="1"
             android:text="Select the version:"
             android:textColor="@color/colorAccent"
-            android:textSize="18dp"/>
+            android:textSize="18dp" />
 
         <RadioGroup
             android:id="@+id/fifaRadioGroup"
@@ -267,54 +269,54 @@
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
 
-        <RadioButton
-            android:id="@+id/uk1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onEquipmentRadioButtonClicked"
-            android:text="UK 1" />
+            <RadioButton
+                android:id="@+id/uk1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onEquipmentRadioButtonClicked"
+                android:text="UK 1" />
 
-        <RadioButton
-            android:id="@+id/uk2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onEquipmentRadioButtonClicked"
-            android:text="UK 2" />
+            <RadioButton
+                android:id="@+id/uk2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onEquipmentRadioButtonClicked"
+                android:text="UK 2" />
 
-        <RadioButton
-            android:id="@+id/flight3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onEquipmentRadioButtonClicked"
-            android:text="Flight 3" />
+            <RadioButton
+                android:id="@+id/flight3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onEquipmentRadioButtonClicked"
+                android:text="Flight 3" />
 
-        <RadioButton
-            android:id="@+id/flight4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onEquipmentRadioButtonClicked"
-            android:text="Flight 4" />
+            <RadioButton
+                android:id="@+id/flight4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onEquipmentRadioButtonClicked"
+                android:text="Flight 4" />
 
-        <RadioButton
-            android:id="@+id/flight5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onEquipmentRadioButtonClicked"
-            android:text="Flight 5" />
+            <RadioButton
+                android:id="@+id/flight5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onEquipmentRadioButtonClicked"
+                android:text="Flight 5" />
 
 
-    </RadioGroup>
+        </RadioGroup>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/other"
