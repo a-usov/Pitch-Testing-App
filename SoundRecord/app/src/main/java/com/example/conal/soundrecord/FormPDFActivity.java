@@ -16,7 +16,6 @@ import java.util.Calendar;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
-
 public class FormPDFActivity extends AppCompatActivity {
 
     private TextInputLayout jobNo;
@@ -41,7 +40,7 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout otherEquipment;
 
     // Radio buttons
-    private Boolean fifaPro; // button for Fifa Pro spec or not
+    private Boolean fifaPro = false; // button for Fifa Pro spec or not
     private Boolean uk1 = false;
     private Boolean uk2 = false;
     private Boolean flight3 = false;
@@ -66,7 +65,6 @@ public class FormPDFActivity extends AppCompatActivity {
             }
         });
 
-
         jobNo = this.findViewById(R.id.job_no);
         contract = this.findViewById(R.id.contract);
         surfaceName = this.findViewById(R.id.surface_name);
@@ -87,7 +85,6 @@ public class FormPDFActivity extends AppCompatActivity {
         testCondition = this.findViewById(R.id.test_conditions);
         uncertaintyMeasurement = this.findViewById(R.id.uncertainty_measurement);
         otherEquipment = this.findViewById(R.id.other);
-
     }
 
     @Override
@@ -134,7 +131,6 @@ public class FormPDFActivity extends AppCompatActivity {
                     // FIFA PRO all the way
                     Log.i("forms", "UK2 equipment");
                 uk2 = true;
-
                 break;
             case R.id.flight3:
                 if (checked)
@@ -163,8 +159,8 @@ public class FormPDFActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedpreferences.edit();
 
         Calendar cal = Calendar.getInstance();
-        String date = cal.get(Calendar.DATE) + "/" + cal.get(Calendar.MONTH) + 1 + "/" + cal.get(Calendar.YEAR);
-        String time = cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.SECOND);
+        String date = cal.get(Calendar.DATE) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
+        String time = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
 
         // Store data
         editor.putString("jobNo", jobNo.getEditText().getText().toString());
@@ -185,14 +181,14 @@ public class FormPDFActivity extends AppCompatActivity {
         editor.putString("additionalTechnician", additionalTechnician.getEditText().getText().toString());
         editor.putString("substrateType", substrateType.getEditText().getText().toString());
         editor.putString("testConditions", testCondition.getEditText().getText().toString());
-        editor.putString("uncertaintyMeasurement", testCondition.getEditText().getText().toString());
+        editor.putString("uncertaintyMeasurement", uncertaintyMeasurement.getEditText().getText().toString());
+        editor.putString("other", otherEquipment.getEditText().getText().toString());
         editor.putBoolean("fifaPro", fifaPro);
         editor.putBoolean("uk1", uk1);
         editor.putBoolean("uk2", uk2);
         editor.putBoolean("flight3", flight3);
         editor.putBoolean("flight4", flight4);
         editor.putBoolean("flight5", flight5);
-        editor.putString("other", testCondition.getEditText().getText().toString());
         editor.putString("currentDate", date);
         editor.putString("currentTime", time);
 
