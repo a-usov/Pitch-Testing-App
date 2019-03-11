@@ -1,10 +1,12 @@
 package com.example.conal.soundrecord;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +34,7 @@ public class ResultsActivity extends AppCompatActivity {
     private PitchTest test;
     private Intent intent;
     private Location loc;
+    private boolean concreteTesting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class ResultsActivity extends AppCompatActivity {
         // if we are doing concrete calibration, we show different results
         // compared to normal testing
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        boolean concreteTesting = sharedpreferences.getBoolean(CONCRETETESTING, false);
+        concreteTesting = sharedpreferences.getBoolean(CONCRETETESTING, false);
 
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -174,24 +177,14 @@ public class ResultsActivity extends AppCompatActivity {
             // here bounceheight is the very first bounce, which is where we always save the result to. We don't use the rest
             // of Pitchtest
             concreteResult.setText(bounceHeight.toString().substring(0, 4) + " meters");
-
-
-            // if we are done, go to home
-            btnFinish.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openHomePage();
-                }
-            });
-        } else {
-            // if we are done but its a test, display final table
-            btnFinish.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openFinalActivityPage();
-                }
-            });
         }
+
+        btnFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goNext();
+            }
+        });
 
         btnRedo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,6 +218,39 @@ public class ResultsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void goNext(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Are you sure you want to finish?");
+
+        builder.setCancelable(false);
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (concreteTesting){
+                    openHomePage();
+                } else {
+                    openFinalActivityPage();
+                }
+            }
+        });
+
+        builder.show();
     }
 
     // stop from going back
