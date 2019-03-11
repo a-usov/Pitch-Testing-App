@@ -2,6 +2,7 @@ package com.example.conal.soundrecord;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,4 +83,46 @@ public class PitchTest implements Parcelable {
             return new PitchTest[size];
         }
     };
+
+    public ArrayList<Double> organiseHeights() {
+        ArrayList<Double> heightList = new ArrayList<>();
+        int i = 0;
+        for (Location loc : locations) {
+            for (Result height : loc.getResults()) {
+                heightList.add(i,height.getBounceHeight());
+                System.out.println("At location" + locations.indexOf(loc) + " , Drop " + loc.getResults().indexOf(height));
+                System.out.println("Adding height " + height.getBounceHeight());
+                i++;
+
+            }
+        }
+
+
+        return heightList;
+
+    }
+
+    public ArrayList<Double> getRunningAverages(){
+        ArrayList<Double> avgHeights = new ArrayList<Double>();
+        for (int i = 0; i < locations.size() ; i++){
+
+            avgHeights.add(i,locations.get(i).getRunningAvg());
+        }
+        return avgHeights;
+
+    }
+
+    public Double getTotalAvg(){ // Averages of all the running averages
+        ArrayList<Double> avgHeights = getRunningAverages();
+        if(avgHeights.size()==1){
+            return 0.0;
+        }
+        Double total = 0.0;
+        for (Double height : avgHeights) {
+            total += height;
+        }
+
+        return total / (avgHeights.size());
+
+    }
 }

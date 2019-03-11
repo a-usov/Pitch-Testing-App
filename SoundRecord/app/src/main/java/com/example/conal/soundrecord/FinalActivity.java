@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -29,16 +30,19 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import org.w3c.dom.Text;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 import static com.example.conal.soundrecord.MapsActivity.TEST;
-import static com.example.conal.soundrecord.RecordingActivity.DEVICE;
 
 public class FinalActivity extends AppCompatActivity {
 
@@ -81,7 +85,14 @@ public class FinalActivity extends AppCompatActivity {
     private String flight5tring = "";
     private String otherEquip;
 
+
+    private ArrayList<TextView> tableDrops = new ArrayList<>();
+
+
     private String defaultValue;
+    private PitchTest finalTest;
+    private ArrayList<Double> heightList = new ArrayList<Double>();
+    private ArrayList<Double> avgHeightsList = new ArrayList<Double>();
 
 
     @Override
@@ -127,6 +138,29 @@ public class FinalActivity extends AppCompatActivity {
 
         otherEquip = sharedPref.getString("other", defaultValue);
 
+        /** Get the pitch tests **/
+
+        intent = getIntent();
+        final PitchTest finalTest = intent.getParcelableExtra(MapsActivity.TEST); // Get the final complete pitch test
+
+
+        final PitchTest testing = createTestPitchTest();
+
+        ArrayList<Double> allHeights = fillTable(finalTest);
+//        if(finalTest.getRunningAverages().size() == 5 ) {
+//            fillAverages(finalTest);
+//        }
+//        ArrayList<Double> avgHeights = fillAverages(finalTest);
+        TextView txtViewTotalAvg = this.findViewById(R.id.textView56);
+        txtViewTotalAvg.setText(finalTest.getTotalAvg().toString());
+//        fillTable(finalTest); // testing filling the table
+        fillTable(finalTest);
+        fillAverages(finalTest);
+
+
+
+
+
 
         if (fifaPro) fifaProString = "FIFA Quality Pro: 0.6 - 0.85m";
         else fifaProString = "FIFA Quality: 0.6 - 1.0m";
@@ -142,12 +176,10 @@ public class FinalActivity extends AppCompatActivity {
         Log.i("currentDate", "The current date is " + currentDate);
         Log.i("currentDate", "The time recorded is " + currentTime);
 
-        intent = getIntent();
 
-        PitchTest test = intent.getParcelableExtra(MapsActivity.TEST);
 
         try {
-            generateCSV(test);
+            generateCSV(finalTest);
         } //Change this to generateCSV(pitchTest)
         catch (IOException e) {
         }
@@ -160,7 +192,7 @@ public class FinalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    generateReportPDF();
+                    generateReportPDF(finalTest);
 
                 } catch (IOException e) {
                 }
@@ -183,6 +215,7 @@ public class FinalActivity extends AppCompatActivity {
 
     }
 
+
     private void insertCell(PdfPTable table, String text, int align, int colspan, int rowspan, Font font, BaseColor color) {
 
         //create a new cell with the specified Text and Font
@@ -200,7 +233,316 @@ public class FinalActivity extends AppCompatActivity {
         table.addCell(cell);
     }
 
-    public void generateCSV(PitchTest test) throws IOException { // Change this method to take PitchTest
+    public PitchTest createTestPitchTest(){
+        PitchTest pitchTest = new PitchTest();
+        Location location1 = new Location(new LatLng(0,0));
+        Location location2 = new Location(new LatLng(0,0));
+        Location location3 = new Location(new LatLng(0,0));
+        Location location4 = new Location(new LatLng(0,0));
+        Location location5 = new Location(new LatLng(0,0));
+        Location location6 = new Location(new LatLng(0,0));
+
+        Result result1 = new Result(0,0,0);
+        result1.setBounceHeight(1);
+
+        Result result2 = new Result(0,0,0);
+        result2.setBounceHeight(2);
+
+        Result result3 = new Result(0,0,0);
+        result3.setBounceHeight(new Double(3));
+
+        Result result4 = new Result(0,0,0);
+        result4.setBounceHeight(4);
+
+        Result result5 = new Result(0,0,0);
+        result5.setBounceHeight(5);
+
+        location1.addResult(result1);
+        location1.addResult(result2);
+        location1.addResult(result3);
+        location1.addResult(result4);
+        location1.addResult(result5);
+
+        Result result6 = new Result(0,0,0);
+        result6.setBounceHeight(6);
+
+        Result result7 = new Result(0,0,0);
+        result7.setBounceHeight(7);
+
+        Result result8 = new Result(0,0,0);
+        result8.setBounceHeight(8);
+
+        Result result9 = new Result(0,0,0);
+        result9.setBounceHeight(9);
+
+        Result result10 = new Result(0,0,0);
+        result10.setBounceHeight(10);
+
+        location2.addResult(result6);
+        location2.addResult(result7);
+        location2.addResult(result8);
+        location2.addResult(result9);
+        location2.addResult(result10);
+
+        Result result11 = new Result(0,0,0);
+        result11.setBounceHeight(11);
+
+        Result result12 = new Result(0,0,0);
+        result12.setBounceHeight(12);
+
+        Result result13 = new Result(0,0,0);
+        result13.setBounceHeight(13);
+
+        Result result14 = new Result(0,0,0);
+        result14.setBounceHeight(14);
+
+        Result result15 = new Result(0,0,0);
+        result15.setBounceHeight(15);
+
+        location3.addResult(result11);
+        location3.addResult(result12);
+        location3.addResult(result13);
+        location3.addResult(result14);
+        location3.addResult(result15);
+
+        Result result16 = new Result(0,0,0);
+        result16.setBounceHeight(16);
+
+        Result result17 = new Result(0,0,0);
+        result17.setBounceHeight(17);
+
+        Result result18 = new Result(0,0,0);
+        result18.setBounceHeight(18);
+
+        Result result19 = new Result(0,0,0);
+        result19.setBounceHeight(19);
+
+        Result result20 = new Result(0,0,0);
+        result20.setBounceHeight(20);
+
+        location4.addResult(result16);
+        location4.addResult(result17);
+        location4.addResult(result18);
+        location4.addResult(result19);
+        location4.addResult(result20);
+
+        Result result21 = new Result(0,0,0);
+        result21.setBounceHeight(21);
+
+        Result result22 = new Result(0,0,0);
+        result22.setBounceHeight(22);
+
+        Result result23 = new Result(0,0,0);
+        result23.setBounceHeight(23);
+
+        Result result24 = new Result(0,0,0);
+        result24.setBounceHeight(24);
+
+        Result result25 = new Result(0,0,0);
+        result25.setBounceHeight(25);
+
+        location5.addResult(result21);
+        location5.addResult(result22);
+        location5.addResult(result23);
+        location5.addResult(result24);
+        location5.addResult(result25);
+
+        Result result26 = new Result(0,0,0);
+        result26.setBounceHeight(26);
+
+        Result result27 = new Result(0,0,0);
+        result27.setBounceHeight(27);
+
+        Result result28 = new Result(0,0,0);
+        result28.setBounceHeight(28);
+
+        Result result29 = new Result(0,0,0);
+        result29.setBounceHeight(29);
+
+        Result result30 = new Result(0,0,0);
+        result30.setBounceHeight(30);
+
+        location6.addResult(result26);
+        location6.addResult(result27);
+        location6.addResult(result28);
+        location6.addResult(result29);
+        location6.addResult(result30);
+
+        pitchTest.addLocation(location1);
+        pitchTest.addLocation(location2);
+        pitchTest.addLocation(location3);
+        pitchTest.addLocation(location4);
+        pitchTest.addLocation(location5);
+        pitchTest.addLocation(location6);
+        return pitchTest;
+    }
+
+    public void fillAverages(PitchTest pitchTest){
+        ArrayList<Double> avgHeights = pitchTest.getRunningAverages();
+
+        TextView txtViewAvg1 = this.findViewById(R.id.textView50);
+        TextView txtViewAvg2 = this.findViewById(R.id.textView51);
+        TextView txtViewAvg3 = this.findViewById(R.id.textView52);
+        TextView txtViewAvg4 = this.findViewById(R.id.textView53);
+        TextView txtViewAvg5 = this.findViewById(R.id.textView54);
+        TextView txtViewAvg6 = this.findViewById(R.id.textView55);
+
+        Log.i("pdf", "The number of average is " + avgHeights.size());
+        if(avgHeights.size()== 6) {
+            txtViewAvg6.setText(avgHeights.get(5).toString());
+            txtViewAvg5.setText(avgHeights.get(4).toString());
+            txtViewAvg4.setText(avgHeights.get(3).toString());
+            txtViewAvg3.setText(avgHeights.get(2).toString());
+            txtViewAvg2.setText(avgHeights.get(1).toString());
+            txtViewAvg1.setText(avgHeights.get(0).toString());
+
+        }else if(avgHeights.size()==5) {
+            txtViewAvg5.setText(avgHeights.get(4).toString());
+            txtViewAvg4.setText(avgHeights.get(3).toString());
+            txtViewAvg3.setText(avgHeights.get(2).toString());
+            txtViewAvg2.setText(avgHeights.get(1).toString());
+            txtViewAvg1.setText(avgHeights.get(0).toString());
+            avgHeights.add(5, 0.0);
+        } else if(avgHeights.size()== 4) {
+            txtViewAvg4.setText(avgHeights.get(3).toString());
+            txtViewAvg3.setText(avgHeights.get(2).toString());
+            txtViewAvg2.setText(avgHeights.get(1).toString());
+            txtViewAvg1.setText(avgHeights.get(0).toString());
+            avgHeights.add(5, 0.0);
+            avgHeights.add(4, 0.0);
+        } else if(avgHeights.size()== 3 ) {
+            txtViewAvg3.setText(avgHeights.get(2).toString());
+            txtViewAvg2.setText(avgHeights.get(1).toString());
+            txtViewAvg1.setText(avgHeights.get(0).toString());
+            avgHeights.add(5, 0.0);
+            avgHeights.add(4, 0.0);
+            avgHeights.add(3, 0.0);
+        } else if(avgHeights.size() > 2) {
+            txtViewAvg2.setText(avgHeights.get(1).toString());
+            txtViewAvg1.setText(avgHeights.get(0).toString());
+            avgHeights.add(5, 0.0);
+            avgHeights.add(4, 0.0);
+            avgHeights.add(3, 0.0);
+            avgHeights.add(2, 0.0);
+        } else if (avgHeights.size() == 1) {
+            txtViewAvg1.setText(avgHeights.get(0).toString());
+            avgHeights.add(1, 0.0);
+            avgHeights.add(2, 0.0);
+            avgHeights.add(3, 0.0);
+            avgHeights.add(4, 0.0);
+            avgHeights.add(5, 0.0);
+        }
+
+        avgHeightsList = avgHeights;
+
+    }
+    public ArrayList<Double> fillTable(PitchTest pitchTest){ // Filling table for all drops bar the averages
+        ArrayList<TextView> tableCells = initializeTable();
+        ArrayList<Double> heights = pitchTest.organiseHeights();
+
+        for(int i = 0; i < heights.size() ; i++) {
+            Double bounceHeight;
+            try {
+                bounceHeight = heights.get(i);
+            }
+            catch(IndexOutOfBoundsException e){
+                bounceHeight = 0.0;
+            }
+
+
+            tableCells.get(i).setText(bounceHeight.toString());
+
+        }
+        return heights; // To set as a variable to fill in the PDF and CSV files
+    }
+
+    public ArrayList<TextView> initializeTable(){
+        /** Table text views **/
+        // Location 1 drops or column 1
+        TextView txtView1 = this.findViewById(R.id.textView10);
+        TextView txtView2 = this.findViewById(R.id.textView18);
+        TextView txtView3 = this.findViewById(R.id.textView26);
+        TextView txtView4 = this.findViewById(R.id.textView34);
+        TextView txtView5 = this.findViewById(R.id.textView42);
+
+        // Location 2 drops or column 2
+        TextView txtView6 = this.findViewById(R.id.textView11);
+        TextView txtView7 = this.findViewById(R.id.textView19);
+        TextView txtView8 = this.findViewById(R.id.textView27);
+        TextView txtView9 = this.findViewById(R.id.textView35);
+        TextView txtView10 = this.findViewById(R.id.textView43);
+
+
+        // Location 3 drops or column 3
+        TextView txtView11 = this.findViewById(R.id.textView12);
+        TextView txtView12 = this.findViewById(R.id.textView20);
+        TextView txtView13 = this.findViewById(R.id.textView28);
+        TextView txtView14 = this.findViewById(R.id.textView36);
+        TextView txtView15 = this.findViewById(R.id.textView44);
+
+
+
+        // Location 4 drops or column 4
+        TextView txtView16 = this.findViewById(R.id.textView13);
+        TextView txtView17 = this.findViewById(R.id.textView21);
+        TextView txtView18 = this.findViewById(R.id.textView29);
+        TextView txtView19 = this.findViewById(R.id.textView37);
+        TextView txtView20 = this.findViewById(R.id.textView45);
+
+
+
+        // Location 5 drops or column 5
+        TextView txtView21 = this.findViewById(R.id.textView14);
+        TextView txtView22 = this.findViewById(R.id.textView22);
+        TextView txtView23 = this.findViewById(R.id.textView30);
+        TextView txtView24 = this.findViewById(R.id.textView38);
+        TextView txtView25 = this.findViewById(R.id.textView46);
+
+
+
+        // Location 6 drops or column 6
+        TextView txtView26 = this.findViewById(R.id.textView15);
+        TextView txtView27 = this.findViewById(R.id.textView23);
+        TextView txtView28 = this.findViewById(R.id.textView31);
+        TextView txtView29 = this.findViewById(R.id.textView39);
+        TextView txtView30 = this.findViewById(R.id.textView47);
+        tableDrops.add(0,txtView1);
+        tableDrops.add(1,txtView2);
+        tableDrops.add(2,txtView3);
+        tableDrops.add(3,txtView4);
+        tableDrops.add(4,txtView5);
+        tableDrops.add(5,txtView6);
+        tableDrops.add(6,txtView7);
+        tableDrops.add(7,txtView8);
+        tableDrops.add(8,txtView9);
+        tableDrops.add(9,txtView10);
+        tableDrops.add(10,txtView11);
+        tableDrops.add(11,txtView12);
+        tableDrops.add(12,txtView13);
+        tableDrops.add(13,txtView14);
+        tableDrops.add(14,txtView15);
+        tableDrops.add(15,txtView16);
+        tableDrops.add(16,txtView17);
+        tableDrops.add(17,txtView18);
+        tableDrops.add(18,txtView19);
+        tableDrops.add(19,txtView20);
+        tableDrops.add(20,txtView21);
+        tableDrops.add(21,txtView22);
+        tableDrops.add(22,txtView23);
+        tableDrops.add(23,txtView24);
+        tableDrops.add(24, txtView25);
+        tableDrops.add(25,txtView26);
+        tableDrops.add(26,txtView27);
+        tableDrops.add(27,txtView28);
+        tableDrops.add(28,txtView29);
+        tableDrops.add(29,txtView30);
+        return tableDrops;
+    }
+
+    public void generateCSV(PitchTest pitchTest) throws IOException { // Change this method to take PitchTest
+        ArrayList<Double> allHeights  = pitchTest.organiseHeights();
+        ArrayList<Double> avgHeights = pitchTest.getRunningAverages();
+        Double TotalAverage = pitchTest.getTotalAvg();
         if (checkPermissionFromDevice()) {
             File folder = new File(Environment.getExternalStorageDirectory()
                     + "/CSV Files");
@@ -214,32 +556,73 @@ public class FinalActivity extends AppCompatActivity {
 
             try {
                 FileWriter fw = new FileWriter(filename);
+                fw.append(" ");
+                fw.append(",");
+                fw.append("Drop 1");
+                fw.append(",");
+                fw.append("Drop 2");
+                fw.append(",");
+                fw.append("Drop 3");
+                fw.append(",");
+                fw.append("Drop 4 ");
+                fw.append(",");
+                fw.append("Drop 5");
+                fw.append(",");
+                fw.append("Average");
+                fw.append("\n");
 
-                fw.append("data");
-                fw.append(',');
 
-                fw.append("goes");
-                fw.append(',');
+                for (Location loc : pitchTest.getLocations()){
+                    int locationIndex = pitchTest.getLocations().indexOf(loc) + 1;
+                    fw.append("Location" + locationIndex);
+                    fw.append(",");
+                    for(Result result : loc.getResults()){
+                        Double bounceHeight = result.getBounceHeight();
+                        fw.append(bounceHeight.toString());
+                        fw.append(",");
 
-                fw.append("here:");
-                fw.append(',');
+                    }
+                    Double avgBounceHeight = loc.getRunningAvg();
+                    fw.append(avgBounceHeight.toString());
+                    fw.append("\n");
 
-                fw.append("time");
-                fw.append(',');
+                }
 
-                fw.append("0.6");
-                fw.append(',');
+                fw.append("\n");
+                fw.append("Average per Location");
+                fw.append(",");
+                for(Double avg : avgHeights) {
+                    fw.append(avg.toString());
+                    fw.append(",");
+                }
+                fw.append("\n");
+                fw.append("Overall average");
+                fw.append(pitchTest.getTotalAvg().toString());
+                fw.append("\n");
 
-                fw.append("height");
-                fw.append(',');
+                fw.append("Test Date");
+                fw.append(",");
+                fw.append(currentDate);
+                fw.append("\n");
 
-                fw.append("1.4");
-                fw.append(',');
+                fw.append("Job number");
+                fw.append(",");
+                fw.append(jobNo);
+                fw.append("\n");
 
-                fw.append(test.toString());
-                fw.append(',');
+                fw.append("Client");
+                fw.append(",");
+                fw.append(client);
+                fw.append("\n");
 
-                fw.append('\n');
+                fw.append("Lead technician");
+                fw.append(",");
+                fw.append(leadTechnician);
+
+
+
+
+
 
                 fw.close();
 
@@ -253,11 +636,15 @@ public class FinalActivity extends AppCompatActivity {
         }
     }
 
-    public void generateReportPDF() throws IOException {
+    public void generateReportPDF(PitchTest pitchTest) throws IOException {
 
         Toast.makeText(FinalActivity.this, "PDF created.", Toast.LENGTH_SHORT).show();
         //create folder
         File folderPDF = new File(Environment.getExternalStorageDirectory() + "/PDF reports");
+
+        ArrayList<Double> allHeights = pitchTest.organiseHeights();
+//        ArrayList<Double> avgHeights = pitchTest.getRunningAverages();
+        Double totalAvg = pitchTest.getTotalAvg();
 
         if (!folderPDF.exists()) folderPDF.mkdir();
 
@@ -271,8 +658,14 @@ public class FinalActivity extends AppCompatActivity {
         Font other = new Font(Font.FontFamily.HELVETICA, 8, Font.NORMAL, BaseColor.BLACK);
         Intent intent = getIntent();
         PitchTest test = intent.getParcelableExtra(MapsActivity.TEST);
-        LatLng coord = test.getLocation(0).getLocation();
+        LatLng coord = pitchTest.getLocation(0).getLocation();
 
+        Log.i("PDF", "The number of heights is " + allHeights.size());
+        if(allHeights.size() < 30){
+            for(int i = allHeights.size() ; i < 30 ; i++){
+                allHeights.add(i, 0.0); // fill up the heights if nothing is there
+            }
+        }
         try {
             Document report = new Document();
             report.setPageSize(PageSize.A4);
@@ -370,48 +763,51 @@ public class FinalActivity extends AppCompatActivity {
             insertCell(table, "Test Location 5", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "Test Location 6", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
 
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
 
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(0).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(5).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(10).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(15).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(20).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(25).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
 
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(1).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(6).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(11).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(16).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(21).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(26).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
 
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(2).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(7).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(12).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(17).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(22).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(27).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
 
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(3).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(8).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(13).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(18).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(23).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(28).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+
+            insertCell(table, allHeights.get(4).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(9).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(14).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(19).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(24).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+            insertCell(table, allHeights.get(29).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.CYAN);
+
 
             insertCell(table, "Mean Result", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            insertCell(table, avgHeightsList.get(0).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            insertCell(table, avgHeightsList.get(1).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            insertCell(table, avgHeightsList.get(2).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            insertCell(table, avgHeightsList.get(3).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            insertCell(table, avgHeightsList.get(4).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            insertCell(table, avgHeightsList.get(5).toString(), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+
 
             insertCell(table, "Consistency ±10%", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
@@ -474,6 +870,7 @@ public class FinalActivity extends AppCompatActivity {
 
     }
 
+
     public boolean checkPermissionFromDevice() {
         int write_external_storage_result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int record_audio_result = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);
@@ -484,10 +881,6 @@ public class FinalActivity extends AppCompatActivity {
     private void openPDFActivity() {
         intent = getIntent();
         intent.removeExtra(TEST);
-        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.remove(DEVICE);
-        editor.apply();
         intent.setClass(this, FormPDFActivity.class);
         startActivity(intent);
 
@@ -496,10 +889,6 @@ public class FinalActivity extends AppCompatActivity {
     private void openHomePage() {
         intent = getIntent();
         intent.removeExtra(TEST);
-        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.remove(DEVICE);
-        editor.apply();
         intent.setClass(this, HomeActivity.class);
         startActivity(intent);
     }
