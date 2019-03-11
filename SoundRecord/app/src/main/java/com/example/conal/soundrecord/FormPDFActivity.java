@@ -41,7 +41,7 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout otherEquipment;
 
     // Radio buttons
-    private Boolean fifaPro; // button for Fifa Pro spec or not
+    private Boolean fifaPro = false; // button for Fifa Pro spec or not
     private Boolean uk1 = false;
     private Boolean uk2 = false;
     private Boolean flight3 = false;
