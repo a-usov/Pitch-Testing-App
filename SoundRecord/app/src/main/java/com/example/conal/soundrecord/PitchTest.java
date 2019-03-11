@@ -84,45 +84,36 @@ public class PitchTest implements Parcelable {
         }
     };
 
-    public ArrayList<Double> organiseHeights() {
-        ArrayList<Double> heightList = new ArrayList<>();
-        int i = 0;
+    public List<Double> organiseHeights() {
+        List<Double> heightList = new ArrayList<>();
         for (Location loc : locations) {
             for (Result height : loc.getResults()) {
-                heightList.add(i,height.getBounceHeight());
-                System.out.println("At location" + locations.indexOf(loc) + " , Drop " + loc.getResults().indexOf(height));
-                System.out.println("Adding height " + height.getBounceHeight());
-                i++;
-
+                heightList.add(height.getBounceHeight());
             }
         }
 
-
         return heightList;
-
     }
 
-    public ArrayList<Double> getRunningAverages(){
-        ArrayList<Double> avgHeights = new ArrayList<Double>();
-        for (int i = 0; i < locations.size() ; i++){
-
-            avgHeights.add(i,locations.get(i).getRunningAvg());
+    public List<Double> getRunningAverages() {
+        List<Double> avgHeights = new ArrayList<>();
+        for (Location loc : locations) {
+            avgHeights.add(loc.getRunningAvg());
         }
+
         return avgHeights;
-
     }
 
-    public Double getTotalAvg(){ // Averages of all the running averages
-        ArrayList<Double> avgHeights = getRunningAverages();
-        if(avgHeights.size()==1){
-            return 0.0;
-        }
-        Double total = 0.0;
-        for (Double height : avgHeights) {
+    public Double getTotalAvg() { // Averages of all the running averages
+        List<Double> avgHeights = getRunningAverages();
+
+        double total = 0.0;
+
+        for (double height : avgHeights) {
             total += height;
         }
 
         return total / (avgHeights.size());
-
     }
 }
+
