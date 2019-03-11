@@ -41,6 +41,7 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 import static com.example.conal.soundrecord.MapsActivity.TEST;
@@ -555,7 +556,8 @@ public class FinalActivity extends AppCompatActivity {
 
             System.out.println("" + var);
 
-            final String filename = folder.toString() + "/" + "Test.csv";
+            final String filename = folder.toString() + "/" + currentDate + "_" + currentTime
+                    + ":" + Calendar.getInstance().get(Calendar.SECOND) + ".csv";
 
             try {
                 FileWriter fw = new FileWriter(filename);
@@ -651,7 +653,8 @@ public class FinalActivity extends AppCompatActivity {
 
         if (!folderPDF.exists()) folderPDF.mkdir();
 
-        String filePDF = folderPDF.toString() + "/" + "Report.pdf";
+        String filePDF = folderPDF.toString() + "/" + currentDate + "_" + currentTime
+                + ":" + Calendar.getInstance().get(Calendar.SECOND) + ".pdf";
 
         //create fonts
         Font title = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLACK);
