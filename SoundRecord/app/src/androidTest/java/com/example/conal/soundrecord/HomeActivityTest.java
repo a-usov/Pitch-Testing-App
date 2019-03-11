@@ -39,9 +39,33 @@ public class HomeActivityTest {
     }
 
     @Test
-    public void footballGoesToFormActivity(){
+    public void footballBtnGoesToFormActivity(){
         onView(withId(R.id.footballBtn)).perform(click());
         intended(hasComponent(new ComponentName(getTargetContext(), FormPDFActivity.class)));
+    }
+
+    @Test
+    public void hockeyBtnGoesToFormActivity() {
+        onView(withId(R.id.hockeyBtn)).perform(click());
+        intended(hasComponent(new ComponentName(getTargetContext(), FormPDFActivity.class)));
+    }
+
+    @Test
+    public void rugbyBtnGoesToFormActivity() {
+        onView(withId(R.id.rugbyBtn)).perform(click());
+        intended(hasComponent(new ComponentName(getTargetContext(), FormPDFActivity.class)));
+    }
+
+    @Test
+    public void tennisBtnGoesToFormActivity() {
+        onView(withId(R.id.tennisBtn)).perform(click());
+        intended(hasComponent(new ComponentName(getTargetContext(), FormPDFActivity.class)));
+    }
+
+    @Test
+    public void concreteGoesToMapsActivity() {
+        onView(withId(R.id.concreteBtn)).perform(click());
+        intended(hasComponent(new ComponentName(getTargetContext(), MapsActivity.class)));
     }
 }
 
