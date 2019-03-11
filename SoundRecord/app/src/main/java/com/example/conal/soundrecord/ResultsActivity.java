@@ -212,7 +212,27 @@ public class ResultsActivity extends AppCompatActivity {
                 if (test.getNumDone() == 5) {
                     openFinalActivityPage();
                 } else if (mapNeeded) {
-                    openMapsActivity();
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    openMapsActivity();
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setCancelable(false);
+                    builder.setMessage("Have you moved to the next location").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
+
+                    //openMapsActivity();
                 } else {
                     openRecordingsPage();
                 }
