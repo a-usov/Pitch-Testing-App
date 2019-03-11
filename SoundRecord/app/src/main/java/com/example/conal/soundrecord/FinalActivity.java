@@ -39,6 +39,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -94,6 +95,8 @@ public class FinalActivity extends AppCompatActivity {
     private PitchTest finalTest;
     private ArrayList<Double> heightList = new ArrayList<Double>();
     private ArrayList<Double> avgHeightsList = new ArrayList<Double>();
+    DecimalFormat df = new DecimalFormat("#.##");
+
 
 
     @Override
@@ -390,43 +393,43 @@ public class FinalActivity extends AppCompatActivity {
 
         Log.i("pdf", "The number of average is " + avgHeights.size());
         if(avgHeights.size()== 6) {
-            txtViewAvg6.setText(avgHeights.get(5).toString());
-            txtViewAvg5.setText(avgHeights.get(4).toString());
-            txtViewAvg4.setText(avgHeights.get(3).toString());
-            txtViewAvg3.setText(avgHeights.get(2).toString());
-            txtViewAvg2.setText(avgHeights.get(1).toString());
-            txtViewAvg1.setText(avgHeights.get(0).toString());
+            txtViewAvg6.setText(df.format(avgHeights.get(5)));
+            txtViewAvg6.setText(df.format(avgHeights.get(4)));
+            txtViewAvg6.setText(df.format(avgHeights.get(3)));
+            txtViewAvg6.setText(df.format(avgHeights.get(2)));
+            txtViewAvg6.setText(df.format(avgHeights.get(1)));
+            txtViewAvg6.setText(df.format(avgHeights.get(0)));
 
         }else if(avgHeights.size()==5) {
-            txtViewAvg5.setText(avgHeights.get(4).toString());
-            txtViewAvg4.setText(avgHeights.get(3).toString());
-            txtViewAvg3.setText(avgHeights.get(2).toString());
-            txtViewAvg2.setText(avgHeights.get(1).toString());
-            txtViewAvg1.setText(avgHeights.get(0).toString());
+            txtViewAvg6.setText(df.format(avgHeights.get(4)));
+            txtViewAvg6.setText(df.format(avgHeights.get(3)));
+            txtViewAvg6.setText(df.format(avgHeights.get(2)));
+            txtViewAvg6.setText(df.format(avgHeights.get(1)));
+            txtViewAvg6.setText(df.format(avgHeights.get(0)));
             avgHeights.add(5, 0.0);
         } else if(avgHeights.size()== 4) {
-            txtViewAvg4.setText(avgHeights.get(3).toString());
-            txtViewAvg3.setText(avgHeights.get(2).toString());
-            txtViewAvg2.setText(avgHeights.get(1).toString());
-            txtViewAvg1.setText(avgHeights.get(0).toString());
+            txtViewAvg6.setText(df.format(avgHeights.get(3)));
+            txtViewAvg6.setText(df.format(avgHeights.get(2)));
+            txtViewAvg6.setText(df.format(avgHeights.get(1)));
+            txtViewAvg6.setText(df.format(avgHeights.get(0)));
             avgHeights.add(5, 0.0);
             avgHeights.add(4, 0.0);
         } else if(avgHeights.size()== 3 ) {
-            txtViewAvg3.setText(avgHeights.get(2).toString());
-            txtViewAvg2.setText(avgHeights.get(1).toString());
-            txtViewAvg1.setText(avgHeights.get(0).toString());
+            txtViewAvg6.setText(df.format(avgHeights.get(2)));
+            txtViewAvg6.setText(df.format(avgHeights.get(1)));
+            txtViewAvg6.setText(df.format(avgHeights.get(0)));
             avgHeights.add(5, 0.0);
             avgHeights.add(4, 0.0);
             avgHeights.add(3, 0.0);
         } else if(avgHeights.size() > 2) {
-            txtViewAvg2.setText(avgHeights.get(1).toString());
-            txtViewAvg1.setText(avgHeights.get(0).toString());
+            txtViewAvg6.setText(df.format(avgHeights.get(1)));
+            txtViewAvg6.setText(df.format(avgHeights.get(0)));
             avgHeights.add(5, 0.0);
             avgHeights.add(4, 0.0);
             avgHeights.add(3, 0.0);
             avgHeights.add(2, 0.0);
         } else if (avgHeights.size() == 1) {
-            txtViewAvg1.setText(avgHeights.get(0).toString());
+            txtViewAvg6.setText(df.format(avgHeights.get(0)));
             avgHeights.add(1, 0.0);
             avgHeights.add(2, 0.0);
             avgHeights.add(3, 0.0);
@@ -451,7 +454,7 @@ public class FinalActivity extends AppCompatActivity {
             }
 
 
-            tableCells.get(i).setText(bounceHeight.toString());
+            tableCells.get(i).setText(df.format(bounceHeight));
 
         }
         return heights; // To set as a variable to fill in the PDF and CSV files
