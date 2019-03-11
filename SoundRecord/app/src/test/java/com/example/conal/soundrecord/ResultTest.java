@@ -23,22 +23,22 @@ public class ResultTest {
     }
 
     @Test
-    public void getFirstBounce() {
+    public void checkGetFirstBounceMethod() {
         assertEquals(0, result.getFirstBounce());
     }
 
     @Test
-    public void getSecondBounce() {
+    public void checkGetSecondBounceMethod() {
         assertEquals(34371, result.getSecondBounce());
     }
 
     @Test
-    public void getTimeOfBounce() {
+    public void checkGetTimeOfBounceMethod() {
         assertTrue(34371.0 == result.getTimeOfBounce());
     }
 
     @Test
-    public void getBounceHeight() {
+    public void checkGetBounceHeightMethod() {
         assertTrue(0.8 == result.getBounceHeight());
     }
 }
