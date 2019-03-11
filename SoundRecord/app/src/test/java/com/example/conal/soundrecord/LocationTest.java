@@ -61,4 +61,16 @@ public class LocationTest {
     public  void checkGetRunningAvgMethod(){
         assertTrue(0.8==location.getRunningAvg());
     }
+
+    @Test
+    public void checkGetNumDoneMethod(){
+        int numDone = location.getNumDone();
+        assertEquals(0, numDone);
+    }
+
+    @Test
+    public void checkIncrementNumDone(){
+        location.incrementNumDone();
+        assertEquals(1, location.getNumDone());
+    }
 }
