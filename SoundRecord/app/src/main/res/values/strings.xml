@@ -1,19 +1,14 @@
 <resources>
     <string name="app_name">Sports Labs</string>
-    <string name="title_activity_home">Home</string>
     <string name="title_activity_results">Results</string>
-    <string name="title_activity_bluetooth">Bluetooth</string>
     <string name="title_activity_processing">Processing</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_form_pdf">FormPDF</string>
-    <string name="title_activity_recording">Recording</string>
     <string name="title_activity_final">All Results</string>
 
     //form PDF strings
-    <string name="action_settings">Settings</string>
     <string name="job_no">Job Number</string>
     <string name="contract">Contract</string>
-    <string name="test_condition">Test Condition</string>
     <string name="substrate_type">Substrate Type</string>
     <string name="surface_name">Surface Name</string>
     <string name="air_temp">Air Temp</string>
@@ -34,15 +29,6 @@
 
     //Radio buttons stuff in PDF form
     <string name="other_option">"Other (please specify)"</string>
-    <string name="select_version">Select the version:</string>
-    <string name="quality">FIFA Quality 0.6 - 1.0m</string>
-    <string name="quality_pro">FIFA Quality Pro 0.6 - 0.85m</string>
-    <string name="select_equipment">Select the equipment set:</string>
-    <string name="uk1">UK 1</string>
-    <string name="uk2">UK 2</string>
-    <string name="flight3">Flight 3</string>
-    <string name="flight4">Flight 4</string>
-    <string name="flight5">Flight 5</string>
 
     //Buttons names
     <string name="submit">Submit</string>
@@ -68,8 +54,6 @@
     <string name="loc5">5</string>
     <string name="loc6">6</string>
     <string name="avg">Average</string>
-    <string name="fifa_quality_pro">FIFA Quality Pro: 0.6 - 0.85m</string>
-    <string name="fifa_normal">FIFA Quality: 0.6 - 1.0m</string>
 
     //Results activity table
     <string name="drop1">1</string>
@@ -80,6 +64,19 @@
     <string name="drop_no">Drop No</string>
     <string name="rebound_H">Rebound Height</string>
     <string name="ConcreteCalibration">Concrete Calibration</string>
+    <string name="begin">BEGIN</string>
+    <string name="reconnect">reconnect</string>
+    <string name="dash">-</string>
+    <string name="select_the_version">Select the version:</string>
+    <string name="fifa_quality_0_6_1_0m">FIFA Quality 0.6 – 1.0m</string>
+    <string name="fifa_quality_pro_0_6_0_85m">FIFA Quality Pro 0.6 – 0.85m</string>
+    <string name="select_the_equipment_set">Select the equipment set:</string>
+    <string name="flight_5">Flight 5</string>
+    <string name="flight_4">Flight 4</string>
+    <string name="flight_3">Flight 3</string>
+    <string name="uk_2">UK 2</string>
+    <string name="uk_1">UK 1</string>
+    <string name="button">Button</string>
 
 
 </resources>

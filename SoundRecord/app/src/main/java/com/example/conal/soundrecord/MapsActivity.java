@@ -136,7 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void openRecordingPage() {
+    private void openRecordingPage() {
         intent = getIntent();
         intent.setClass(this, RecordingActivity.class);
         intent.putExtra(TEST, test);

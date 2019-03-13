@@ -4,9 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Result implements Parcelable {
-    private int firstBounce;
-    private int secondBounce;
-    private double timeOfBounce;
+    private final int firstBounce;
+    private final int secondBounce;
+    private final double timeOfBounce;
     private double bounceHeight;
 
     public Result(int firstBounce, int secondBounce, double timeOfBounce) {
@@ -40,7 +40,7 @@ public class Result implements Parcelable {
     }
 
     // PARCELABLE METHODS
-    protected Result(Parcel in) {
+    Result(Parcel in) {
         firstBounce = in.readInt();
         secondBounce = in.readInt();
         timeOfBounce = in.readDouble();

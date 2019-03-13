@@ -32,14 +32,14 @@ import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
 public class RecordingActivity extends AppCompatActivity {
 
-    private static File folderPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
+    private static final File folderPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
     private String filePath = "";
     private Intent intent;
     private WavRecorder recorder;
     private ToggleButton btnRecording;
 
     private BluetoothSocket socket;
-    private BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private OutputStream outputStream;
     private boolean canUseBluetooth = false;
     private String nameDevice;

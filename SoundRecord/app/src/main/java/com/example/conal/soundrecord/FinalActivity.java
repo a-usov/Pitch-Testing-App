@@ -74,9 +74,9 @@ public class FinalActivity extends AppCompatActivity {
     private String otherEquip;
 
 
-    private List<TextView> tableDrops = new ArrayList<>();
+    private final List<TextView> tableDrops = new ArrayList<>();
     private List<Double> avgHeightsList = new ArrayList<>();
-    private DecimalFormat df = new DecimalFormat("0.00");
+    private final DecimalFormat df = new DecimalFormat("0.00");
     private PitchTest finalTest;
 
     @Override
@@ -219,7 +219,7 @@ public class FinalActivity extends AppCompatActivity {
         avgHeightsList = avgHeights;
     }
 
-    public List<TextView> initializeTable() {
+    private List<TextView> initializeTable() {
         // Location 1
         tableDrops.add((TextView) this.findViewById(R.id.textView10));
         tableDrops.add((TextView) this.findViewById(R.id.textView18));
@@ -265,7 +265,7 @@ public class FinalActivity extends AppCompatActivity {
         return tableDrops;
     }
 
-    public void generateCSV(PitchTest pitchTest) throws IOException { // Change this method to take PitchTest
+    private void generateCSV(PitchTest pitchTest) throws IOException { // Change this method to take PitchTest
         File folder = new File(Environment.getExternalStorageDirectory() + "/CSV Files");
 
         if (!folder.exists())
@@ -295,7 +295,7 @@ public class FinalActivity extends AppCompatActivity {
 
         for (Location loc : pitchTest.getLocations()) {
             int locationIndex = pitchTest.getLocations().indexOf(loc) + 1;
-            fw.append("Location" + locationIndex);
+            fw.append("Location").append(String.valueOf(locationIndex));
             fw.append(",");
 
             for(int i = 0; i < 5; i++){
