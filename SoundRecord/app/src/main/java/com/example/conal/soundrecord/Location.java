@@ -5,67 +5,82 @@ import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.io.Serializable;
-import java.sql.Array;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 public class Location implements Parcelable {
-    private boolean passFail;
     private LatLng location;
-    private ArrayList<Float> heights;
+    private List<Result> results;
+    private int numDone;
 
     public Location(LatLng location) {
-        this.passFail = false;
-        this.heights = new ArrayList<Float>();
+        this.results = new ArrayList<>();
         this.location = location;
+        this.numDone = 0;
     }
 
-    public boolean getPassFail(){
-        return passFail;
+    public Location() {
+        this.results = new ArrayList<>();
+        this.location = null;
+        this.numDone = 0;
     }
 
-    public void setPassFail(boolean bool){
-        passFail = bool;
+    List<Result> getResults() {
+        return results;
     }
 
-    public LatLng getLocation(){
+    void addResult(Result result) {
+        results.add(result);
+    }
+
+    void deleteResult() {
+        results.remove(results.size() - 1);
+    }
+
+    // location is possibly null when we can't get a GPS signal
+    LatLng getLocation() throws NullPointerException {
         return location;
     }
 
-    public void setLocation(LatLng place){
-        location = place;
+    int getNumDone() {
+        return numDone;
     }
 
-    public ArrayList<Float> getHeights() { return heights; }
+    void incrementNumDone() {
+        this.numDone += 1;
+    }
 
-    public void addHeight(Float height){ heights.add(height); }
+    Double getRunningAvg() {
+        double total = 0.0;
 
-    public Float getRunningAvg(){
-        float total = 0f;
-
-        for (float height : heights) {
-            total += height;
+        for (Result result : results) {
+            total += result.getBounceHeight();
         }
 
-        return total/(heights.size());
+        return total / (results.size());
     }
 
     public String toString() {
-        return location + " " + heights;
+        String s = "";
+
+        s += getLocation().latitude + "," + getLocation().longitude + ",";
+        for (int i = 0; i < 5; i++) {
+            s += getResults().get(i);
+            s += ",";
+        }
+        return s;
     }
 
-
+    // PARCELABLE METHODS
     protected Location(Parcel in) {
-        passFail = in.readByte() != 0x00;
         location = (LatLng) in.readValue(LatLng.class.getClassLoader());
         if (in.readByte() == 0x01) {
-            heights = new ArrayList<Float>();
-            in.readList(heights, Float.class.getClassLoader());
+            results = new ArrayList<>();
+            in.readList(results, Result.class.getClassLoader());
         } else {
-            heights = null;
+            results = null;
         }
+        numDone = in.readInt();
     }
 
     @Override
@@ -75,14 +90,14 @@ public class Location implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeByte((byte) (passFail ? 0x01 : 0x00));
         dest.writeValue(location);
-        if (heights == null) {
+        if (results == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeList(heights);
+            dest.writeList(results);
         }
+        dest.writeInt(numDone);
     }
 
     @SuppressWarnings("unused")

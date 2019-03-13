@@ -1,8 +1,5 @@
 package com.example.conal.soundrecord;
 
-import android.os.AsyncTask;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,77 +11,55 @@ import be.tarsos.dsp.io.PipedAudioStream;
 import be.tarsos.dsp.io.TarsosDSPAudioInputStream;
 import be.tarsos.dsp.util.fft.FFT;
 
-
 public class SoundProcessing {
-
     // set parameters about sound and FFT
     private int sampleRate;
     private int bufferSize;
-    private int windowSize = 0;
-
     private List<Double> sound = new ArrayList<>();
+    // this array is used for displaying graph in results
+    private double[] soundArray;
 
-    private float maxGlobalPower = 0;
-    private double maxPowerFreq;
+    public double[] getSoundArray() {
+        return soundArray;
+    }
 
-    public SoundProcessing(int sampleRate, int bufferSize){
+    public SoundProcessing(int sampleRate, int bufferSize) {
         this.sampleRate = sampleRate;
         this.bufferSize = bufferSize;
     }
 
-    public double process(String file){
+    public Result process(String file) {
         // setup our audio stream of our wav file
         PipedAudioStream f = new PipedAudioStream(file);
-        TarsosDSPAudioInputStream stream = f.getMonoStream(sampleRate,0);
+        TarsosDSPAudioInputStream stream = f.getMonoStream(sampleRate, 0);
 
         // create processor that applies fft and filtering to chunks of sound
-        AudioDispatcher dispatcher = new AudioDispatcher(stream, bufferSize, windowSize);
+        AudioDispatcher dispatcher = new AudioDispatcher(stream, bufferSize, 0);
 
         dispatcher.addAudioProcessor(new AudioProcessor() {
-
             @Override
             public boolean process(AudioEvent audioEvent) {
                 FFT fft = new FFT(bufferSize);
 
                 // get the chunk of data, create arrays to hold transformed data and its power
-                float [] audioFloatBuffer = audioEvent.getFloatBuffer();
+                float[] audioFloatBuffer = audioEvent.getFloatBuffer();
 
-                float [] transformBuffer = new float[bufferSize*2];
-                float[] power = new float[bufferSize/2];
+                float[] transformBuffer = new float[bufferSize * 2];
+                float[] power = new float[bufferSize / 2];
 
+                // copy data to our new array
                 System.arraycopy(audioFloatBuffer, 0, transformBuffer, 0, audioFloatBuffer.length);
 
                 // apply fft on data and get power
                 fft.forwardTransform(transformBuffer);
                 fft.modulus(transformBuffer, power);
 
-                // max power entry
                 // TODO redo filtering
 
-                /*
-                int maxIdx = 1;
-                {
-                    float m = power[1];
-                    for (int i = 2; i < power.length; ++i) {
-                        if (power[i] > m) {
-                            m = power[i];
-                            maxIdx = i;
-                        }
-                    }
-                }
-
-                if (power[maxIdx] > maxGlobalPower) {
-                    maxGlobalPower = power[maxIdx];
-                    maxPowerFreq = fft.binToHz(maxIdx, sampleRate);
-                }
-
-                // cut off above that power
-                for (int i = (maxIdx+1)*2; i < transformBuffer.length; ++i)
-                    transformBuffer[i] = 0;
-                */
-
+                // invert fft
                 fft.backwardsTransform(transformBuffer);
 
+                // copy new data back into original stream
                 System.arraycopy(transformBuffer, 0, audioFloatBuffer, 0, audioFloatBuffer.length);
 
                 return true;
@@ -95,16 +70,27 @@ public class SoundProcessing {
             }
         });
 
-        //dispatcher.addAudioProcessor(new BandPass((float) maxPowerFreq, 100, sampleRate));
-
         dispatcher.addAudioProcessor(new AudioProcessor() {
             @Override
             public boolean process(AudioEvent audioEvent) {
-                float [] audioFloatBuffer = audioEvent.getFloatBuffer();
+                float[] audioFloatBuffer = audioEvent.getFloatBuffer();
 
-                for (float value : audioFloatBuffer){
-                    sound.add((double) value);
+                int counter = 0;
+                double average = 0;
+
+                // we downsample sound from 44100hz to 11025hz
+                // for faster processing
+                for (float value : audioFloatBuffer) {
+                    if (counter == 3) {
+                        sound.add(average / 4);
+                        counter = 0;
+                        average = 0;
+                    } else {
+                        average += (double) value;
+                        counter++;
+                    }
                 }
+
 
                 return true;
             }
@@ -113,7 +99,8 @@ public class SoundProcessing {
             public void processingFinished() {
             }
         });
-        
+
+        // create, run and wait for thread to finish
         Thread t1 = new Thread(dispatcher);
 
         t1.start();
@@ -123,18 +110,22 @@ public class SoundProcessing {
             e.printStackTrace();
         }
 
-
-        double[] soundArray = new double[sound.size()];
+        // copy over Arraylist to primitive array
+        // this is as Peak finding uses primitive array
+        // but can't use it from the start as we don't know
+        // what size is should be at the start
+        soundArray = new double[sound.size()];
         for (int i = 0; i < soundArray.length; i++) {
             soundArray[i] = sound.get(i);
         }
 
-        List<Integer> peaks = Peaks.findPeaks(soundArray, 25000, 0.10);
+        List<Integer> peaks = Peaks.findPeaks(soundArray, 6250, 0.10);
 
-        try{
-            return ( (peaks.get(1) - (double)peaks.get(0)) / sampleRate);
-        } catch (IndexOutOfBoundsException e){
-            return -1;
+        // return Result or null if peak finding wasn't successful
+        try {
+            return new Result(peaks.get(0), peaks.get(1), (peaks.get(1) - (double) peaks.get(0)) / sampleRate * 4);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         }
     }
 }
