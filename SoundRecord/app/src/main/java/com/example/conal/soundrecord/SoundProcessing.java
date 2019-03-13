@@ -11,11 +11,11 @@ import be.tarsos.dsp.io.PipedAudioStream;
 import be.tarsos.dsp.io.TarsosDSPAudioInputStream;
 import be.tarsos.dsp.util.fft.FFT;
 
-public class SoundProcessing {
+class SoundProcessing {
     // set parameters about sound and FFT
-    private int sampleRate;
-    private int bufferSize;
-    private List<Double> sound = new ArrayList<>();
+    private final int sampleRate;
+    private final int bufferSize;
+    private final List<Double> sound = new ArrayList<>();
     // this array is used for displaying graph in results
     private double[] soundArray;
 

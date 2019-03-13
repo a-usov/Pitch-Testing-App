@@ -87,11 +87,6 @@ public class FormPDFActivity extends AppCompatActivity {
         otherEquipment = this.findViewById(R.id.other);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     public void onFifaRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();

@@ -19,8 +19,8 @@ public class HomeActivity extends AppCompatActivity {
     private final int REQUEST_PERMISSION_CODE = 1000;
 
     public static final String MyPREFERENCES = "MyPrefs";
-    public static String CONCRETETESTING = "concreteTesting";
-    public static String MAPNEEDED = "mapNeeded"; // For global variable in sharedPrefs
+    public static final String CONCRETETESTING = "concreteTesting";
+    private static final String MAPNEEDED = "mapNeeded"; // For global variable in sharedPrefs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

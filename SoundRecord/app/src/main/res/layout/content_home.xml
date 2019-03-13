@@ -25,8 +25,7 @@
         app:layout_constraintBottom_toTopOf="@+id/concreteBtn"
         app:layout_constraintEnd_toStartOf="@+id/tennisBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/footballBtn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/footballBtn" />
 
     <Button
         android:id="@+id/tennisBtn"
@@ -46,8 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/rugbyBtn"
-        app:layout_constraintTop_toBottomOf="@+id/hockeyBtn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/hockeyBtn" />
 
     <Button
         android:id="@+id/footballBtn"
