@@ -5,14 +5,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 
@@ -39,6 +47,9 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout uncertaintyMeasurement;
     private TextInputLayout otherEquipment;
 
+    private ArrayList<TextInputLayout> textFields = new ArrayList<>();
+
+
     // Radio buttons
     private Boolean fifaPro = false; // button for Fifa Pro spec or not
     private Boolean uk1 = false;
@@ -46,6 +57,8 @@ public class FormPDFActivity extends AppCompatActivity {
     private Boolean flight3 = false;
     private Boolean flight4 = false;
     private Boolean flight5 = false;
+
+    private int btnPressed;
 
 
     @Override
@@ -56,12 +69,35 @@ public class FormPDFActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button btnSubmitPDF = this.findViewById(R.id.btnSubmitForm);
+        final Button btnSubmitPDF = this.findViewById(R.id.btnSubmitForm);
+        groupTextFields();
         btnSubmitPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitPDF();
+                if(btnPressed<1) {
+                    if (checkIfFieldsAreEmpty()) {
+                        btnSubmitPDF.setEnabled(false);
+                        btnPressed++;
+                        Timer buttonTimer = new Timer();
+                        buttonTimer.schedule(new TimerTask() {
 
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        btnSubmitPDF.setEnabled(true);
+                                    }
+                                });
+                            }
+                        }, 3000);
+
+                    }
+                }else {
+
+                    submitPDF();
+                }
             }
         });
 
@@ -87,6 +123,53 @@ public class FormPDFActivity extends AppCompatActivity {
         otherEquipment = this.findViewById(R.id.other);
     }
 
+    public void groupTextFields(){
+        textFields.add(jobNo);
+        textFields.add(contract);
+        textFields.add(surfaceName);
+        textFields.add(airTemp);
+        textFields.add(surfaceTemp);
+        textFields.add(humidity);
+        textFields.add(windSpeed);
+        textFields.add(dayBook);
+        textFields.add(client);
+        textFields.add(dateOfConstruction);
+        textFields.add(carpetType);
+        textFields.add(infillType);
+        textFields.add(shockpad);
+        textFields.add(weatherConditions);
+        textFields.add(leadTechnician);
+        textFields.add(additionalTechnician);
+        textFields.add(substrateType);
+        textFields.add(testCondition);
+        textFields.add(uncertaintyMeasurement);
+        textFields.add(otherEquipment);
+
+    }
+
+    public boolean checkIfFieldsAreEmpty(){
+        for(TextInputLayout field : textFields){
+            String fieldString;
+            try{
+                fieldString = field.getEditText().getText().toString();
+            }
+            catch(NullPointerException e ){
+                fieldString = "";
+            }
+            if(fieldString.isEmpty()){
+                alertFieldIsEmpty(field);
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    public void alertFieldIsEmpty(TextInputLayout field){
+        Toast.makeText(this, "Warning: not all of the fields have been filled in.", Toast.LENGTH_SHORT).show();
+//        NestedScrollView sv = (NestedScrollView)findViewById(R.id.scroll);
+//        sv.smoothScrollTo(field.getScrollX(), field.getScrollY());
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -154,6 +237,8 @@ public class FormPDFActivity extends AppCompatActivity {
     }
 
     private void submitPDF() {
+
+
         // Create a shared preferences to store the user inputted data
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -161,6 +246,8 @@ public class FormPDFActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         String date = cal.get(Calendar.DATE) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
         String time = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+
+
 
         // Store data
         editor.putString("jobNo", jobNo.getEditText().getText().toString());
