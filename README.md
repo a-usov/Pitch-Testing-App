@@ -97,6 +97,8 @@ This project uses FFmpeg which we do not own but can be found at [FFmpeg](http:/
 	* Proceedings of the 53rd AES Conference (AES 53rd), 2014
 * Nicola Corso
 	* [Wav File Recorder](http://selvaline.blogspot.com/2016/04/record-audio-wav-format-android-how-to.html)	
-* [SportLabs](https://www.sportslabs.co.uk)
+* [SportLabs](https://www.sportslabs.co.uk
+* iText (https://itextpdf.com)
+	* PDF, A PDF Toolkit for PDF generation, PDF programming, handling & manipulation. (https://itextpdf.com/)
 
 
