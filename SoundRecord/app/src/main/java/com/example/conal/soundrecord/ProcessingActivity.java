@@ -27,11 +27,15 @@ import static com.example.conal.soundrecord.RecordingActivity.FOLDER;
 
 public class ProcessingActivity extends AppCompatActivity {
 
+    private static final int SAMPLERATE = 44100;
+    private static final int OVERLAP = 2048;
     private Intent intent;
     private Result result;
     private PitchTest test;
     private AsyncTask<String, Void, Result> runner;
     public static double[] sound;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +124,7 @@ public class ProcessingActivity extends AppCompatActivity {
         }
 
         protected void onPreExecute() {
-            processor = new SoundProcessing(44100, 2048);
+            processor = new SoundProcessing(SAMPLERATE, OVERLAP);
         }
 
         protected void onPostExecute(Result returnResult) {
