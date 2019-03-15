@@ -500,7 +500,7 @@ public class FinalActivity extends AppCompatActivity {
 
             insertCell(table, "Consistency ±10%", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
 
-            avgHeight = avgHeight/5;
+            avgHeight = avgHeight/6;
             Log.i("consistency", "avgHeight " + avgHeight);
             double avgHeightPercent = avgHeight / 100;
             Log.i("consistency", "avgHeightPercent " + avgHeightPercent);
