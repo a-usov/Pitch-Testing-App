@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Location implements Parcelable {
-    private LatLng location;
-    private List<Result> results;
+    private final LatLng location;
+    private final List<Result> results;
     private int numDone;
 
     public Location(LatLng location) {
@@ -61,18 +61,18 @@ public class Location implements Parcelable {
     }
 
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
-        s += getLocation().latitude + "," + getLocation().longitude + ",";
+        s.append(getLocation().latitude).append(",").append(getLocation().longitude).append(",");
         for (int i = 0; i < 5; i++) {
-            s += getResults().get(i);
-            s += ",";
+            s.append(getResults().get(i));
+            s.append(",");
         }
-        return s;
+        return s.toString();
     }
 
     // PARCELABLE METHODS
-    protected Location(Parcel in) {
+    Location(Parcel in) {
         location = (LatLng) in.readValue(LatLng.class.getClassLoader());
         if (in.readByte() == 0x01) {
             results = new ArrayList<>();

@@ -2,13 +2,12 @@ package com.example.conal.soundrecord;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PitchTest implements Parcelable {
-    private List<Location> locations;
+    private final List<Location> locations;
     private int numDone;
 
     public PitchTest() {
@@ -45,9 +44,9 @@ public class PitchTest implements Parcelable {
     }
 
     // PARCELABLE methods
-    protected PitchTest(Parcel in) {
+    private PitchTest(Parcel in) {
         if (in.readByte() == 0x01) {
-            locations = new ArrayList<Location>();
+            locations = new ArrayList<>();
             in.readList(locations, Location.class.getClassLoader());
         } else {
             locations = null;

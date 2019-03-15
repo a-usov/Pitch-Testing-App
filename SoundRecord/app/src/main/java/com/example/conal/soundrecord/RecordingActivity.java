@@ -29,17 +29,18 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
+import static com.example.conal.soundrecord.MapsActivity.TEST;
 
 public class RecordingActivity extends AppCompatActivity {
 
-    private static File folderPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
+    private static final File folderPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recordings");
     private String filePath = "";
     private Intent intent;
     private WavRecorder recorder;
     private ToggleButton btnRecording;
 
     private BluetoothSocket socket;
-    private BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private OutputStream outputStream;
     private boolean canUseBluetooth = false;
     private String nameDevice;
@@ -199,6 +200,32 @@ public class RecordingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Are you sure you want to go home?");
+
+        builder.setCancelable(false);
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                openHomePage();
+            }
+        });
+
+        builder.show();
     }
 
     //Testing startRecording button instead of event listener
@@ -239,6 +266,18 @@ public class RecordingActivity extends AppCompatActivity {
         intent.putExtra(PATH, filePath);
         intent.setClass(this, ProcessingActivity.class);
 
+        startActivity(intent);
+    }
+
+    private void openHomePage() {
+        intent = getIntent();
+        intent.setClass(this, HomeActivity.class);
+        intent.removeExtra(TEST);
+        intent.removeExtra(DEVICE);
+        SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.remove(DEVICE);
+        editor.apply();
         startActivity(intent);
     }
 }

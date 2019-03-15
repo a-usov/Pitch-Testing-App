@@ -33,8 +33,6 @@ public class ProcessingActivity extends AppCompatActivity {
     private AsyncTask<String, Void, Result> runner;
     public static double[] sound;
 
-    public static final String SOUND = "com.example.conal.soundrecord.SOUND";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

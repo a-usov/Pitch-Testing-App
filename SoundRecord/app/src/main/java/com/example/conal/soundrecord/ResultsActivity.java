@@ -23,6 +23,8 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import java.text.DecimalFormat;
+
 import static com.example.conal.soundrecord.HomeActivity.MyPREFERENCES;
 import static com.example.conal.soundrecord.HomeActivity.CONCRETETESTING;
 import static com.example.conal.soundrecord.MapsActivity.TEST;
@@ -35,6 +37,8 @@ public class ResultsActivity extends AppCompatActivity {
     private Intent intent;
     private Location loc;
     private boolean concreteTesting;
+    private final DecimalFormat df = new DecimalFormat("0.00");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,7 @@ public class ResultsActivity extends AppCompatActivity {
         final TextView height5 = findViewById(R.id.height5);
         final TextView average = findViewById(R.id.avg_H);
 
-        Double bounceHeight = 0.0;
+        double bounceHeight = 0.0;
 
         // fill out the table depending on how many bounces we've done
         // correct behaviour relies on fallthrough of cases
@@ -70,22 +74,22 @@ public class ResultsActivity extends AppCompatActivity {
             case 4:
                 bounceHeight = loc.getResults().get(4).getBounceHeight();
                 // substring to get it to 2 decimal places
-                height5.setText(bounceHeight.toString().substring(0, 4));
+                height5.setText(df.format(bounceHeight));
             case 3:
                 bounceHeight = loc.getResults().get(3).getBounceHeight();
-                height4.setText(bounceHeight.toString().substring(0, 4));
+                height4.setText(df.format(bounceHeight));
             case 2:
                 bounceHeight = loc.getResults().get(2).getBounceHeight();
-                height3.setText(bounceHeight.toString().substring(0, 4));
+                height3.setText(df.format(bounceHeight));
             case 1:
                 bounceHeight = loc.getResults().get(1).getBounceHeight();
-                height2.setText(bounceHeight.toString().substring(0, 4));
+                height2.setText(df.format(bounceHeight));
             case 0:
                 bounceHeight = loc.getResults().get(0).getBounceHeight();
-                height1.setText(bounceHeight.toString().substring(0, 4));
+                height1.setText(df.format(bounceHeight));
         }
 
-        average.setText(loc.getRunningAvg().toString().substring(0, 4));
+        average.setText(df.format(loc.getRunningAvg()));
 
         // SET SLIDER
         SeekBar sb = findViewById(R.id.seekBar);
@@ -176,7 +180,7 @@ public class ResultsActivity extends AppCompatActivity {
             concreteResult.setVisibility(View.VISIBLE);
             // here bounceheight is the very first bounce, which is where we always save the result to. We don't use the rest
             // of Pitchtest
-            concreteResult.setText(bounceHeight.toString().substring(0, 4) + " meters");
+            concreteResult.setText(df.format(bounceHeight) + " meters");
         }
 
         btnFinish.setOnClickListener(new View.OnClickListener() {
