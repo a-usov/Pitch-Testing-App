@@ -213,7 +213,7 @@ public class ResultsActivity extends AppCompatActivity {
                     test.increaseLocNumDone(test.getNumDone());
                 }
 
-                if (test.getNumDone() == 5) {
+                if (test.getNumDone() == 6) {
                     openFinalActivityPage();
                 } else if (mapNeeded) {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

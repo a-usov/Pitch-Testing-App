@@ -87,7 +87,7 @@ public class FormPDFActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-                        }, 3000);
+                        }, 2000);
 
                     }
                 }else {
