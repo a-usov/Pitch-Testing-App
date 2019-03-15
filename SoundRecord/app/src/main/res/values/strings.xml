@@ -71,12 +71,12 @@
     <string name="fifa_quality_0_6_1_0m">FIFA Quality 0.6 – 1.0m</string>
     <string name="fifa_quality_pro_0_6_0_85m">FIFA Quality Pro 0.6 – 0.85m</string>
     <string name="select_the_equipment_set">Select the equipment set:</string>
-    <string name="flight_5">Flight 5</string>
-    <string name="flight_4">Flight 4</string>
-    <string name="flight_3">Flight 3</string>
-    <string name="uk_2">UK 2</string>
-    <string name="uk_1">UK 1</string>
     <string name="button">Button</string>
+    <string name="uk_1">UK 1</string>
+    <string name="uk_2">UK 2</string>
+    <string name="flight_3">Flight 3</string>
+    <string name="flight_4">Flight 4</string>
+    <string name="flight_5">Flight 5</string>
 
 
 </resources>

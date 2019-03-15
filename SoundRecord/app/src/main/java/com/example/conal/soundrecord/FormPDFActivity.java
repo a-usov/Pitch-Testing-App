@@ -5,17 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,7 +43,7 @@ public class FormPDFActivity extends AppCompatActivity {
     private TextInputLayout uncertaintyMeasurement;
     private TextInputLayout otherEquipment;
 
-    private ArrayList<TextInputLayout> textFields = new ArrayList<>();
+    private final ArrayList<TextInputLayout> textFields = new ArrayList<>();
 
 
     // Radio buttons
@@ -91,7 +87,7 @@ public class FormPDFActivity extends AppCompatActivity {
                                     }
                                 });
                             }
-                        }, 3000);
+                        }, 2000);
 
                     }
                 }else {
@@ -123,7 +119,7 @@ public class FormPDFActivity extends AppCompatActivity {
         otherEquipment = this.findViewById(R.id.other);
     }
 
-    public void groupTextFields(){
+    private void groupTextFields(){
         textFields.add(jobNo);
         textFields.add(contract);
         textFields.add(surfaceName);
@@ -147,7 +143,7 @@ public class FormPDFActivity extends AppCompatActivity {
 
     }
 
-    public boolean checkIfFieldsAreEmpty(){
+    private boolean checkIfFieldsAreEmpty(){
         for(TextInputLayout field : textFields){
             String fieldString;
             try{
@@ -157,7 +153,7 @@ public class FormPDFActivity extends AppCompatActivity {
                 fieldString = "";
             }
             if(fieldString.isEmpty()){
-                alertFieldIsEmpty(field);
+                alertFieldIsEmpty();
                 return true;
             }
 
@@ -165,14 +161,10 @@ public class FormPDFActivity extends AppCompatActivity {
         return false;
     }
 
-    public void alertFieldIsEmpty(TextInputLayout field){
+    private void alertFieldIsEmpty(){
         Toast.makeText(this, "Warning: not all of the fields have been filled in.", Toast.LENGTH_SHORT).show();
 //        NestedScrollView sv = (NestedScrollView)findViewById(R.id.scroll);
 //        sv.smoothScrollTo(field.getScrollX(), field.getScrollY());
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     public void onFifaRadioButtonClicked(View view) {

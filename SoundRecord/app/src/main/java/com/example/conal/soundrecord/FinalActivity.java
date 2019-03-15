@@ -257,7 +257,7 @@ public class FinalActivity extends AppCompatActivity {
         tableDrops.add((TextView) this.findViewById(R.id.textView46));
 
         // Location 6 drops or column 6
-        tableDrops.add((TextView) this.findViewById(R.id.textView16));
+        tableDrops.add((TextView) this.findViewById(R.id.textView15));
         tableDrops.add((TextView) this.findViewById(R.id.textView23));
         tableDrops.add((TextView) this.findViewById(R.id.textView31));
         tableDrops.add((TextView) this.findViewById(R.id.textView39));
