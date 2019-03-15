@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -488,18 +489,37 @@ public class FinalActivity extends AppCompatActivity {
                 }
             }
 
+            double avgHeight = 0;
+
             insertCell(table, "Mean Result", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
+
             for (int i = 0; i < 6; i++){
                 insertCell(table, df.format(avgHeightsList.get(i)), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+                avgHeight += avgHeightsList.get(i);
             }
 
             insertCell(table, "Consistency ±10%", Element.ALIGN_CENTER, 1, 1, labelBlack, BaseColor.WHITE);
+
+            avgHeight = avgHeight/5;
+            Log.i("consistency", "avgHeight " + avgHeight);
+            double avgHeightPercent = avgHeight / 100;
+            Log.i("consistency", "avgHeightPercent " + avgHeightPercent);
+
+            for (Double height : avgHeightsList) {
+                double consistency = (height - avgHeight) / avgHeightPercent;
+                Log.i("consistency", "height " + height);
+                Log.i("consistency", "consistency " + consistency);
+                insertCell(table, df.format(consistency), Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            }
+
+
+
+            /*insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
             insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
-            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);
+            insertCell(table, "###", Element.ALIGN_CENTER, 1, 1, other, BaseColor.YELLOW);*/
 
             //picture cell
             InputStream ims = getAssets().open("pitch.png");
