@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PitchTest implements Parcelable {
-    private List<Location> locations;
+    private final List<Location> locations;
     private int numDone;
 
     public PitchTest() {
@@ -43,9 +43,10 @@ public class PitchTest implements Parcelable {
         return locations.get(index);
     }
 
-    protected PitchTest(Parcel in) {
+    // PARCELABLE methods
+    private PitchTest(Parcel in) {
         if (in.readByte() == 0x01) {
-            locations = new ArrayList<Location>();
+            locations = new ArrayList<>();
             in.readList(locations, Location.class.getClassLoader());
         } else {
             locations = null;
@@ -81,4 +82,37 @@ public class PitchTest implements Parcelable {
             return new PitchTest[size];
         }
     };
+
+    public List<Double> organiseHeights() {
+        List<Double> heightList = new ArrayList<>();
+        for (Location loc : locations) {
+            for (Result height : loc.getResults()) {
+                heightList.add(height.getBounceHeight());
+            }
+        }
+
+        return heightList;
+    }
+
+    public List<Double> getRunningAverages() {
+        List<Double> avgHeights = new ArrayList<>();
+        for (Location loc : locations) {
+            avgHeights.add(loc.getRunningAvg());
+        }
+
+        return avgHeights;
+    }
+
+    public Double getTotalAvg() { // Averages of all the running averages
+        List<Double> avgHeights = getRunningAverages();
+
+        double total = 0.0;
+
+        for (double height : avgHeights) {
+            total += height;
+        }
+
+        return total / (avgHeights.size());
+    }
 }
+

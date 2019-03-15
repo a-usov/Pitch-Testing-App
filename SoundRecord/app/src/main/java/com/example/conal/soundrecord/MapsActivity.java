@@ -47,6 +47,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         intent = getIntent();
 
+        // if test doesn't exists, means we are starting a new test, otherwise 
+        // we are moving to a new location
         if (intent.getParcelableExtra(TEST) != null) {
             test = intent.getParcelableExtra(TEST);
         } else {
@@ -56,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Button btnBegin = this.findViewById(R.id.btnBegin);
         btnBegin.setEnabled(true);
 
+        // having shown map, we don't need to show it until we do 5 bounces
         SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putBoolean("mapNeeded", false);
@@ -87,6 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
+                    // get our position
                     double lat = location.getLatitude();
                     double longi = location.getLongitude();
 
@@ -96,13 +100,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     float maxZoomLevel = 18;
                     gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cPos, maxZoomLevel));
 
+                    // use explicit class name as there is also a native android Location class that we don't want to use
                     MapsActivity.this.location = new com.example.conal.soundrecord.Location(cPos);
                     test.addLocation(MapsActivity.this.location);
 
                     Log.i("location", "Latitude " + lat);
                     Log.i("location", "Longitude" + longi);
                 } else {
-                    MapsActivity.this.location = new com.example.conal.soundrecord.Location();
+                    // if we cant get GPS location, create location without details of where we are
+                    MapsActivity.this.location = new com.example.conal.soundrecord.Location();///
                     test.addLocation(MapsActivity.this.location);
                     Log.i("location", "Location is null.");
                 }
@@ -130,7 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void openRecordingPage() {
+    private void openRecordingPage() {
         intent = getIntent();
         intent.setClass(this, RecordingActivity.class);
         intent.putExtra(TEST, test);

@@ -14,14 +14,14 @@ import android.os.Environment;
 // TAKEN FROM http://selvaline.blogspot.com/2016/04/record-audio-wav-format-android-how-to.html
 // Author Nicola Corso
 
-public class WavRecorder {
+class WavRecorder {
     private static final int RECORDER_BPP = 16;
     private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
     private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw";
     private static final int RECORDER_SAMPLERATE = 44100;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    short[] audioData;
+    private final short[] audioData;
 
     private AudioRecord recorder = null;
     private int bufferSize = 0;
@@ -30,7 +30,7 @@ public class WavRecorder {
     int[] bufferData;
     int bytesRecorded;
 
-    private String output;
+    private final String output;
 
     public WavRecorder(String path) {
         bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,

@@ -11,11 +11,12 @@ import be.tarsos.dsp.io.PipedAudioStream;
 import be.tarsos.dsp.io.TarsosDSPAudioInputStream;
 import be.tarsos.dsp.util.fft.FFT;
 
-public class SoundProcessing {
+class SoundProcessing {
     // set parameters about sound and FFT
-    private int sampleRate;
-    private int bufferSize;
-    private List<Double> sound = new ArrayList<>();
+    private final int sampleRate;
+    private final int bufferSize;
+    private final List<Double> sound = new ArrayList<>();
+    // this array is used for displaying graph in results
     private double[] soundArray;
 
     public double[] getSoundArray() {
@@ -46,6 +47,7 @@ public class SoundProcessing {
                 float[] transformBuffer = new float[bufferSize * 2];
                 float[] power = new float[bufferSize / 2];
 
+                // copy data to our new array
                 System.arraycopy(audioFloatBuffer, 0, transformBuffer, 0, audioFloatBuffer.length);
 
                 // apply fft on data and get power
@@ -54,8 +56,10 @@ public class SoundProcessing {
 
                 // TODO redo filtering
 
+                // invert fft
                 fft.backwardsTransform(transformBuffer);
 
+                // copy new data back into original stream
                 System.arraycopy(transformBuffer, 0, audioFloatBuffer, 0, audioFloatBuffer.length);
 
                 return true;
@@ -71,9 +75,22 @@ public class SoundProcessing {
             public boolean process(AudioEvent audioEvent) {
                 float[] audioFloatBuffer = audioEvent.getFloatBuffer();
 
+                int counter = 0;
+                double average = 0;
+
+                // we downsample sound from 44100hz to 11025hz
+                // for faster processing
                 for (float value : audioFloatBuffer) {
-                    sound.add((double) value);
+                    if (counter == 3) {
+                        sound.add(average / 4);
+                        counter = 0;
+                        average = 0;
+                    } else {
+                        average += (double) value;
+                        counter++;
+                    }
                 }
+
 
                 return true;
             }
@@ -83,6 +100,7 @@ public class SoundProcessing {
             }
         });
 
+        // create, run and wait for thread to finish
         Thread t1 = new Thread(dispatcher);
 
         t1.start();
@@ -92,15 +110,20 @@ public class SoundProcessing {
             e.printStackTrace();
         }
 
+        // copy over Arraylist to primitive array
+        // this is as Peak finding uses primitive array
+        // but can't use it from the start as we don't know
+        // what size is should be at the start
         soundArray = new double[sound.size()];
         for (int i = 0; i < soundArray.length; i++) {
             soundArray[i] = sound.get(i);
         }
 
-        List<Integer> peaks = Peaks.findPeaks(soundArray, 25000, 0.10);
+        List<Integer> peaks = Peaks.findPeaks(soundArray, 6250, 0.10);
 
+        // return Result or null if peak finding wasn't successful
         try {
-            return new Result(peaks.get(0), peaks.get(1), (peaks.get(1) - (double) peaks.get(0)) / sampleRate);
+            return new Result(peaks.get(0), peaks.get(1), (peaks.get(1) - (double) peaks.get(0)) / sampleRate * 4);
         } catch (IndexOutOfBoundsException e) {
             return null;
         }

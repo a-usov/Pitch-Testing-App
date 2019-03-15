@@ -33,8 +33,6 @@ public class ProcessingActivity extends AppCompatActivity {
     private AsyncTask<String, Void, Result> runner;
     public static double[] sound;
 
-    public static final String SOUND = "com.example.conal.soundrecord.SOUND";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +47,12 @@ public class ProcessingActivity extends AppCompatActivity {
         test = intent.getParcelableExtra(TEST);
         String path = intent.getStringExtra(PATH);
 
+        // load the ffmpeg library, then run processing on file
+        // alongside current activity
         new AndroidFFMPEGLocator(this);
         runner = new AsyncRunner().execute(path);
 
-        // time is super long(5min), but timer cancels early whenever processing is done
+        // time is super long(5min) to be safe, but timer cancels early whenever processing is done
         new CountDownTimer(500000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -62,7 +62,7 @@ public class ProcessingActivity extends AppCompatActivity {
                 }
             }
 
-            // realistically never executes
+            // realistically never executes as we will finish early
             public void onFinish() {
                 spinner.setVisibility(View.GONE);
                 afterProcessing();
@@ -70,6 +70,7 @@ public class ProcessingActivity extends AppCompatActivity {
         }.start();
     }
 
+    // stop user from being able to go back, i.e. does nothing
     @Override
     public void onBackPressed() {
     }
@@ -85,10 +86,13 @@ public class ProcessingActivity extends AppCompatActivity {
         }
 
         if (result != null) {
+            // add result to current location, current drop
             test.getLocation(test.getNumDone()).addResult(result);
 
             Log.i("Processing", "bounceHeight: " + result.getBounceHeight());
 
+            // if this is our last drop for a location, toggle that we 
+            // want to show map again
             if (test.getLocation(test.getNumDone()).getNumDone() == 4) {
                 SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                 final SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -97,6 +101,7 @@ public class ProcessingActivity extends AppCompatActivity {
             }
             openResultsActivity();
         } else {
+            // if processing not successful, try again
             Log.i("Processing", "bounceTime was 0");
             Toast.makeText(this, "Failed, try again", Toast.LENGTH_LONG).show();
             openRecordingActivity();
@@ -107,6 +112,8 @@ public class ProcessingActivity extends AppCompatActivity {
     private class AsyncRunner extends AsyncTask<String, Void, Result> {
         private SoundProcessing processor;
 
+        // we want to do processing in background so doesn't pause
+        // the current UI thread
         protected Result doInBackground(String... strings) {
             Log.i("Recordings", "In Runner");
             return processor.process(strings[0]);
