@@ -237,7 +237,7 @@ public class FormPDFActivity extends AppCompatActivity {
 
         Calendar cal = Calendar.getInstance();
         String date = cal.get(Calendar.DATE) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR);
-        String time = String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
+        String time = String.format("%02d.%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
 
 
 

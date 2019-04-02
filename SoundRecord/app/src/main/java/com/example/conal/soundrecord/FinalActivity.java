@@ -274,7 +274,7 @@ public class FinalActivity extends AppCompatActivity {
                 throw new IOException();
 
         final String filename = folder.toString() + "/" + currentDate + "_" + currentTime
-                + ":" + Calendar.getInstance().get(Calendar.SECOND) + ".csv";
+                + "." + Calendar.getInstance().get(Calendar.SECOND) + ".csv";
 
 
         FileWriter fw = new FileWriter(filename);
@@ -372,7 +372,7 @@ public class FinalActivity extends AppCompatActivity {
                 throw new IOException();
 
         String filePDF = folderPDF.toString() + "/" + currentDate + "_" + currentTime
-                + ":" + Calendar.getInstance().get(Calendar.SECOND) + ".pdf";
+                + "." + Calendar.getInstance().get(Calendar.SECOND) + ".pdf";
 
         //create fonts
         Font title = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLACK);
