@@ -81,11 +81,11 @@ The built APK can then be copied to an Android device and installed by navigatin
 * **Conall Clements** 
 * **Kara Newlands**
 
-See also the list of [contributors](http://stgit.dcs.gla.ac.uk/tp3-2018-cs23/codebase/blob/master/CONTRIBUTING.md) for contact details 
+See also the list of [contributors](CONTRIBUTING.md) for contact details 
 
 ## License
 
-This project is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International license - see the [LICENSE.md](http://stgit.dcs.gla.ac.uk/tp3-2018-cs23/codebase/blob/master/LICENCE) file for details.
+This project is licensed under the GNU General Public License version 3 - see the [LICENSE.md](LICENSE) file for details.
 
 This project uses FFmpeg which we do not own but can be found at [FFmpeg](http://ffmpeg.org) and its source can be downloaded [here](https://github.com/FFmpeg/FFmpeg)
  
